@@ -1,0 +1,121 @@
+﻿@{
+    SPF.OleDB.BLL.BeetleClass bc = new SPF.OleDB.BLL.BeetleClass();
+    IList<SPF.OleDB.Model.BeetleClassInfo> bciList = bc.GetModelList(string.Format("1=1 and BCStatus = 1 "));
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8">
+    <link href="@Url.Content("~/Css/classlisthome.css")" rel="stylesheet" />
+    @*<link href="@Url.Content("~/Css/Beetle/Index.css")" rel="stylesheet" />*@
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SPF.Helper.js")" type="text/javascript"></script>
+    <style type="text/css">
+        .themeStyle {
+            background-color: #384C5E !important;
+        }
+    </style>
+    @RenderSection("HeadElement", false)
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var oWin = document.getElementById("win");
+            var oLay = document.getElementById("overlay");
+            var oBtn = document.getElementById("popmenu");
+            oBtn.onclick = function () {
+                oLay.style.display = "block";
+                oWin.style.display = "block";
+            };
+            oLay.onclick = function () {
+                oLay.style.display = "none";
+                oWin.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body id="listhome10">
+    <div id="ui-header">
+        <div class="fixed">
+            <a class="ui-title" id="popmenu">选择分类</a>
+            <a class="ui-btn-left_pre" href="javascript:history.go(-1);"></a>
+            <a class="ui-btn-right" href="http://wxapi.cn/wxapi.php?ac=listhome10&tid=62766&w=1&page=2">这是个刷新按钮</a>
+        </div>
+    </div>
+    <div id="overlay"></div>
+    <div id="win">
+        <ul class="dropdown">
+            @foreach (SPF.OleDB.Model.BeetleClassInfo item in bciList)
+            {
+                <li><a href="@Url.Content(item.BCUrl + item.BCSid)"><span>@item.BCName</span></a></li>
+            }                                    
+            <div class="clr"></div>
+        </ul>
+    </div>
+
+    @RenderBody()
+
+    @RenderSection("FootElement", false)
+
+    <link href="~/Css/footStyle.css" rel="stylesheet" />
+    @*<div id="sharemcover" onclick="document.getElementById('sharemcover').style.display ='';" style=" display:none"><img src="http://img.ishangtong.com/images/MgnnofmleM.png"></div>*@
+    <div class="top_bar" style="-webkit-transform:translate3d(0,0,0)">
+        <nav>
+            <ul id="top_menu" class="top_menu">
+                <li>
+                    <a onclick="javascript: displayit(0);"><img src="@Url.Content("~/Images/earth.png")"><label>首页</label></a>
+                    <ul id="menu_list0" class="menu_font" style=" display:none"></ul>
+                </li>
+                <li>
+                    <a href="tel:18756067203"><img src="@Url.Content("~/Images/phone.png")"><label>联系客服</label></a>
+                    <ul id="menu_list1" class="menu_font" style=" display:none"></ul>
+                </li>
+                <li>
+                    <a href="http://api.map.baidu.com/marker?location=31.296804,121.595327&title=%e7%94%b2%e5%a3%b3%e8%99%ab%e8%a3%85%e9%a5%b0&content=上海市浦东新区东靖路地铁站&output=html"><img src="@Url.Content("~/Images/coordinate.png")"><label>公司地址</label></a>
+                    <ul id="menu_list2" class="menu_font" style=" display:none"></ul>
+                </li>
+                <li>
+                    <a href="#"><img src="@Url.Content("~/Images/weixin.png")"><label>微信预约</label></a>
+                    <ul id="menu_list3" class="menu_font" style=" display:none"></ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div id="plug-wrap" onclick="closeall()" style="display: none;"></div>
+    <script type="text/javascript">
+        function displayit(n) {
+            var count = document.getElementById("top_menu").getElementsByTagName("ul").length;
+            for (var i = 0; i < count; i++) {
+                if (i == n) {
+                    if (document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display == 'none') {
+                        document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display = '';
+                        document.getElementById("plug-wrap").style.display = '';
+                    } else {
+                        document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display = 'none';
+                        document.getElementById("plug-wrap").style.display = 'none';
+                    }
+                } else {
+                    document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display = 'none';
+                }
+            }
+        }
+        function closeall() {
+            var count = document.getElementById("top_menu").getElementsByTagName("ul").length;
+            for (i = 0; i < count; i++) {
+                document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display = 'none';
+            }
+            document.getElementById("plug-wrap").style.display = 'none';
+        }
+
+
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.call('hideToolbar');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+#过滤文件夹
+.svn/
+bin/
+obj/
+SPF.ManagementStudio/
+
+#过滤文件
+#*.config

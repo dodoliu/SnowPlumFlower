@@ -1,0 +1,247 @@
+﻿@{
+    ViewBag.Title = "甲壳虫装饰";
+    Layout = "~/Views/Shared/_IndexLayout.cshtml";
+}
+<div id="cate100">
+    <div class="banner">
+        <div id="wrapper" style="overflow: hidden;">
+            <div id="scroller" style="width: 5709px; -webkit-transform: translate3d(0px, 0px, 0px) scale(1); -webkit-transition: 0ms; transition: 0ms;">
+                <ul id="thelist">
+                    <li>
+                        <p>快快点击</p>
+                        <a href="http://www.baidu.com"> <img src="~/Images/ppage_133.jpg" style="width: 1903px;" /></a>
+                    </li>
+                    <li>
+                        <p>测试</p>
+                        <a href="http://www.baidu.com"> <img src="~/Images/ppage_133.jpg" style="width: 1903px;" /></a>
+                    </li>
+                    <li>
+                        <p>32个赞</p>
+                        <a href="http://www.baidu.com"> <img src="~/Images/ppage_133.jpg" style="width: 1903px;" /></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div id="nav">
+                <div id="prev" onclick="myScroll.scrollToPage('prev', 0, 400, 3); return false;">← prev</div>
+                <ul id="indicator">
+                    <li class="active">1</li>
+                    <li class="">2</li>
+                    <li class="">3</li>
+                </ul>
+                <div id="next" onclick="myScroll.scrollToPage('next', 0, 400, 3); return false;">next →</div>
+            </div>
+        <div class="clr"></div>
+    </div>
+
+    <div id="insert1"></div>
+    <div class="imgmenu">
+        <ul>
+            <li><a href="http://www.baidu.com"><img src="~/Images/ppage_133.jpg" /><p>公司简介</p></a></li>
+            <li><a href="http://www.baidu.com"><img src="~/Images/ppage_133.jpg" /><p>联系我们</p></a></li>
+            <li><a href="http://www.baidu.com"><img src="~/Images/ppage_133.jpg" /><p>业主社区</p></a></li>
+        </ul>
+        <ul>
+            <li><a href="http://www.baidu.com"><img src="~/Images/ppage_133.jpg" /><p>最新资讯</p></a></li>
+            <li><a href="http://www.baidu.com"><img src="~/Images/ppage_133.jpg" /><p>服务流程</p></a></li>
+            <li><a href="http://www.baidu.com"><img src="~/Images/ppage_133.jpg" /><p>收费标准</p></a></li>
+        </ul>
+    </div>
+
+
+    <section>
+        <nav class="nav_for_list_ul">
+            <div class="ofh">
+                <ul>
+                    <li class="on"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <ul>
+                    <div id="nav_uls" style="width: 33.3%; visibility: visible;">
+                        <ol style="list-style: none; width: 4435.8125px; transition: 0ms; -webkit-transition: 0ms; -webkit-transform: translate3d(0px, 0px, 0px);">
+                            <li style="width: 633.6875px; float: left; vertical-align: top;"><a href="javascript:swiper_2.slide(0);" class="on"><img src="~/Images/ppage_133.jpg" />家装案例</a></li>
+                            <li style="width: 633.6875px; float: left; vertical-align: top;"><a href="javascript:swiper_2.slide(1);"><img src="~/Images/ppage_133.jpg" />公装案例</a></li>
+                            <li style="width: 633.6875px; float: left; vertical-align: top;"><a href="javascript:swiper_2.slide(2);"><img src="~/Images/ppage_133.jpg" />设计团队</a></li>
+                        </ol>
+                    </div>
+                </ul>
+                <script>
+                    window.nav_uls = new Swipe(document.getElementById('nav_uls'), {
+                        speed:500,
+                        callback: function(){
+                            if(this.index>(this.length-3)){
+                                this.slide(this.length-3);
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </nav>
+        <div id="list_uls" class="list_uls box_swipe" style="visibility: visible;">
+            <ul style="list-style: none; width: 13321px; transition: 0ms; -webkit-transition: 0ms; -webkit-transform: translate3d(0px, 0px, 0px);">
+                <li style="width: 1903px; float: left; vertical-align: top;">
+                    <dl>
+
+                        <dd>
+                            <a href="http://www.baidu.com">
+                                <figure>
+                                    <div><img src="~/Images/ppage_133.jpg" /></div>
+                                    <figcaption>
+                                        <label>测试</label>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </dd>
+                        <dd>
+                            <a href="http://www.baidu.com">
+                                <figure>
+                                    <div><img src="~/Images/ppage_133.jpg" /></div>
+                                    <figcaption>
+                                        <label>现代简约</label>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </dd>
+                        <dd>
+                            <a href="http://www.baidu.com">
+                                <figure>
+                                    <div><img src="~/Images/ppage_133.jpg" /></div>
+                                    <figcaption>
+                                        <label>田园风格</label>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </dd>                        
+                    </dl>
+                </li>
+                <li style="width: 1903px; float: left; vertical-align: top;">
+                    <dl>
+
+                        <dd>
+                            <a href="http://www.baidu.com">
+                                <figure>
+                                    <div><img src="~/Images/ppage_133.jpg" /></div>
+                                    <figcaption>
+                                        <label>微信预约</label>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </dd>
+                        <dd>
+                            <a href="http://www.baidu.com">
+                                <figure>
+                                    <div><img src="~/Images/ppage_133.jpg" /></div>
+                                    <figcaption>
+                                        <label>客厅</label>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </dd>                        
+                    </dl>
+                </li>
+                <li style="width: 1903px; float: left; vertical-align: top;">
+                    <dl>
+
+                        <dd>
+                            <a href="http://www.baidu.com">
+                                <figure>
+                                    <div><img src="~/Images/ppage_133.jpg" /></div>
+                                    <figcaption>
+                                        <label>小张/ABC</label>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </dd>
+                        <dd>
+                            <a href="http://www.baidu.com">
+                                <figure>
+                                    <div><img src="~/Images/ppage_133.jpg" /></div>
+                                    <figcaption>
+                                        <label>小李/CBA</label>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </dd>                        
+                    </dl>
+                </li>               
+            </ul>
+        </div>
+    </section>
+    <script type="text/javascript">
+        var count = document.getElementById("thelist").getElementsByTagName("img").length;
+        for(i=0;i<count;i++){
+            document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:"+document.body.clientWidth+"px";
+        }
+        document.getElementById("scroller").style.cssText = " width:"+document.body.clientWidth*count+"px";
+        setInterval(function(){
+            myScroll.scrollToPage('next', 0,400,count);
+        },3500 );
+        window.onresize = function(){
+            for(i=0;i<count;i++){
+                document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:"+document.body.clientWidth+"px";
+            }
+            document.getElementById("scroller").style.cssText = " width:"+document.body.clientWidth*count+"px";
+        }
+    </script>
+    <div id="insert2"></div>
+
+    <div class="copyright">© 2014-2015 甲壳虫装饰版权所有</div>
+    <script type="text/javascript">
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            window.shareData = {
+                "imgUrl": "http://www.baidu.com",
+                "timeLineLink": "http://www.baidu.com",
+                "sendFriendLink": "http://www.baidu.com",
+                "weiboLink": "http://www.baidu.com",
+                "tTitle": "点击进入甲壳虫微官网首页",
+                "tContent": "想咨询  坐在家里不想动？想装修  工作没时间？没关系    轻松一点~手机微装修服务 可以如此简单~效果图、装修流程、装修预算都能满足你~",
+                "fTitle": "点击进入甲壳虫微官网首页",
+                "fContent": "想咨询  坐在家里不想动？想装修  工作没时间？没关系    轻松一点~手机微装修服务 可以如此简单~效果图、装修流程、装修预算都能满足你~",
+                "wContent": "想咨询  坐在家里不想动？想装修  工作没时间？没关系    轻松一点~手机微装修服务 可以如此简单~效果图、装修流程、装修预算都能满足你~"
+            };
+            // 发送给好友
+            WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+                WeixinJSBridge.invoke('sendAppMessage', {
+                    "img_url": window.shareData.imgUrl,
+                    "img_width": "640",
+                    "img_height": "640",
+                    "link": window.shareData.sendFriendLink,
+                    "desc": window.shareData.fContent,
+                    "title": window.shareData.fTitle
+                }, function (res) {
+                    _report('send_msg', res.err_msg);
+                })
+            });
+
+            // 分享到朋友圈
+            WeixinJSBridge.on('menu:share:timeline', function (argv) {
+                WeixinJSBridge.invoke('shareTimeline', {
+                    "img_url": window.shareData.imgUrl,
+                    "img_width": "640",
+                    "img_height": "640",
+                    "link": window.shareData.timeLineLink,
+                    "desc": window.shareData.tContent,
+                    "title": window.shareData.tTitle
+                }, function (res) {
+                    _report('timeline', res.err_msg);
+                });
+            });
+
+            // 分享到微博
+            WeixinJSBridge.on('menu:share:weibo', function (argv) {
+                WeixinJSBridge.invoke('shareWeibo', {
+                    "content": window.shareData.wContent,
+                    "url": window.shareData.weiboLink,
+                }, function (res) {
+                    _report('weibo', res.err_msg);
+                });
+            });
+        }, false)
+    </script>
+</div>

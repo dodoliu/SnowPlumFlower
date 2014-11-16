@@ -1,0 +1,222 @@
+﻿@{
+    ViewBag.Title = "分类列表";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+@section SubmenuElement{
+    <a href="javascript.void(0);" class="button" data-reveal-id="myModal" data-animation="fade" data-bind="click:$root.addClick"><small class="icon clipboard"></small><span>新增分类</span></a>
+}
+
+<div id="table" class="help">
+    <div class="col w10 last">
+        <div class="content">
+            <table>
+                <tr>
+                    <th width="25%">分类名称</th>
+                    <th width="25%">对应链接</th>
+                    <th width="10%">创建时间</th>
+                    <th width="10%">类型</th>
+                    <th width="10%">状态</th>
+                    <th width="10%">备注</th>
+                    <th width="10%">操作</th>
+                </tr>
+                <!--ko foreach:$root.BeetleClassList-->
+                <tr>
+                    <td data-bind="text:BCName"></td>
+                    <td data-bind="text:BCUrl"></td>
+                    <td data-bind="text:BCCreateTime"></td>
+                    <td data-bind="text:BCType"></td>
+                    <!--ko foreach:$root.BeetleClassStatus-->
+                    <!--ko if:$data.key==$parent.BCStatus()-->
+                    <td data-bind="text:$data.value"></td>
+                    <!--/ko-->
+                    <!--/ko-->
+                    <td data-bind="text:BCDesc"></td>
+                    <td>
+                        <a href="javascript.void(0)" title="编辑分类" data-reveal-id="myModal" data-animation="fade" class="button" data-bind="click:$root.EditClick"><small class="icon pencil"></small><span>编辑</span></a>
+                    </td>
+                </tr>
+                <!--/ko-->
+            </table>
+        </div>       
+        <div class="module pagination">
+            <a href="" class="page_left"><small class="icon arrow_left"></small></a>
+            <a href="" class="current">1</a>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a href="" class="page_right"><small class="icon arrow_right"></small></a>
+        </div>
+    </div>        
+</div>
+
+<div id="myModal" class="reveal-modal">
+    <a class="close-reveal-modal">&#215;</a>        
+    <div id="form" class="help">
+        <div class="col w5" data-bind="with:$root.BeetleClassInfo">
+            <div class="content form">
+                <p style="margin-top:20px;">
+                    <label for="simple_input">分类名称:</label>
+                    <input type="text" maxlength="50" class="text w_30" data-bind="value:$data.BCName" />
+                </p>
+                <p>
+                    <label for="simple_input">对应链接:</label>
+                    <input type="text" name="simple_input" maxlength="255" class="text w_30" data-bind="value:$data.BCUrl" />
+                </p>
+                <p>
+                    <label for="select">类型:</label>
+                    <select name="select" id="select" class="w_28">
+                        <option value="option1">主页显示</option>
+                        <option value="option2">option2</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="select">状态:</label>
+                    <select name="select" id="selectStatus" class="w_28">
+                        <!--ko foreach:$root.BeetleClassStatus-->
+                        <!--ko if:$data.key==$parent.BCStatus()-->
+                        <option selected="selected" data-bind="text:$data.value,value:$data.key"></option>
+                        <!--/ko-->
+                        <!--ko if:$data.key!=$parent.BCStatus()-->
+                        <option data-bind="text:$data.value,value:$data.key"></option>
+                        <!--/ko-->
+                        <!--/ko-->
+                    </select>
+                </p>
+                <p>
+                    <label for="select">备注:</label>
+                    <textarea rows="10" maxlength="255" cols="50" data-bind="value:$data.BCDesc"></textarea>
+                    <br />
+                </p>
+            </div>
+            <div style="margin-left:150px;margin-top:40px;width:100%">
+                <a href="javascript:void(0)" title="保存" class="button" data-bind="click:$root.SubmitData"><span>&nbsp;&nbsp;保存&nbsp;&nbsp;</span></a>
+                <a href="javascript:void(0)" title="取消" class="button" onclick="CloseDialog();"><span>&nbsp;&nbsp;取消&nbsp;&nbsp;</span></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section FootElement{
+    
+    <script src="@Url.Content("~/Scripts/knockout-2.2.0.js")"></script>
+
+    <script type="text/javascript">
+        window.Urls = {
+            GetClass: "@Url.Action("GetClassInfo", "BeetleManager")",
+            AddClass: "@Url.Action("AddClassInfo", "BeetleManager")",
+            GetClassList: "@Url.Action("GetClassList", "BeetleManager")"
+        };
+
+        var vClassList = function() {
+            var self = this;
+            self.Urls = window.Urls;
+            //当前编辑变量ID
+            self.CurrID = ko.observable(0);
+
+            //状态数组
+            self.BeetleClassStatus = ko.observableArray([{ key: "1", value: "正常" }, { key: "0", value: "关闭" }]);
+
+            self.BeetleClassList = ko.observableArray();
+
+            self.BeetleClassBind = function(data) {
+                var temp = {};
+                temp.ID = ko.observable(data.ID);
+                temp.BCSid = ko.observable(data.BCSid);
+                temp.BCName = ko.observable(data.BCName);
+                temp.BCType = ko.observable(data.BCType);
+                temp.BCCreateTime = ko.observable(data.BCCreateTime);
+                temp.BCUpdateTime = ko.observable(data.BCUpdateTime);
+                temp.BCStatus = ko.observable(data.BCStatus);
+                temp.BCDesc = ko.observable(data.BCDesc);
+                temp.BCUrl = ko.observable(data.BCUrl);
+                return temp;
+            };
+
+            self.RefreshList = function () {
+                self.BeetleClassList.removeAll();
+                $.getJSON(self.Urls.GetClassList, {}, function (result) {
+                    if (result.IsSuccess) {
+                        $(result.ResultData.BCIList).each(function (index, item) {
+                            self.BeetleClassList.push(self.BeetleClassBind(item));
+                        });
+                    }
+                });
+            };
+
+            //判断几次回发
+            self.GetData = ko.computed(function() {
+                self.RefreshList();
+            }, this);
+
+            self.EditClick = function(data, _event) {
+                self.CurrID(data.ID());
+                self.ShowDialog("edit");
+            }
+            self.AddClick = function() {
+                self.CurrID(0);
+                self.ShowDialog("add");
+            }
+
+            //分类对象
+            self.BeetleClassInit = function() {
+                var temp = {};
+                temp.ID = ko.observable("");
+                temp.BCSid = ko.observable("");
+                temp.BCName = ko.observable("");
+                temp.BCType = ko.observable("");
+                temp.BCCreateTime = ko.observable("");
+                temp.BCUpdateTime = ko.observable("");
+                temp.BCStatus = ko.observable("");
+                temp.BCDesc = ko.observable("");
+                temp.BCUrl = ko.observable("");
+                return temp;
+            };
+
+            self.BeetleClassInfo = ko.observable(self.BeetleClassInit());
+
+            self.SubmitData = function(item) {
+                var vBCInfo = function(data) {
+                    var temp = {};
+                    temp.ID = self.CurrID();
+                    temp.BCName = data.BCName();
+                    temp.BCType = data.BCType();
+                    temp.BCStatus = $("#selectStatus option:selected").val(); //data.BCStatus();
+                    temp.BCDesc = data.BCDesc();
+                    temp.BCUrl = data.BCUrl();
+
+                    return temp;
+                }
+                var vSubmitData = vBCInfo(item);
+
+                $.getJSON(self.Urls.AddClass, vSubmitData, function(result) {
+                    if (result.IsSuccess) {
+                        self.RefreshList();
+                        CloseDialog();
+                    }
+                    alert(result.Text);
+                });
+
+            };
+
+            self.ShowDialog = function(type) {
+                switch (type) {
+                case "add":
+                    self.BeetleClassInfo(self.BeetleClassInit());
+                    break;
+                case "edit":
+                    $.getJSON(self.Urls.GetClass, { id: self.CurrID() }, function(result) {
+                        if (result.IsSuccess) {
+                            self.BeetleClassInfo(self.BeetleClassBind(result.ResultData.BCInfo));
+                        } else {
+                            self.BeetleClassInfo(self.BeetleClassInit());
+                        }
+                    });
+                    break;
+                }
+            };
+
+        };
+        ko.applyBindings(new vClassList());
+    </script>    
+}

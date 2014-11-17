@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -35,6 +37,20 @@ namespace SPF.Beetlea.Web.Controllers
             try
             {
                 BeetleClass bc = new BeetleClass();
+                //分页
+                Helper.DataHelpler dataHelper = new Helper.DataHelpler();
+                //总记录条数
+                int iCount = dataHelper.FindCount("BeetleClass", "ID");
+                //每页记录数
+                int iPageSize = 3;
+                //总页数
+                int iPageCount = iCount/2 + 1;
+                int iPageIndex = 2;
+
+                DataTable dt = dataHelper.FindDataByPage(iPageSize, iPageIndex, "BeetleClass", "ID");
+
+
+
                 IList<BeetleClassInfo> bciList = new List<BeetleClassInfo>();
                 bciList = bc.GetModelList(string.Format("1=1"));
                 rm.ResultData["BCIList"] = bciList;
@@ -148,16 +164,48 @@ namespace SPF.Beetlea.Web.Controllers
         /// 获取分类内容列表
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetClassContentList()
+        public JsonResult GetClassContentList(string bccname="")
         {
             Helper.ReturnMessage rm = new Helper.ReturnMessage(false);
 
             try
             {
-                BeetleClassContent bc = new BeetleClassContent();
-                IList<BeetleClassContentInfo> bcciList = new List<BeetleClassContentInfo>();
-                bcciList = bc.GetModelList(string.Format("1=1"));
-                rm.ResultData["BCCIList"] = bcciList;
+                //获取分类信息
+                BeetleClass bc = new BeetleClass();
+                IList<BeetleClassInfo> bciList = bc.GetModelList(string.Format("1=1"));
+
+                //分类内容
+                StringBuilder sb = new StringBuilder();
+                sb.Append("1=1");
+                if (!string.IsNullOrWhiteSpace(bccname))
+                {
+                    sb.AppendFormat(" and BCCName like '%{0}%'", bccname);
+                }
+                BeetleClassContent bcc = new BeetleClassContent();
+                IList<BeetleClassContentInfo> bcciList = bcc.GetModelList(sb.ToString());
+                IList<ClassAndClassContentInfo> caciList = new List<ClassAndClassContentInfo>();
+                bcciList.AsEnumerable().All(p =>
+                {
+                    string strBCName = bciList.Where(s => s.BCSid == p.BCSid).Select(s=>s.BCName).FirstOrDefault();
+                    caciList.Add(new ClassAndClassContentInfo
+                    {
+                        BCCCreateTime = p.BCCCreateTime,
+                        BCCDesc = p.BCCDesc,
+                        BCCName = p.BCCName,
+                        BCCPic = p.BCCPic,
+                        BCCSid = p.BCCSid,
+                        BCCStatus = p.BCCStatus,
+                        BCCType = p.BCCType,
+                        BCCUpdateTime = p.BCCUpdateTime,
+                        BCCUrl = p.BCCUrl,
+                        BCName = string.IsNullOrWhiteSpace(strBCName) ? "未知" : strBCName,
+                        BCSid = p.BCSid,
+                        ID = p.ID
+                    });
+                    return true;
+                });
+
+                rm.ResultData["BCCIList"] = caciList;
                 rm.IsSuccess = true;
             }
             catch
@@ -254,5 +302,17 @@ namespace SPF.Beetlea.Web.Controllers
 
         #endregion
         #endregion
+    }
+
+
+    /// <summary>
+    /// 分类和分类内容对象
+    /// </summary>
+    public class ClassAndClassContentInfo : BeetleClassContentInfo
+    {
+        /// <summary>
+        /// 分类名称
+        /// </summary>
+        public string BCName { get; set; }
     }
 }

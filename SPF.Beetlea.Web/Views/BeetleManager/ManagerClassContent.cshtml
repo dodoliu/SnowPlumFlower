@@ -6,7 +6,13 @@
 @section SubmenuElement{
 <a href="javascript.void(0);" class="button" data-reveal-id="myModal" data-animation="fade" data-bind="click:$root.addClick"><small class="icon clipboard"></small><span>新增分类内容</span></a>
 }
-
+@section SubmenuRightElement{
+    <div class="module search">        
+        <p>
+            <input type="text" placeholder="搜索..." name="user_search" id="txtSearch" data-bind="event:{keyup:$root.SearchClick}" />
+        </p>
+    </div>
+}
 
 <div id="table" class="help">
     <div class="col w10 last">
@@ -24,9 +30,11 @@
                 </tr>               
                 <!--ko foreach:$root.BeetleClassContentList-->
                 <tr>
-                    <td data-bind="text:BCSid"></td>
+                    <td data-bind="text:BCName"></td>
                     <td data-bind="text:BCCName"></td>
-                    <td data-bind="text:BCCPic"></td>
+                    <td>
+                        <img width="70" height="60" data-bind="attr:{src:BCCPic}" />
+                    </td>
                     <td data-bind="text:BCCCreateTime"></td>
                     <td data-bind="text:BCCDesc"></td>
                     <!--ko foreach:$root.BeetleClassContentStatus-->
@@ -60,9 +68,6 @@
                 <p style="margin-top:20px;">
                     <label for="simple_input">所属分类:</label>
                     <select name="select" id="selectClass" class="w_28">
-                        @*<!--ko foreach:$root.BeetleClassList-->
-                        <option data-bind="text:$data.BCName,value:$data.BCSid"></option>
-                        <!--/ko-->*@
                         <!--ko foreach:$root.BeetleClassList-->
                         <!--ko if:$data.BCSid()==$parent.BCSid()-->
                         <option selected="selected" data-bind="text:$data.BCName,value:$data.BCSid"></option>
@@ -132,7 +137,7 @@
                 GetClassList: "@Url.Action("GetClassList", "BeetleManager")"
             };
 
-            var vClassContentList = function () {
+            var vClassContentList = function() {
                 var self = this;
                 self.Urls = window.Urls;
 
@@ -143,10 +148,11 @@
 
                 self.BeetleClassContentList = ko.observableArray();
 
-                self.BeetleClassContentBind = function (data) {
+                self.BeetleClassContentBind = function(data) {
                     var temp = {};
                     temp.ID = ko.observable(data.ID);
                     temp.BCSid = ko.observable(data.BCSid);
+                    temp.BCName = ko.observable(data.BCName);
                     temp.BCCSid = ko.observable(data.BCCSid);
                     temp.BCCName = ko.observable(data.BCCName);
                     temp.BCCPic = ko.observable(data.BCCPic);
@@ -160,10 +166,11 @@
                 };
 
                 //分类内容对象
-                self.BeetleClassContentInit = function () {
+                self.BeetleClassContentInit = function() {
                     var temp = {};
                     temp.ID = ko.observable("");
                     temp.BCSid = ko.observable("");
+                    temp.BCName = ko.observable("");
                     temp.BCCSid = ko.observable("");
                     temp.BCCName = ko.observable("");
                     temp.BCCPic = ko.observable("");
@@ -182,7 +189,7 @@
                 //分类内容
                 self.BeetleClassContentInfo = ko.observable(self.BeetleClassContentInit());
                 //分类绑定
-                self.BeetleClassBind = function (data) {
+                self.BeetleClassBind = function(data) {
                     var temp = {};
                     temp.ID = ko.observable(data.ID);
                     temp.BCSid = ko.observable(data.BCSid);
@@ -196,11 +203,11 @@
                     return temp;
                 };
 
-                self.RefreshList = function () {
+                self.RefreshList = function() {
                     self.BeetleClassContentList.removeAll();
-                    $.getJSON(self.Urls.GetClassContentList, {}, function (result) {
+                    $.getJSON(self.Urls.GetClassContentList, { bccname: $("#txtSearch").val() }, function (result) {
                         if (result.IsSuccess) {
-                            $(result.ResultData.BCCIList).each(function (index, item) {
+                            $(result.ResultData.BCCIList).each(function(index, item) {
                                 self.BeetleClassContentList.push(self.BeetleClassContentBind(item));
                             });
                         }
@@ -214,35 +221,31 @@
                     self.BeetleClassList.removeAll();
                     $.getJSON(self.Urls.GetClassList, {}, function(result) {
                         if (result.IsSuccess) {
-                            $(result.ResultData.BCIList).each(function (index, item) {
-                                console.log(item);
+                            $(result.ResultData.BCIList).each(function(index, item) {
                                 self.BeetleClassList.push(self.BeetleClassBind(item));
                             });
                         }
                     });
                 });
 
-                self.EditClick = function (data) {
+                self.EditClick = function(data) {
                     self.CurrID(data.ID());
                     self.ShowDialog("edit");
                 };
-                self.AddClick = function () {
+                self.AddClick = function() {
                     self.CurrID(0);
                     self.ShowDialog("add");
                 };
 
 
-
-
-
-                self.SubmitData = function (item, _event) {
-                    var vBCInfo = function (data) {
+                self.SubmitData = function(item, _event) {
+                    var vBCInfo = function(data) {
                         var temp = {};
                         temp.ID = self.CurrID();
                         temp.BCSid = $("#selectClass option:selected").val(); //item.BCSid();
                         temp.BCCName = data.BCCName();
                         temp.BCCPic = data.BCCPic();
-                        temp.BCCStatus = $("#selectStatus option:selected").val();//data.BCCStatus();//
+                        temp.BCCStatus = $("#selectStatus option:selected").val(); //data.BCCStatus();//
                         temp.BCCDesc = data.BCCDesc();
                         temp.BCCType = data.BCCType();
                         temp.BCCUrl = data.BCCUrl();
@@ -251,7 +254,7 @@
                     }
                     var vSubmitData = vBCInfo(item);
 
-                    $.getJSON(self.Urls.AddClassContent, vSubmitData, function (result) {
+                    $.getJSON(self.Urls.AddClassContent, vSubmitData, function(result) {
                         if (result.IsSuccess) {
                             self.RefreshList();
                             CloseDialog();
@@ -261,23 +264,29 @@
 
                 };
 
-                self.ShowDialog = function (type) {
+                self.ShowDialog = function(type) {
                     switch (type) {
-                        case "add":
-                            self.BeetleClassContentInfo(self.BeetleClassContentInit());
-                            break;
-                        case "edit":
-                            $.getJSON(self.Urls.GetClassContentInfo, { id: self.CurrID() }, function (result) {
-                                if (result.IsSuccess) {
-                                    self.BeetleClassContentInfo(self.BeetleClassContentBind(result.ResultData.BCCInfo));
-                                } else {
-                                    self.BeetleClassContentInfo(self.BeetleClassContentInit());
-                                }
-                            });
-                            break;
+                    case "add":
+                        self.BeetleClassContentInfo(self.BeetleClassContentInit());
+                        break;
+                    case "edit":
+                        $.getJSON(self.Urls.GetClassContentInfo, { id: self.CurrID() }, function(result) {
+                            if (result.IsSuccess) {
+                                self.BeetleClassContentInfo(self.BeetleClassContentBind(result.ResultData.BCCInfo));
+                            } else {
+                                self.BeetleClassContentInfo(self.BeetleClassContentInit());
+                            }
+                        });
+                        break;
                     }
                 };
 
+                self.SearchClick = function(data, _event) {
+                    if (_event.keyCode == 13) {
+                        //console.log(data);
+                        self.RefreshList();
+                    }
+                };
             };
             ko.applyBindings(new vClassContentList());
 

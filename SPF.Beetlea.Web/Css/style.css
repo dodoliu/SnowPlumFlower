@@ -40,7 +40,7 @@ padding:0px 0 0 0;
 width:100%;
 height:10px;
 font-size:0px;
-background:#fff url(../../../Images/Beetle/Manager/footer_bg.png) repeat-x bottom left;
+background:#fff url(../Images/Manager/footer_bg.png) repeat-x bottom left;
 }
 
 
@@ -50,13 +50,13 @@ height:10px;
 }
 
 #body_footer #bottom_left {
-background:url(../../../Images/Beetle/Manager/footer_bl.png) no-repeat bottom left;
+background:url(../Images/Manager/footer_bl.png) no-repeat bottom left;
 margin:0px;
 padding:0px;
 }
 
 #body_footer #bottom_right {
-background:url(../../../Images/Beetle/Manager/footer_br.png) no-repeat top right;
+background:url(../Images/Manager/footer_br.png) no-repeat top right;
 margin:0px;
 padding:0px;
 }
@@ -82,7 +82,7 @@ font-size:11px;
 #menu {
 width:100%;
 height:35px;
-background:#d0d0d0 url(../../../Images/Beetle/Manager/menu.png) repeat-x;
+background:#d0d0d0 url(../Images/Manager/menu.png) repeat-x;
 position:relative;
 border-bottom:1px solid #767778;
 }
@@ -97,18 +97,18 @@ font-size:0px;
 
 #menu #left {
 left:0px;
-background:#d0d0d0 url(../../../Images/Beetle/Manager/menu_tl.png) no-repeat;
+background:#d0d0d0 url(../Images/Manager/menu_tl.png) no-repeat;
 }
 
 #menu #right {
 right:0px;
-background:#d0d0d0 url(../../../Images/Beetle/Manager/menu_tr.png) no-repeat;
+background:#d0d0d0 url(../Images/Manager/menu_tr.png) no-repeat;
 }
 
 #submenu {
 width:100%;
 height:49px;
-background:#9c9d9e url(../../../Images/Beetle/Manager/submenu.png) repeat-x;
+background:#9c9d9e url(../Images/Manager/submenu.png) repeat-x;
 position:relative;
 }
 
@@ -148,7 +148,7 @@ cursor:pointer;
 margin:8px 0 0;
 }
 
-#menu ul li a:hover,#menu ul li.hover a,#menu ul li a.selected {background:url(../../../Images/Beetle/Manager/menu_arrow.png) no-repeat center 29px;}
+#menu ul li a:hover,#menu ul li.hover a,#menu ul li a.selected {background:url(../Images/Manager/menu_arrow.png) no-repeat center 29px;}
 
 #menu h2 {padding:10px 0 0 10px;}
 
@@ -202,7 +202,7 @@ float:left;
 margin:0 10px 0 0;
 height:28px;
 display:block;
-background:url(../../../Images/Beetle/Manager/submenu_button_bg_left.png) no-repeat top left;
+background:url(../Images/Manager/submenu_button_bg_left.png) no-repeat top left;
 text-decoration:none;
 padding:0 0 0 10px;
 }
@@ -218,7 +218,7 @@ float:left;
 padding:0 10px 0 0;
 height:28px;
 line-height:27px;
-background:url(../../../Images/Beetle/Manager/submenu_button_bg_right.png) no-repeat top right;
+background:url(../Images/Manager/submenu_button_bg_right.png) no-repeat top right;
 color:#cacaca;
 font-size:13px;
 }
@@ -241,7 +241,7 @@ opacity:1.0;
 .module.search {
 width:230px;
 height:28px;
-background:url(../../../Images/Beetle/Manager/module_search.png) no-repeat top left;
+background:url(../Images/Manager/module_search.png) no-repeat top left;
 }
 
 .module.search p {
@@ -281,13 +281,13 @@ right:0px;
 }
 
 .module .dropdown .arrow {
-background:url(../../../Images/Beetle/Manager/dropdown_arrow.png) no-repeat 33px 0px;
+background:url(../Images/Manager/dropdown_arrow.png) no-repeat 33px 0px;
 height:10px;
 font-size:0px;
 }
 
 #submenu .modules_right .module .dropdown .arrow {
-background:url(../../../Images/Beetle/Manager/dropdown_arrow.png) no-repeat top right;
+background:url(../Images/Manager/dropdown_arrow.png) no-repeat top right;
 margin:0 33px 0 0;
 }
 
@@ -304,7 +304,7 @@ color:#dbdbdb;
 .module .dropdown hr {
 display:block;
 border:0;
-background:url(../../../Images/Beetle/Manager/dropdown_hr.png) no-repeat center top;
+background:url(../Images/Manager/dropdown_hr.png) no-repeat center top;
 height:2px;
 font-size:0px;
 margin:0 0 10px 0;
@@ -332,14 +332,14 @@ display:block;
 width:27px;
 height:28px;
 display:block;
-background:url(../../../Images/Beetle/Manager/pagination_button.png) no-repeat top left;
+background:url(../Images/Manager/pagination_button.png) no-repeat top left;
 }
 
 .module.pagination a.page_right {
 width:27px;
 height:28px;
 display:block;
-background:url(../../../Images/Beetle/Manager/pagination_button.png) no-repeat top left;
+background:url(../Images/Manager/pagination_button.png) no-repeat top left;
 }
 
 .module.pagination a small {
@@ -376,7 +376,7 @@ font-size:20px;
 position:absolute;
 width:5px;
 height:5px;
-background-image:url(../../../Images/Beetle/Manager/messages.png);
+background-image:url(../Images/Manager/messages.png);
 background-repeat:no-repeat;
 }
 
@@ -408,22 +408,22 @@ background-repeat:no-repeat;
 
 .box .head,.box .bottom,.box .head div,.box .bottom div{height:5px;font-size:0;width:100%;}
 .box{background:#f0f0f0;position:relative;}
-.box .head {background:#f0f0f0 url(../../../Images/Beetle/Manager/box_tl.png) no-repeat;}
-.box .head div {background:url(../../../Images/Beetle/Manager/box_tr.png) no-repeat top right;}
-.box .bottom {background:#f0f0f0 url(../../../Images/Beetle/Manager/box_bl.png) no-repeat;}
-.box .bottom div {background:url(../../../Images/Beetle/Manager/box_br.png) no-repeat top right;}
+.box .head {background:#f0f0f0 url(../Images/Manager/box_tl.png) no-repeat;}
+.box .head div {background:url(../Images/Manager/box_tr.png) no-repeat top right;}
+.box .bottom {background:#f0f0f0 url(../Images/Manager/box_bl.png) no-repeat;}
+.box .bottom div {background:url(../Images/Manager/box_br.png) no-repeat top right;}
 .box .desc {color:#666;}
 .box h2{font-size:14px;margin:0;padding:8px 0 7px 10px;}
-.box.header .head {background:url(../../../Images/Beetle/Manager/box_tl_h.png) no-repeat top left;position:absolute;top:0px;left:0px;}
-.box.header .head div {background:url(../../../Images/Beetle/Manager/box_tr_h.png) no-repeat top right;position:absolute;width:5px;top:0px;right:0px;}
-.box.header h2{background:#d0d0d0 url(../../../Images/Beetle/Manager/box_c.png) repeat-x top left;border-bottom:1px solid #b6b6b6;padding:10px 0 9px 10px;}
+.box.header .head {background:url(../Images/Manager/box_tl_h.png) no-repeat top left;position:absolute;top:0px;left:0px;}
+.box.header .head div {background:url(../Images/Manager/box_tr_h.png) no-repeat top right;position:absolute;width:5px;top:0px;right:0px;}
+.box.header h2{background:#d0d0d0 url(../Images/Manager/box_c.png) repeat-x top left;border-bottom:1px solid #b6b6b6;padding:10px 0 9px 10px;}
 /*-------------------------BOXES--------------------------*/
 
 
 /*-------------------------SHELF-------------------------*/
 .shelf {
 height:165px;
-background:url(../../../Images/Beetle/Manager/shelf_center.png) repeat-x bottom left;
+background:url(../Images/Manager/shelf_center.png) repeat-x bottom left;
 position:relative;
 margin:0 0 20px 0;	
 }
@@ -434,7 +434,7 @@ height:54px;
 position:absolute;
 left:0px;
 bottom:0px;
-background:url(../../../Images/Beetle/Manager/shelf_left.png) no-repeat top left;
+background:url(../Images/Manager/shelf_left.png) no-repeat top left;
 }
 
 .shelf .right {
@@ -443,7 +443,7 @@ height:54px;
 position:absolute;
 right:0px;
 bottom:0px;
-background:url(../../../Images/Beetle/Manager/shelf_right.png) no-repeat top left;
+background:url(../Images/Manager/shelf_right.png) no-repeat top left;
 }
 
 .shelf .inside {
@@ -502,7 +502,7 @@ border:1px solid #d6d6d6;
 -moz-border-radius:20px;
 -webkit-border-radius:20px;
 border-radius:20px;
-background:#fff url(../../../Images/Beetle/Manager/input_bg.png) repeat-x bottom left;
+background:#fff url(../Images/Manager/input_bg.png) repeat-x bottom left;
 padding:6px;
 clear:both;
 color:#666;
@@ -544,7 +544,7 @@ color:#666;
 line-height:28px;
 margin:0 14px 0 0;
 padding:0 0 0 10px;
-background-image:url(../../../Images/Beetle/Manager/buttons_left.png);
+background-image:url(../Images/Manager/buttons_left.png);
 background-repeat:no-repeat;
 }
 
@@ -555,7 +555,7 @@ cursor:pointer;
 margin:0 -14px 0 0;
 padding:0 10px 0 0;
 float:left;
-background-image:url(../../../Images/Beetle/Manager/buttons_right.png);
+background-image:url(../Images/Manager/buttons_right.png);
 background-repeat:no-repeat;
 }
 
@@ -608,13 +608,13 @@ width:21px;
 height:20px;
 position:absolute;
 top:4px;
-background:url(../../../Images/Beetle/Manager/checkbox.png) no-repeat bottom left;
+background:url(../Images/Manager/checkbox.png) no-repeat bottom left;
 }
 
 a.checkbox.on small {left:0px;}
 a.checkbox.off small {left:23px;}
-a.checkbox.on {background:url(../../../Images/Beetle/Manager/checkbox.png) no-repeat left 3px;}
-a.checkbox.off {background:url(../../../Images/Beetle/Manager/checkbox.png) no-repeat right 3px;}
+a.checkbox.on {background:url(../Images/Manager/checkbox.png) no-repeat left 3px;}
+a.checkbox.off {background:url(../Images/Manager/checkbox.png) no-repeat right 3px;}
 
 input.checkbox {
 display:none;
@@ -627,7 +627,7 @@ th.checkbox {width:0px}
 table tr:hover td {background:#e4e4e4;}
 
 table th {
-background:#d0d0d0 url(../../../Images/Beetle/Manager/box_c.png) repeat-x top left;
+background:#d0d0d0 url(../Images/Manager/box_c.png) repeat-x top left;
 font-size:13px;
 font-weight:400;
 color:#444;
@@ -723,7 +723,7 @@ left:0px;
 z-index:100;
 width:100%;
 height:100%;
-background:url(../../../Images/Beetle/Manager/overlay.png);
+background:url(../Images/Manager/overlay.png);
 display:none;
 }
 
@@ -753,7 +753,7 @@ width:50px;
 height:50px;
 top:100px;
 position:fixed;
-background:#fff url(../../../Images/Beetle/Manager/ajax-loader.gif) no-repeat center;
+background:#fff url(../Images/Manager/ajax-loader.gif) no-repeat center;
 z-index:101;
 }
 
@@ -794,10 +794,10 @@ border:2px solid blue;
 /*-------------------------ICONS-------------------------*/
 .icon {
 background-repeat:no-repeat;
-background-image:url(../../../Images/Beetle/Manager/icons.png);
+background-image:url(../Images/Manager/icons.png);
 }
 
-a.button .icon {background-image:url(../../../Images/Beetle/Manager/icons_gray.png);}
+a.button .icon {background-image:url(../Images/Manager/icons_gray.png);}
 
 .icon.single_user{background-position:-13px -13px}
 .icon.multiple_users{background-position:-61px -13px}

@@ -12,8 +12,9 @@
         <div class="content">
             <table>
                 <tr>
-                    <th width="25%">分类名称</th>
-                    <th width="25%">对应链接</th>
+                    <th width="20%">分类名称</th>
+                    <th width="20%">对应链接</th>
+                    <th width="10%">SID</th>
                     <th width="10%">创建时间</th>
                     <th width="10%">类型</th>
                     <th width="10%">状态</th>
@@ -24,6 +25,7 @@
                 <tr>
                     <td data-bind="text:BCName"></td>
                     <td data-bind="text:BCUrl"></td>
+                    <td data-bind="text:BCSid"></td>
                     <td data-bind="text:BCCreateTime"></td>
                     <td data-bind="text:BCType"></td>
                     <!--ko foreach:$root.BeetleClassStatus-->

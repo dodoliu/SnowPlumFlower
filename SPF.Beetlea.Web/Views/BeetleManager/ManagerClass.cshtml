@@ -41,12 +41,15 @@
                 <!--/ko-->
             </table>
         </div>       
-        <div class="module pagination">
-            <a href="" class="page_left"><small class="icon arrow_left"></small></a>
-            <a href="" class="current">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <a href="" class="page_right"><small class="icon arrow_right"></small></a>
+        <div class="module pagination" style="float:right;margin-right:50px;">
+            <span class="pagingstyle">共 20 条</span>
+            <a href="javascript:void(0)" class="page_left"><small class="icon arrow_left"></small></a>
+            @*<a href="javascript:void(0)" class="current">1</a>
+            <a href="javascript:void(0)">2</a>
+            <a href="javascript:void(0)">3</a>*@
+            1/2
+            <a href="javascript:void(0)" class="page_right"><small class="icon arrow_right"></small></a>            
+            <input type="text" value="1" style="width:20px;"/>
         </div>
     </div>        
 </div>
@@ -115,6 +118,12 @@
             self.Urls = window.Urls;
             //当前编辑变量ID
             self.CurrID = ko.observable(0);
+
+            //分页
+            self.pageSize = ko.observable(10);
+            self.pageIndex = ko.observable(1);
+            self.pageCount = ko.observable(0);
+            
 
             //状态数组
             self.BeetleClassStatus = ko.observableArray([{ key: "1", value: "正常" }, { key: "0", value: "关闭" }]);

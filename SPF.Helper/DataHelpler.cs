@@ -34,15 +34,23 @@ namespace SPF.Helper
             //order by AppConfigID
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("select top {0} * ", iPageSize);
-            sb.AppendFormat(" from {0} ", strTableName);
-            sb.AppendFormat(" where [{0}] >= ", strIndexColumn);
-            sb.AppendFormat(" (select Max([{0}]) from ", strIndexColumn);
-            sb.AppendFormat(" (select top ({0}*({1}-1)-1) [{2}] ", iPageSize, iPageIndex, strIndexColumn);
-            sb.AppendFormat(" from {0} ", strTableName);
-            sb.AppendFormat(" order by [{0}]) as T) ", strIndexColumn);
-            sb.AppendFormat(" order by [{0}] ", strIndexColumn);
-
+            if (iPageIndex <= 1)
+            {
+                sb.AppendFormat("select top {0} * ", iPageSize);
+                sb.AppendFormat(" from {0} ", strTableName);
+                sb.AppendFormat(" order by [{0}] ", strIndexColumn);
+            }
+            else
+            {
+                sb.AppendFormat("select top {0} * ", iPageSize);
+                sb.AppendFormat(" from {0} ", strTableName);
+                sb.AppendFormat(" where [{0}] >= ", strIndexColumn);
+                sb.AppendFormat(" (select Max([{0}]) from ", strIndexColumn);
+                sb.AppendFormat(" (select top {0} [{1}] ", iPageSize*(iPageIndex - 1), strIndexColumn);
+                sb.AppendFormat(" from {0} ", strTableName);
+                sb.AppendFormat(" order by [{0}]) as T) ", strIndexColumn);
+                sb.AppendFormat(" order by [{0}] ", strIndexColumn);
+            }
             DataSet ds = OleDBHelper.Query(sb.ToString());
             DataTable dt = new DataTable();
             if (ds != null && ds.Tables.Count > 0)

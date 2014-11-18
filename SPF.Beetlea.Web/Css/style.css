@@ -860,3 +860,9 @@ a.button .icon {background-image:url(../Images/Manager/icons_gray.png);}
 .icon.arrow_down{background-position:-205px -445px}
 .icon.arrow_up{background-position:-253px -445px}
 /*-------------------------ICONS-------------------------*/
+
+.pagingstyle {
+    font-size: 12px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    color: #666;
+}

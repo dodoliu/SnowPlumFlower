@@ -30,7 +30,7 @@ namespace SPF.Beetlea.Web.Controllers
         /// 获取分类列表
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetClassList()
+        public JsonResult GetClassList(int ipageindex = 0)
         {
             Helper.ReturnMessage rm = new Helper.ReturnMessage(false);
 
@@ -42,18 +42,23 @@ namespace SPF.Beetlea.Web.Controllers
                 //总记录条数
                 int iCount = dataHelper.FindCount("BeetleClass", "ID");
                 //每页记录数
-                int iPageSize = 3;
+                int iPageSize = 10;
                 //总页数
-                int iPageCount = iCount/2 + 1;
-                int iPageIndex = 2;
+                int iPageCount = iCount / iPageSize + 1;
+                //当前页
+                int iPageIndex = ipageindex <= 0 ? 1 : ipageindex;
 
                 DataTable dt = dataHelper.FindDataByPage(iPageSize, iPageIndex, "BeetleClass", "ID");
+                IList <BeetleClassInfo> bciList= bc.DataTableToList(dt);
 
 
-
-                IList<BeetleClassInfo> bciList = new List<BeetleClassInfo>();
-                bciList = bc.GetModelList(string.Format("1=1"));
+                //IList<BeetleClassInfo> bciList = new List<BeetleClassInfo>();
+                //bciList = bc.GetModelList(string.Format("1=1"));
                 rm.ResultData["BCIList"] = bciList;
+                rm.ResultData["iPageSize"] = iPageSize;
+                rm.ResultData["iPageCount"] = iPageCount;
+                rm.ResultData["iPageIndex"] = iPageIndex;
+
                 rm.IsSuccess = true;
             }
             catch

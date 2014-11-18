@@ -1,9 +1,5 @@
 ﻿/**************************************
 * 作用：转换配置字符类型
-
-* 作者：HanaTech
-* 日期: 2008-02-11
-* 网址：www.hanatech.com.cn
 **************************************/
 using System;
 using System.Configuration;

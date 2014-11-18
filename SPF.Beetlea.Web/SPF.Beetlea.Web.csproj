@@ -319,6 +319,7 @@
     <Content Include="Scripts\SPF.Helper.js" />
     <Content Include="Scripts\swipe.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\CustomError\404.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -348,6 +349,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SPF.DBUtility\SPF.DBUtility.csproj">
+      <Project>{c8fb9076-3e5a-41b5-8483-5da6154b89b7}</Project>
+      <Name>SPF.DBUtility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPF.Helper\SPF.Helper.csproj">
       <Project>{8e712061-c743-4721-ad31-b2e5ab5c5a33}</Project>
       <Name>SPF.Helper</Name>

@@ -331,10 +331,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SPF.Controller\SPF.Controller.csproj">
-      <Project>{a08b437e-ee15-4112-a361-b2abc430d816}</Project>
-      <Name>SPF.Controller</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SPF.OleDB.BLL\SPF.OleDB.BLL.csproj">
       <Project>{0BB045E0-383A-413A-B5DE-5A133E3A1E6E}</Project>
       <Name>SPF.OleDB.BLL</Name>

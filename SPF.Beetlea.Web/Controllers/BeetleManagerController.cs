@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using SPF.DBUtility;
 using SPF.OleDB.BLL;
 using SPF.OleDB.Model;
 
@@ -38,7 +39,7 @@ namespace SPF.Beetlea.Web.Controllers
             {
                 BeetleClass bc = new BeetleClass();
                 //分页
-                Helper.DataHelpler dataHelper = new Helper.DataHelpler();
+                DataHelpler dataHelper = new DataHelpler();
                 //总记录条数
                 int iCount = dataHelper.FindCount("BeetleClass", "ID");
                 //每页记录数

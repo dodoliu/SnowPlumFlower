@@ -19,36 +19,38 @@ namespace SPF.DBUtility
         /// <param name="iPageIndex">当前页</param>
         /// <param name="strTableName">需要分页的表名</param>
         /// <param name="strIndexColumn">索引字段</param>
+        /// <param name="strWhere">where条件</param>
         /// <returns></returns>
-        public DataTable FindDataByPage(int iPageSize = 10, int iPageIndex = 0, string strTableName = "", string strIndexColumn = "")
+        public DataTable FindDataByPage(int iPageSize = 10, int iPageIndex = 0, string strTableName = "", string strIndexColumn = "" ,string strWhere = "")
         {
-            //select top 10 *
-            //from AppConfig
-            //where AppConfigID >=
-            //(select MAX(AppConfigID)
-            //from
-            //(select top (10*(9-1)-1) AppConfigID
-            //from AppConfig
-            //order by AppConfigID)
-            //as T)
-            //order by AppConfigID
-
             StringBuilder sb = new StringBuilder();
             if (iPageIndex <= 1)
             {
                 sb.AppendFormat("select top {0} * ", iPageSize);
                 sb.AppendFormat(" from {0} ", strTableName);
+                if (!string.IsNullOrWhiteSpace(strWhere))
+                {
+                    sb.AppendFormat(" where 1=1 and {0} ", strWhere);
+                }
                 sb.AppendFormat(" order by [{0}] ", strIndexColumn);
             }
             else
             {
                 sb.AppendFormat("select top {0} * ", iPageSize);
                 sb.AppendFormat(" from {0} ", strTableName);
-                sb.AppendFormat(" where [{0}] >= ", strIndexColumn);
+                sb.AppendFormat(" where [{0}] > ", strIndexColumn);
                 sb.AppendFormat(" (select Max([{0}]) from ", strIndexColumn);
                 sb.AppendFormat(" (select top {0} [{1}] ", iPageSize*(iPageIndex - 1), strIndexColumn);
                 sb.AppendFormat(" from {0} ", strTableName);
+                if (!string.IsNullOrWhiteSpace(strWhere))
+                {
+                    sb.AppendFormat(" where 1=1 and {0} ", strWhere);
+                }
                 sb.AppendFormat(" order by [{0}]) as T) ", strIndexColumn);
+                if (!string.IsNullOrWhiteSpace(strWhere))
+                {
+                    sb.AppendFormat(" where 1=1 and {0} ", strWhere);
+                }
                 sb.AppendFormat(" order by [{0}] ", strIndexColumn);
             }
             DataSet ds = OleDBHelper.Query(sb.ToString());
@@ -64,8 +66,9 @@ namespace SPF.DBUtility
         /// <summary>
         /// 获取每个查询的总记录数
         /// </summary>
-        /// <param name="strTableName"></param>
-        /// <param name="strIndexColumn"></param>
+        /// <param name="strTableName">表名</param>
+        /// <param name="strIndexColumn">索引字段</param>
+        /// <param name="strWhere">where条件</param>
         /// <returns></returns>
         public int FindCount(string strTableName = "", string strIndexColumn = "", string strWhere = "")
         {

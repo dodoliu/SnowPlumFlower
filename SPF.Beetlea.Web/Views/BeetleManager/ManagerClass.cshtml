@@ -41,15 +41,19 @@
                 <!--/ko-->
             </table>
         </div>       
-        <div class="module pagination" style="float:right;margin-right:50px;">
-            <span class="pagingstyle">共 20 条</span>
-            <a href="javascript:void(0)" class="page_left"><small class="icon arrow_left"></small></a>
-            @*<a href="javascript:void(0)" class="current">1</a>
-            <a href="javascript:void(0)">2</a>
-            <a href="javascript:void(0)">3</a>*@
-            1/2
-            <a href="javascript:void(0)" class="page_right"><small class="icon arrow_right"></small></a>            
-            <input type="text" value="1" style="width:20px;"/>
+        <div class="module pagination" style="float:right;margin-right:30px;width:300px;">
+            <span class="pagingstyle" data-bind="text:'共 '+$root.pageCount() +' 页 ' + +$root.pageSize()+ ' 条'"></span>
+            <a href="javascript:void(0)" class="page_left" data-bind="click:$root.PagePrev"><small class="icon arrow_left"></small></a>
+            <!--ko foreach:$root.currPageIndex-->
+            <!--ko if:$root.pageIndex()==$data-->
+            <a href="javascript:void(0)" class="current" data-bind="text:$data,click:$root.IndexClick"></a>
+            <!--/ko-->            
+            <!--ko if:$root.pageIndex()!=$data-->
+            <a href="javascript:void(0)" data-bind="text:$data,click:$root.IndexClick"></a>            
+            <!--/ko-->       
+            <!--/ko-->            
+            <a href="javascript:void(0)" class="page_right" data-bind="click:$root.PageNext"><small class="icon arrow_right"></small></a> 
+            <input type="text" id="txtPage" class="page_right" style="width:20px;margin-top:4px;margin-left:5px;" data-bind="value:$root.pageIndex,event:{keyup:$root.PageEnter}" />
         </div>
     </div>        
 </div>
@@ -120,10 +124,12 @@
             self.CurrID = ko.observable(0);
 
             //分页
-            self.pageSize = ko.observable(10);
-            self.pageIndex = ko.observable(1);
-            self.pageCount = ko.observable(0);
-            
+            self.pageSize = ko.observable(20); //每页条数
+            self.pageIndex = ko.observable(1); //当前页
+            self.pageCount = ko.observable(0); //总页数
+            self.count = ko.observable(0); //总条数
+            self.currPageIndex = ko.observableArray();
+
 
             //状态数组
             self.BeetleClassStatus = ko.observableArray([{ key: "1", value: "正常" }, { key: "0", value: "关闭" }]);
@@ -144,13 +150,40 @@
                 return temp;
             };
 
-            self.RefreshList = function () {
+            self.RefreshList = function() {
                 self.BeetleClassList.removeAll();
-                $.getJSON(self.Urls.GetClassList, {}, function (result) {
+                $.getJSON(self.Urls.GetClassList, { ipageindex: self.pageIndex(), ipagesize: self.pageSize() }, function(result) {
                     if (result.IsSuccess) {
-                        $(result.ResultData.BCIList).each(function (index, item) {
+                        $(result.ResultData.BCIList).each(function(index, item) {
                             self.BeetleClassList.push(self.BeetleClassBind(item));
+                            self.count(result.ResultData.iCount);
+                            self.pageCount(result.ResultData.iPageCount);
                         });
+
+                        //分页
+                        self.currPageIndex.removeAll();
+                        if (self.pageIndex() >= 3 && self.pageCount() >= 3) {
+                            if (self.pageIndex() + 1 >= self.pageCount()) {
+                                for (var i = self.pageCount() - 2; i <= self.pageCount(); i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            } else {
+                                for (var i = self.pageIndex() - 1; i <= self.pageIndex() + 1; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            }
+                        } else {
+                            if (self.pageCount() <= 3) {
+                                for (var i = 1; i <= self.pageCount(); i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            } else {
+                                for (var i = 1; i <= 3; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            }
+                        }
+
                     }
                 });
             };
@@ -227,6 +260,25 @@
                 }
             };
 
+            //分页
+            self.PagePrev = function() {
+                var vPrev = (self.pageIndex() - 1) <= 0 ? 1 : self.pageIndex() - 1;
+                self.pageIndex(vPrev);
+            };
+            self.PageNext = function() {
+                var vNext = (self.pageIndex() + 1) >= self.pageCount() ? self.pageCount() : (self.pageIndex() + 1);
+                self.pageIndex(vNext);
+            };
+            self.IndexClick = function(data) {
+                self.pageIndex(data);
+            };
+            self.PageEnter = function(data, _event) {
+                if (_event.keyCode == 13) {
+                    var vPage = $("#txtPage").val() <= 0 ? 1 : $("#txtPage").val() >= self.pageCount() ? self.pageCount() : $("#txtPage").val();
+                    $("#txtPage").val(vPage);
+                    self.pageIndex(vPage);
+                }
+            };
         };
         ko.applyBindings(new vClassList());
     </script>    

@@ -54,6 +54,16 @@ namespace SPF.Beetlea.Web.Controllers
             return MyJson(rm);
         }
 
+        /// <summary>
+        /// 服务流程
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BeetleService()
+        {
+            return View();
+        }
+
+
         #endregion
 
     }

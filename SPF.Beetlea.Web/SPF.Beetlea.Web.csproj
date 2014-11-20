@@ -237,15 +237,20 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Css\cate100kz1.css" />
-    <Content Include="Css\cate100_.css" />
+    <Content Include="Css\indexcatez.css" />
+    <Content Include="Css\indexcate.css" />
     <Content Include="Css\classlisthome.css" />
+    <Content Include="Css\serviceawesome.css" />
+    <Content Include="Css\servicecommon.css" />
     <Content Include="Css\footStyle.css" />
+    <Content Include="Css\servicehome.css" />
     <Content Include="Css\Index.css" />
     <Content Include="Css\iscroll.css" />
     <Content Include="Css\listhome10_.css" />
     <Content Include="Css\reset.css" />
     <Content Include="Css\reveal.css" />
+    <Content Include="Css\servicereset.css" />
+    <Content Include="Css\servicesnower.css" />
     <Content Include="Css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -293,8 +298,13 @@
     <Content Include="Images\modal-gloss.png" />
     <Content Include="Images\phone.png" />
     <Content Include="Images\ppage_133.jpg" />
+    <Content Include="Images\tel.png" />
+    <Content Include="Images\test\test1.jpg" />
+    <Content Include="Images\test\test3.jpg" />
+    <Content Include="Images\test\test2.jpg" />
     <Content Include="Images\weixin.png" />
     <Content Include="OleDB\Beetle\Beetle.mdb" />
+    <Content Include="Scripts\audio.js" />
     <Content Include="Scripts\global.js" />
     <Content Include="Scripts\iscroll.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -313,11 +323,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\maivl.js" />
     <Content Include="Scripts\ManagerHelper.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\SPF.Helper.js" />
     <Content Include="Scripts\swipe.js" />
+    <Content Include="Scripts\zepto.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\CustomError\404.html" />
     <Content Include="Web.config">
@@ -340,6 +352,7 @@
     <Content Include="Views\BeetleManager\ManagerClass.cshtml" />
     <Content Include="Views\BeetleManager\ManagerClassContent.cshtml" />
     <Content Include="Views\Beetle\ClassContent.cshtml" />
+    <Content Include="Views\Beetle\BeetleService.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

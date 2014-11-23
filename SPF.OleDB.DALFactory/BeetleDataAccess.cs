@@ -63,5 +63,12 @@ namespace SPF.OleDB.DALFactory
             object objType = CreateObject(AssemblyPath, ClassNamespace);
             return (SPF.OleDB.IDAL.IBeetleClassContent)objType;
         }
+        public static SPF.OleDB.IDAL.IBeetlePic CreateBeetlePic()
+        {
+
+            string ClassNamespace = AssemblyPath + ".BeetlePic";
+            object objType = CreateObject(AssemblyPath, ClassNamespace);
+            return (SPF.OleDB.IDAL.IBeetlePic)objType;
+        }
 	}
 }

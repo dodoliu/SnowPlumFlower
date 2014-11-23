@@ -7,9 +7,16 @@
 <a href="javascript.void(0);" class="button" data-reveal-id="myModal" data-animation="fade" data-bind="click:$root.addClick"><small class="icon clipboard"></small><span>新增分类内容</span></a>
 }
 @section SubmenuRightElement{
-    <div class="module search">        
+    <select style="float: right; margin-right: 15px; width: 120px; margin-top: 10px; height: 28px;" id="selectclassq" data-bind="event:{change:$root.SelectClick}">
+        <option data-bind="text:'--请选择分类--',value:'0'"></option>
+        <!--ko foreach:$root.BeetleClassList-->
+        <option data-bind="text:$data.BCName,value:$data.BCSid"></option>
+        <!--/ko-->
+    </select>
+    
+    <div class="module search">
         <p>
-            <input type="text" placeholder="搜索..." name="user_search" id="txtSearch" data-bind="event:{keyup:$root.SearchClick}" />
+            <input type="text" style="margin-right: 5px;" placeholder="搜索..." name="user_search" id="txtSearch" data-bind="event:{keyup:$root.SearchClick}" />
         </p>
     </div>
 }
@@ -75,13 +82,8 @@
                 <p style="margin-top:20px;">
                     <label for="simple_input">所属分类:</label>
                     <select name="select" id="selectClass" class="w_28">
-                        <!--ko foreach:$root.BeetleClassList-->
-                        <!--ko if:$data.BCSid()==$parent.BCSid()-->
-                        <option selected="selected" data-bind="text:$data.BCName,value:$data.BCSid"></option>
-                        <!--/ko-->
-                        <!--ko if:$data.key!=$parent.BCCStatus()-->
+                        <!--ko foreach:$root.BeetleClassList-->                        
                         <option data-bind="text:$data.BCName,value:$data.BCSid"></option>
-                        <!--/ko-->
                         <!--/ko-->
                     </select>
                 </p>
@@ -158,6 +160,7 @@
 
                 //当前编辑变量ID
                 self.CurrID = ko.observable(0);
+                self.CurrBCSID = ko.observable("");
                 //状态数组
                 self.BeetleClassContentStatus = ko.observableArray([{ key: "1", value: "正常" }, { key: "0", value: "关闭" }]);
 
@@ -217,10 +220,12 @@
                     temp.BCUrl = ko.observable(data.BCUrl);
                     return temp;
                 };
+                //搜索框上当前选择的分类sid
+                self.CurrSelectBCSid = ko.observable("");
 
                 self.RefreshList = function() {
                     self.BeetleClassContentList.removeAll();
-                    $.getJSON(self.Urls.GetClassContentList, { bccname: $("#txtSearch").val(), ipageindex: self.pageIndex(), ipagesize: self.pageSize() }, function (result) {
+                    $.getJSON(self.Urls.GetClassContentList, { bccname: $("#txtSearch").val(), bcsid: self.CurrSelectBCSid(), ipageindex: self.pageIndex(), ipagesize: self.pageSize() }, function (result) {
                         if (result.IsSuccess) {
                             $(result.ResultData.BCCIList).each(function(index, item) {
                                 self.BeetleClassContentList.push(self.BeetleClassContentBind(item));
@@ -234,7 +239,7 @@
                             self.currPageIndex.removeAll();
                             if (self.pageIndex() >= 3 && self.pageCount() >= 3) {
                                 if (self.pageIndex() + 1 >= self.pageCount()) {
-                                    for (var i = self.pageCount() - 2; i <= self.pageCount() ; i++) {
+                                    for (var i = self.pageCount() - 2; i <= self.pageCount(); i++) {
                                         self.currPageIndex.push(i);
                                     }
                                 } else {
@@ -244,7 +249,7 @@
                                 }
                             } else {
                                 if (self.pageCount() <= 3) {
-                                    for (var i = 1; i <= self.pageCount() ; i++) {
+                                    for (var i = 1; i <= self.pageCount(); i++) {
                                         self.currPageIndex.push(i);
                                     }
                                 } else {
@@ -257,9 +262,7 @@
                     });
                 };
 
-                self.GetData = ko.computed(function() {
-                    self.RefreshList();
-
+                self.GetClassInfoList = function() {
                     //获取分类信息
                     self.BeetleClassList.removeAll();
                     $.getJSON(self.Urls.GetClassList, {}, function(result) {
@@ -269,14 +272,23 @@
                             });
                         }
                     });
-                });
+                }
+                self.GetData = ko.computed(function() {
+                    self.RefreshList();
 
+                });
+                self.GetClassData = ko.computed(function(){                    
+                    //获取分类信息
+                    self.GetClassInfoList();
+                });
                 self.EditClick = function(data) {
                     self.CurrID(data.ID());
+                    self.CurrBCSID(data.BCSid());
                     self.ShowDialog("edit");
                 };
                 self.AddClick = function() {
                     self.CurrID(0);
+                    self.CurrBCSID(data.BCSid());
                     self.ShowDialog("add");
                 };
 
@@ -315,7 +327,12 @@
                     case "edit":
                         $.getJSON(self.Urls.GetClassContentInfo, { id: self.CurrID() }, function(result) {
                             if (result.IsSuccess) {
+                                self.GetClassInfoList();
                                 self.BeetleClassContentInfo(self.BeetleClassContentBind(result.ResultData.BCCInfo));
+                                setTimeout(function() {
+                                    $("#selectClass").val(self.CurrBCSID());
+                                }, 500);
+
                             } else {
                                 self.BeetleClassContentInfo(self.BeetleClassContentInit());
                             }
@@ -329,20 +346,23 @@
                         self.RefreshList();
                     }
                 };
+                self.SelectClick = function (data, _event) {
+                    self.CurrSelectBCSid($(_event.target).val());
+                };
 
                 //分页
-                self.PagePrev = function () {
+                self.PagePrev = function() {
                     var vPrev = (self.pageIndex() - 1) <= 0 ? 1 : self.pageIndex() - 1;
                     self.pageIndex(vPrev);
                 };
-                self.PageNext = function () {
+                self.PageNext = function() {
                     var vNext = (self.pageIndex() + 1) >= self.pageCount() ? self.pageCount() : (self.pageIndex() + 1);
                     self.pageIndex(vNext);
                 };
-                self.IndexClick = function (data) {
+                self.IndexClick = function(data) {
                     self.pageIndex(data);
                 };
-                self.PageEnter = function (data, _event) {
+                self.PageEnter = function(data, _event) {
                     if (_event.keyCode == 13) {
                         var vPage = $("#txtPage").val() <= 0 ? 1 : $("#txtPage").val() >= self.pageCount() ? self.pageCount() : $("#txtPage").val();
                         $("#txtPage").val(vPage);

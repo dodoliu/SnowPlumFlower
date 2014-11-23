@@ -57,7 +57,7 @@ margin-bottom: 5px;
 display: block; text-align:center;
 }
 #cate100 .imgmenu li a img{
-	width:50px;
+	width:80px;
 }
 #cate100 .imgmenu li a p{
 	font-size:14px
@@ -247,4 +247,4 @@ margin-top: 5px;display: none;
 	white-space: nowrap;
 }
 
-#nav_uls li img{ width:24px; height:24px; vertical-align:middle; margin-right:5px;}
+#nav_uls li img{ width:90px; height:30px; vertical-align:middle;margin-right: 5px; margin-top: 5px;}

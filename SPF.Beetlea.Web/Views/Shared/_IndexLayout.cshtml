@@ -64,65 +64,10 @@
 
     <body id="listhome10">
 
-
         @RenderBody()
 
-        @RenderSection("FootElement", false)
-
-        <link href="~/Css/footStyle.css" rel="stylesheet" />
-        @*<div id="sharemcover" onclick="document.getElementById('sharemcover').style.display ='';" style=" display:none"><img src="~/Images/ppage_133.jpg"></div>*@
-        <div class="top_bar" style="-webkit-transform:translate3d(0,0,0)">
-            <nav>
-                <ul id="top_menu" class="top_menu">
-                    <li>
-                        <a onclick="javascript:displayit(0)"><img src="@Url.Content("~/Images/earth.png")"><label>首页</label></a>
-                        <ul id="menu_list0" class="menu_font" style=" display:none"></ul>
-                    </li>
-                    <li>
-                        <a href="tel:15551189377"><img src="@Url.Content("~/Images/phone.png")" /><label>联系客服</label></a>
-                        <ul id="menu_list1" class="menu_font" style=" display:none"></ul>
-                    </li>
-                    <li>
-                        <a href="http://api.map.baidu.com/marker?location=31.296804,121.595327&title=%e7%94%b2%e5%a3%b3%e8%99%ab%e8%a3%85%e9%a5%b0&content=上海市浦东新区东靖路地铁站&output=html"><img src="@Url.Content("~/Images/coordinate.png")"><label>公司地址</label></a>
-                        <ul id="menu_list2" class="menu_font" style=" display:none"></ul>
-                    </li>
-                    <li>
-                        <a href="#"><img src="@Url.Content("~/Images/weixin.png")"><label>微信预约</label></a>
-                        <ul id="menu_list3" class="menu_font" style=" display:none"></ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div id="plug-wrap" onclick="closeall()" style="display: none;"></div>
-        <script type="text/javascript">
-            function displayit(n) {
-                var count = document.getElementById("top_menu").getElementsByTagName("ul").length;
-                for (var i = 0; i < count; i++) {
-                    if (i == n) {
-                        if (document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display == 'none') {
-                            document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display = '';
-                            document.getElementById("plug-wrap").style.display = '';
-                        } else {
-                            document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display = 'none';
-                            document.getElementById("plug-wrap").style.display = 'none';
-                        }
-                    } else {
-                        document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display = 'none';
-                    }
-                }
-            }
-            function closeall() {
-                var count = document.getElementById("top_menu").getElementsByTagName("ul").length;
-                for (i = 0; i < count; i++) {
-                    document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display = 'none';
-                }
-                document.getElementById("plug-wrap").style.display = 'none';
-            }
-
-
-            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-                WeixinJSBridge.call('hideToolbar');
-            });
-        </script>
+        @RenderSection("FootElement", false)        
+        
+        @RenderPage("_IndexFoot.cshtml")
     </body>
 </html>

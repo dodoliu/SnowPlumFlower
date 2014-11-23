@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "甲壳虫设计";
+    Layout = null;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="utf-8" />
+    <link href="@Url.Content("~/Css/photo.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Css/photoswipe.css")" type="text/css" rel="stylesheet" />
+    <style>
+        .themeStyle {
+            background-color: #384C5E !important;
+        }
+    </style>
+
+    <script src="@Url.Content("~/Scripts/jquery.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.lazyload.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/klass.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/code.photoswipe-3.0.5.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+    (function (window, PhotoSwipe) {
+        document.addEventListener('DOMContentLoaded', function () {
+            var options = {},instance = PhotoSwipe.attach(window.document.querySelectorAll('#Gallery a'), options);
+        }, false);
+    }(window, window.Code.PhotoSwipe));
+    </script>   
+</head>
+<body id="photo">
+    <div class="qiandaobanner"> <a href="javascript:void(0)"><img src="~/Images/test/test1.jpg" /></a> </div>
+    <div id="main" role="main" style="height: 1207px;">
+        <ul id="Gallery" class="gallery">
+            
+            
+            <li><a href="@Url.Content("../Images/test/test1.jpg")"><img src="@Url.Content("../Images/test/test1.jpg")" alt="简欧风格  " /><p>简欧风格</p></a></li>
+            <li><a href="@Url.Content("../Images/test/test2.jpg")"><img src="@Url.Content("../Images/test/test2.jpg")" alt="简欧风格  " /><p>简欧风格</p></a></li>
+            <li><a href="@Url.Content("../Images/test/test3.jpg")"><img src="@Url.Content("~/Images/test/test3.jpg")" alt="简欧风格  " /><p>简欧风格</p></a></li>
+            <li><a href="@Url.Content("../Images/test/test1.jpg")"><img src="@Url.Content("~/Images/test/test2.jpg")" alt="简欧风格  " /><p>简欧风格</p></a></li>
+            <li><a href="@Url.Content("../Images/test/test1.jpg")"><img src="@Url.Content("../Images/test/test1.jpg")" alt="简欧风格  " /><p>简欧风格</p></a></li>
+            <li><a href="@Url.Content("../Images/test/test2.jpg")"><img src="@Url.Content("../Images/test/test2.jpg")" alt="简欧风格  " /><p>简欧风格</p></a></li>
+            <li><a href="@Url.Content("../Images/test/test3.jpg")"><img src="@Url.Content("~/Images/test/test3.jpg")" alt="简欧风格  " /><p>简欧风格</p></a></li>
+            <li><a href="@Url.Content("../Images/test/test1.jpg")"><img src="@Url.Content("~/Images/test/test2.jpg")" alt="简欧风格  " /><p>简欧风格</p></a></li>
+        </ul>
+    </div>
+
+    <!--下面是瀑布流js-->
+    <script src="@Url.Content("~/Scripts/jquery.imagesloaded.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.wookmark.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        (function ($) {
+            $('#Gallery').imagesLoaded(function () {
+                // Prepare layout options.
+                var options = {
+                    autoResize: true, // This will auto-update the layout when the browser window is resized.
+                    container: $('#main'), // Optional, used for some extra CSS styling
+                    offset: 4, // Optional, the distance between grid items
+                    itemWidth: 150 // Optional, the width of a grid item
+                };
+
+                // Get a reference to your grid items.
+                var handler = $('#Gallery li');
+
+                // Call the layout function.
+                handler.wookmark(options);
+
+
+            });
+        })(jQuery);
+    </script>  
+
+    @RenderPage("../Shared/_IndexFoot.cshtml")
+
+    <script type="text/javascript">
+
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            window.shareData = {
+                "imgUrl": "http://www.baidu.com",
+                "timeLineLink": "http://www.baidu.com",
+                "sendFriendLink": "http://www.baidu.com",
+                "weiboLink": "http://www.baidu.com",
+                "tTitle": "测试",
+                "tContent": "测试",
+                "fTitle": "测试",
+                "fContent": "测试",
+                "wContent": "测试"
+            };
+            // 发送给好友
+            WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+                WeixinJSBridge.invoke('sendAppMessage', {
+                    "img_url": window.shareData.imgUrl,
+                    "img_width": "640",
+                    "img_height": "640",
+                    "link": window.shareData.sendFriendLink,
+                    "desc": window.shareData.fContent,
+                    "title": window.shareData.fTitle
+                }, function (res) {
+                    _report('send_msg', res.err_msg);
+                });
+            });
+
+            // 分享到朋友圈
+            WeixinJSBridge.on('menu:share:timeline', function (argv) {
+                WeixinJSBridge.invoke('shareTimeline', {
+                    "img_url": window.shareData.imgUrl,
+                    "img_width": "640",
+                    "img_height": "640",
+                    "link": window.shareData.timeLineLink,
+                    "desc": window.shareData.tContent,
+                    "title": window.shareData.tTitle
+                }, function (res) {
+                    _report('timeline', res.err_msg);
+                });
+            });
+
+            // 分享到微博
+            WeixinJSBridge.on('menu:share:weibo', function (argv) {
+                WeixinJSBridge.invoke('shareWeibo', {
+                    "content": window.shareData.wContent,
+                    "url": window.shareData.weiboLink,
+                }, function (res) {
+                    _report('weibo', res.err_msg);
+                });
+            });
+        }, false);
+    </script>
+
+</body>
+</html>

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Beetle\IBeetleClass.cs" />
     <Compile Include="Beetle\IBeetleClassContent.cs" />
+    <Compile Include="Beetle\IBeetlePic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

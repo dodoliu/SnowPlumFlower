@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>甲壳虫装饰微站管理后台</title>
+    <title>甲壳虫设计微站管理后台</title>
     <link href="@Url.Content("~/Css/style.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Css/reveal.css")" rel="stylesheet" />
     <script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
@@ -18,7 +18,7 @@
 <body>
     <div id="header">
         <div class="col w5 bottomlast">
-            <span class="logo">甲壳虫装饰微站管理后台</span>
+            <span class="logo">甲壳虫设计微站管理后台</span>
         </div>
         <div class="clear"></div>
     </div>
@@ -36,7 +36,7 @@
                             <a href="@Url.Action("ManagerClassContent", "BeetleManager")" urltip="ManagerClassContentList"><span>分类内容管理</span></a>
                         </li>
                         <li>
-                            <a href="articles.html" urltip="articles"><span>...</span></a>
+                            <a href="@Url.Action("ManagerPicShow", "BeetleManager")" urltip="ManagerClassContentList"><span>图片展示管理</span></a>
                         </li>
                     </ul>
                     <div class="clear"></div>
@@ -79,7 +79,7 @@
         </div>
     </div>
     <div id="footer">
-        <p class="last">© 2014-2015 甲壳虫装饰版权所有</p>
+        <p class="last">© 2014-2015 甲壳虫设计版权所有</p>
     </div>
 
     @RenderSection("FootElement", false)

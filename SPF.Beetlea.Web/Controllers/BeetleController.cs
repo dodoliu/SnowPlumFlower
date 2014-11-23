@@ -63,6 +63,15 @@ namespace SPF.Beetlea.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 二级页面,图片展示
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BeetlePicShow()
+        {
+            return View();
+        }
+
 
         #endregion
 

@@ -168,7 +168,7 @@ namespace SPF.Beetlea.Web.Controllers
         /// 获取分类内容列表
         /// </summary>
         /// <returns></returns>
-        public JsonResult GetClassContentList(string bccname = "", int ipageindex = 0, int ipagesize = 10)
+        public JsonResult GetClassContentList(string bccname = "",string bcsid="", int ipageindex = 0, int ipagesize = 10)
         {
             Helper.ReturnMessage rm = new Helper.ReturnMessage(false);
 
@@ -176,7 +176,9 @@ namespace SPF.Beetlea.Web.Controllers
             {
                 //获取分类信息
                 BeetleClass bc = new BeetleClass();
-                IList<BeetleClassInfo> bciList = bc.GetModelList(string.Format("1=1"));
+                StringBuilder bcsb = new StringBuilder();
+                bcsb.Append("1=1");
+                IList<BeetleClassInfo> bciList = bc.GetModelList(bcsb.ToString());
 
                 //分类内容
                 StringBuilder sb = new StringBuilder();
@@ -184,6 +186,10 @@ namespace SPF.Beetlea.Web.Controllers
                 if (!string.IsNullOrWhiteSpace(bccname))
                 {
                     sb.AppendFormat(" and BCCName like '%{0}%'", bccname);
+                }
+                if (!string.IsNullOrWhiteSpace(bcsid))
+                {
+                    sb.AppendFormat(" and BCSid = '{0}'", bcsid);
                 }
                 BeetleClassContent bcc = new BeetleClassContent();
 
@@ -240,7 +246,7 @@ namespace SPF.Beetlea.Web.Controllers
             }
 
             return Json(rm);
-        }
+        } 
 
         #region 编辑分类内容
 
@@ -327,6 +333,16 @@ namespace SPF.Beetlea.Web.Controllers
         #endregion
 
         #endregion
+
+        #region 图片展示
+
+        public ActionResult ManagerPicShow()
+        {
+            return View();
+
+        }
+        #endregion
+
         #endregion
     }
 

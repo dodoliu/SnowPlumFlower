@@ -52,7 +52,7 @@ namespace SPF.OleDB.BLL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public bool Add(SPF.OleDB.Model.BeetlePic model)
+        public bool Add(SPF.OleDB.Model.BeetlePicInfo model)
 		{
 			return dal.Add(model);
 		}
@@ -60,7 +60,7 @@ namespace SPF.OleDB.BLL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(SPF.OleDB.Model.BeetlePic model)
+        public bool Update(SPF.OleDB.Model.BeetlePicInfo model)
 		{
 			return dal.Update(model);
 		}
@@ -84,7 +84,7 @@ namespace SPF.OleDB.BLL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public SPF.OleDB.Model.BeetlePic GetModel(int ID)
+        public SPF.OleDB.Model.BeetlePicInfo GetModel(int ID)
 		{
 			
 			return dal.GetModel(ID);
@@ -93,7 +93,7 @@ namespace SPF.OleDB.BLL
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
-		public SPF.OleDB.Model.BeetlePic GetModelByCache(int ID)
+        public SPF.OleDB.Model.BeetlePicInfo GetModelByCache(int ID)
 		{
 			
 			string CacheKey = "BeetlePicModel-" + ID;
@@ -111,7 +111,7 @@ namespace SPF.OleDB.BLL
 				}
 				catch{}
 			}
-			return (SPF.OleDB.Model.BeetlePic)objModel;
+            return (SPF.OleDB.Model.BeetlePicInfo)objModel;
 		}
 
 		/// <summary>
@@ -124,7 +124,7 @@ namespace SPF.OleDB.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<SPF.OleDB.Model.BeetlePic> GetModelList(string strWhere)
+        public List<SPF.OleDB.Model.BeetlePicInfo> GetModelList(string strWhere)
 		{
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
@@ -132,13 +132,13 @@ namespace SPF.OleDB.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public List<SPF.OleDB.Model.BeetlePic> DataTableToList(DataTable dt)
+        public List<SPF.OleDB.Model.BeetlePicInfo> DataTableToList(DataTable dt)
 		{
-			List<SPF.OleDB.Model.BeetlePic> modelList = new List<SPF.OleDB.Model.BeetlePic>();
+            List<SPF.OleDB.Model.BeetlePicInfo> modelList = new List<SPF.OleDB.Model.BeetlePicInfo>();
 			int rowsCount = dt.Rows.Count;
 			if (rowsCount > 0)
 			{
-				SPF.OleDB.Model.BeetlePic model;
+                SPF.OleDB.Model.BeetlePicInfo model;
 				for (int n = 0; n < rowsCount; n++)
 				{
 					model = dal.DataRowToModel(dt.Rows[n]);

@@ -106,10 +106,10 @@ namespace SPF.OleDB.DAL
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update BeetleClassContent set ");
 			strSql.Append("BCSid=@BCSid,");
-			strSql.Append("BCCSid=@BCCSid,");
+            //strSql.Append("BCCSid=@BCCSid,");
 			strSql.Append("BCCName=@BCCName,");
 			strSql.Append("BCCPic=@BCCPic,");
-			strSql.Append("BCCCreateTime=@BCCCreateTime,");
+            //strSql.Append("BCCCreateTime=@BCCCreateTime,");
 			strSql.Append("BCCUpdateTime=@BCCUpdateTime,");
 			strSql.Append("BCCStatus=@BCCStatus,");
 			strSql.Append("BCCDesc=@BCCDesc,");
@@ -118,10 +118,10 @@ namespace SPF.OleDB.DAL
 			strSql.Append(" where ID=@ID");
 			OleDbParameter[] parameters = {
 					new OleDbParameter("@BCSid", OleDbType.VarChar,50),
-					new OleDbParameter("@BCCSid", OleDbType.VarChar,50),
+                    //new OleDbParameter("@BCCSid", OleDbType.VarChar,50),
 					new OleDbParameter("@BCCName", OleDbType.VarChar,255),
 					new OleDbParameter("@BCCPic", OleDbType.VarChar,255),
-					new OleDbParameter("@BCCCreateTime", OleDbType.Date),
+                    //new OleDbParameter("@BCCCreateTime", OleDbType.Date),
 					new OleDbParameter("@BCCUpdateTime", OleDbType.Date),
 					new OleDbParameter("@BCCStatus", OleDbType.SmallInt),
 					new OleDbParameter("@BCCDesc", OleDbType.VarChar,255),
@@ -129,16 +129,16 @@ namespace SPF.OleDB.DAL
 					new OleDbParameter("@BCCUrl", OleDbType.VarChar,255),
 					new OleDbParameter("@ID", OleDbType.Integer,4)};
 			parameters[0].Value = model.BCSid;
-			parameters[1].Value = model.BCCSid;
-            parameters[2].Value = model.BCCName == null ? "" : model.BCCName;
-            parameters[3].Value = model.BCCPic == null ? "" : model.BCCPic;
-			parameters[4].Value = model.BCCCreateTime;
-			parameters[5].Value = model.BCCUpdateTime;
-			parameters[6].Value = model.BCCStatus;
-            parameters[7].Value = model.BCCDesc == null ? "" : model.BCCDesc;
-			parameters[8].Value = model.BCCType;
-            parameters[9].Value = model.BCCUrl == null ? "" : model.BCCUrl;
-			parameters[10].Value = model.ID;
+            //parameters[1].Value = model.BCCSid;
+            parameters[1].Value = model.BCCName == null ? "" : model.BCCName;
+            parameters[2].Value = model.BCCPic == null ? "" : model.BCCPic;
+            //parameters[3].Value = model.BCCCreateTime;
+			parameters[3].Value = model.BCCUpdateTime;
+			parameters[4].Value = model.BCCStatus;
+            parameters[5].Value = model.BCCDesc == null ? "" : model.BCCDesc;
+			parameters[6].Value = model.BCCType;
+            parameters[7].Value = model.BCCUrl == null ? "" : model.BCCUrl;
+			parameters[8].Value = model.ID;
 
 			int rows=OleDBHelper.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)

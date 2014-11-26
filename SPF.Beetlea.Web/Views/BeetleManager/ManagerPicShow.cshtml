@@ -3,4 +3,361 @@
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
-<h2>ManagerPicShow</h2>
+@section SubmenuElement{
+    <a href="javascript.void(0);" class="button" data-reveal-id="myModal" data-animation="fade" data-bind="click:$root.addClick"><small class="icon clipboard"></small><span>新增图片内容</span></a>
+}
+@section SubmenuRightElement{
+    <select style="float: right; margin-right: 15px; width: 120px; margin-top: 10px; height: 28px;" id="selectclassq" data-bind="event:{change:$root.SelectClick}">
+        <option data-bind="text:'--请选择子分类--',value:'0'"></option>
+        <!--ko foreach:$root.BeetleClassContentList-->
+        <option data-bind="text:$data.BCCName,value:$data.BCCSid"></option>
+        <!--/ko-->
+    </select>
+
+    <div class="module search">
+        <p>
+            <input type="text" style="margin-right: 5px;" placeholder="搜索..." name="user_search" id="txtSearch" data-bind="event:{keyup:$root.SearchClick}" />
+        </p>
+    </div>
+}
+
+<div id="table" class="help">
+    <div class="col w10 last">
+        <div class="content">
+            <table>
+                <tr>
+                    <th width="10%">所属子分类</th>
+                    <th width="20%">图片名称</th>
+                    <th width="20%">图片路径</th>
+                    <th width="10%">状态</th>
+                    <th width="10%">创建日期</th>
+                    <th width="10%">备注</th>
+                    <th width="20%">操作</th>
+                </tr>
+                <!--ko foreach:$root.BeetlePicList-->
+                <tr>
+                    <td data-bind="text:BCCName"></td>
+                    <td data-bind="text:BPName"></td>
+                    <td>
+                        <img width="70" height="60" data-bind="attr:{src:BPUrl}" />
+                    </td>
+                    <!--ko foreach:$root.BeetlePicStatus-->
+                    <!--ko if:$data.key==$parent.BPStatus()-->
+                    <td data-bind="text:$data.value"></td>
+                    <!--/ko-->
+                    <!--/ko-->
+                    <td data-bind="text:BCCCreateTime"></td>
+                    <td data-bind="text:BPDemo"></td>
+                    <td>
+                        <a href="javascript.void(0)" title="编辑图片" data-reveal-id="myModal" data-animation="fade" class="button" data-bind="click:$root.EditClick"><small class="icon pencil"></small><span>编辑</span></a>
+                    </td>
+                </tr>
+                <!--/ko-->
+            </table>
+        </div>
+        <div class="module pagination" style="float:right;margin-right:30px;width:300px;">
+            <span class="pagingstyle" data-bind="text:'共 '+$root.pageCount() +' 页 ' + +$root.pageSize()+ ' 条'"></span>
+            <a href="javascript:void(0)" class="page_left" data-bind="click:$root.PagePrev"><small class="icon arrow_left"></small></a>
+            <!--ko foreach:$root.currPageIndex-->
+            <!--ko if:$root.pageIndex()==$data-->
+            <a href="javascript:void(0)" class="current" data-bind="text:$data,click:$root.IndexClick"></a>
+            <!--/ko-->
+            <!--ko if:$root.pageIndex()!=$data-->
+            <a href="javascript:void(0)" data-bind="text:$data,click:$root.IndexClick"></a>
+            <!--/ko-->
+            <!--/ko-->
+            <a href="javascript:void(0)" class="page_right" data-bind="click:$root.PageNext"><small class="icon arrow_right"></small></a>
+            <input type="text" id="txtPage" class="page_right" style="width:20px;margin-top:4px;margin-left:5px;" data-bind="value:$root.pageIndex,event:{keyup:$root.PageEnter}" />
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="reveal-modal">
+    <a class="close-reveal-modal">&#215;</a>
+    <div id="form" class="help">
+        <div class="col w5" data-bind="with:$root.BeetlePicInfo">
+            <div class="content form">
+                <p style="margin-top:20px;">
+                    <label for="simple_input">所属子分类:</label>
+                    <select name="select" id="selectClass" class="w_28">
+                        <!--ko foreach:$root.BeetleClassContentList-->
+                        <option data-bind="text:$data.BCCName,value:$data.BCCSid"></option>
+                        <!--/ko-->
+                    </select>
+                </p>
+                <p style="margin-top:20px;">
+                    <label for="simple_input">图片名称:</label>
+                    <input type="text" maxlength="50" class="text w_30" data-bind="value:$data.BPName" />
+                </p>
+                <p>
+                    <label for="simple_input">图片路径:</label>
+                    <input type="text" name="simple_input" maxlength="255" class="text w_30" data-bind="value:$data.BPUrl" />
+                </p>               
+                <p>
+                    <label for="select">状态:</label>
+                    <select name="select" id="selectStatus" class="w_28">
+                        <!--ko foreach:$root.BeetlePicStatus-->
+                        <!--ko if:$data.key==$parent.BPStatus()-->
+                        <option selected="selected" data-bind="text:$data.value,value:$data.key"></option>
+                        <!--/ko-->
+                        <!--ko if:$data.key!=$parent.BPStatus()-->
+                        <option data-bind="text:$data.value,value:$data.key"></option>
+                        <!--/ko-->
+                        <!--/ko-->
+                    </select>
+                </p>
+                <p>
+                    <label for="select">备注:</label>
+                    <textarea rows="10" maxlength="255" cols="50" data-bind="value:$data.BPDemo"></textarea>
+                    <br />
+                </p>
+            </div>
+            <div style="margin-left:150px;margin-top:40px;width:100%">
+                <a href="javascript:void(0)" title="保存" class="button" data-bind="click:$root.SubmitData"><span>&nbsp;&nbsp;保存&nbsp;&nbsp;</span></a>
+                <a href="javascript:void(0)" title="取消" class="button" onclick="CloseDialog();"><span>&nbsp;&nbsp;取消&nbsp;&nbsp;</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+@section FootElement{
+
+    <script src="@Url.Content("~/Scripts/knockout-2.2.0.js")"></script>
+
+    <script type="text/javascript">
+        window.Urls = {
+            GetPicList: "@Url.Action("GetPicList", "BeetleManager")",
+            GetClassContentForPic: "@Url.Action("GetClassContentForPic", "BeetleManager")",
+            GetPicInfo: "@Url.Action("GetPicInfo", "BeetleManager")",
+            AddPic: "@Url.Action("AddPicInfo", "BeetleManager")"
+        };
+
+        var vPicList = function () {
+            var self = this;
+            self.Urls = window.Urls;
+
+            //分页
+            self.pageSize = ko.observable(20); //每页条数
+            self.pageIndex = ko.observable(1); //当前页
+            self.pageCount = ko.observable(0); //总页数
+            self.count = ko.observable(0); //总条数
+            self.currPageIndex = ko.observableArray();
+
+
+            //当前编辑变量ID
+            self.CurrID = ko.observable(0);
+            self.CurrBCCSID = ko.observable("");
+            //状态数组
+            self.BeetlePicStatus = ko.observableArray([{ key: "1", value: "正常" }, { key: "0", value: "关闭" }]);
+
+            self.BeetlePicList = ko.observableArray();
+
+            self.BeetlePicBind = function (data) {
+                var temp = {};
+                temp.ID = ko.observable(data.ID);
+                temp.BCCSid = ko.observable(data.BCCSid);
+                temp.BCCName = ko.observable(data.BCCName);
+                temp.BPName = ko.observable(data.BPName);
+                temp.BPStatus = ko.observable(data.BPStatus);
+                temp.BPDemo = ko.observable(data.BPDemo);
+                temp.BPUrl = ko.observable(data.BPUrl);
+                temp.BCCCreateTime = ko.observable(data.BCCCreateTime);
+                temp.BCCUpdateTime = ko.observable(data.BCCUpdateTime);
+                return temp;
+            };
+
+            //图片对象
+            self.BeetlePicInit = function () {
+                var temp = {};
+                temp.ID = ko.observable("");
+                temp.BCCSid = ko.observable("");
+                temp.BCCName = ko.observable("");
+                temp.BPName = ko.observable("");
+                temp.BPStatus = ko.observable("");
+                temp.BPUrl = ko.observable("");
+                temp.BPDemo = ko.observable(""); 
+                temp.BCCCreateTime = ko.observable("");
+                temp.BCCUpdateTime = ko.observable("");
+                return temp;
+            };
+
+
+            //子分类列表
+            self.BeetleClassContentList = ko.observableArray();
+            //图片
+            self.BeetlePicInfo = ko.observable(self.BeetlePicInit());
+            //子分类绑定
+            self.BeetleClassContentBind = function (data) {
+                var temp = {};
+                temp.ID = ko.observable(data.ID);
+                temp.BCSid = ko.observable(data.BCSid);
+                //temp.BCName = ko.observable(data.BCName);
+                temp.BCCSid = ko.observable(data.BCCSid);
+                temp.BCCName = ko.observable(data.BCCName);
+                temp.BCCPic = ko.observable(data.BCCPic);
+                temp.BCCCreateTime = ko.observable(data.BCCCreateTime);
+                temp.BCCUpdateTime = ko.observable(data.BCCUpdateTime);
+                temp.BCCStatus = ko.observable(data.BCCStatus);
+                temp.BCCType = ko.observable(data.BCCType);
+                temp.BCCUrl = ko.observable(data.BCCUrl);
+                temp.BCCDesc = ko.observable(data.BCCDesc);
+                return temp;
+            };
+            //搜索框上当前选择的分类sid
+            self.CurrSelectBCCSid = ko.observable("");
+
+            self.RefreshList = function () {
+                self.BeetlePicList.removeAll();
+                $.getJSON(self.Urls.GetPicList, { pname: $("#txtSearch").val(), bccsid: self.CurrSelectBCCSid(), ipageindex: self.pageIndex(), ipagesize: self.pageSize() }, function (result) {
+                    if (result.IsSuccess) {
+                        $(result.ResultData.BPIList).each(function (index, item) {
+                            self.BeetlePicList.push(self.BeetlePicBind(item));
+
+                            //分页
+                            self.count(result.ResultData.iCount);
+                            self.pageCount(result.ResultData.iPageCount);
+                        });
+
+                        //分页
+                        self.currPageIndex.removeAll();
+                        if (self.pageIndex() >= 3 && self.pageCount() >= 3) {
+                            if (self.pageIndex() + 1 >= self.pageCount()) {
+                                for (var i = self.pageCount() - 2; i <= self.pageCount() ; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            } else {
+                                for (var i = self.pageIndex() - 1; i <= self.pageIndex() + 1; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            }
+                        } else {
+                            if (self.pageCount() <= 3) {
+                                for (var i = 1; i <= self.pageCount() ; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            } else {
+                                for (var i = 1; i <= 3; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            self.GetClassContentInfoList = function () {
+                //获取子分类信息
+                self.BeetleClassContentList.removeAll();
+                $.getJSON(self.Urls.GetClassContentForPic, {}, function (result) {
+                    if (result.IsSuccess) {
+                        $(result.ResultData.BCCIList).each(function (index, item) {
+                            self.BeetleClassContentList.push(self.BeetleClassContentBind(item));
+                        });
+                    }
+                });
+            }
+            self.GetData = ko.computed(function () {
+                self.RefreshList();
+
+            });
+            self.GetClassContentData = ko.computed(function () {
+                //获取子分类信息
+                self.GetClassContentInfoList();
+            });
+
+            //判断是否编辑
+            self.isEdit = false;
+            self.EditClick = function (data) {
+                self.isEdit = true;
+                self.CurrID(data.ID());
+                self.CurrBCCSID(data.BCCSid());
+                self.ShowDialog("edit");
+            };
+            self.AddClick = function () {
+                self.isEdit = false;
+                self.CurrID(0);
+                self.CurrBCCSID(data.BCCSid());
+                self.ShowDialog("add");
+            };
+
+
+            self.SubmitData = function (item, _event) {
+                var vBPInfo = function (data) {
+                    var temp = {};
+                    temp.ID = self.isEdit ? self.CurrID() : 0;
+                    temp.BCCSid = $("#selectClass option:selected").val(); //item.BCCSid();
+                    temp.BPName = data.BPName();
+                    temp.BPStatus = $("#selectStatus option:selected").val(); //data.BPStatus();//
+                    temp.BPDemo = data.BPDemo();
+                    temp.BPUrl = data.BPUrl();
+
+                    return temp;
+                }
+                var vSubmitData = vBPInfo(item);
+
+                $.getJSON(self.Urls.AddPic, vSubmitData, function (result) {
+                    if (result.IsSuccess) {
+                        self.RefreshList();
+                        CloseDialog();
+                        self.isEdit = false;
+                    }
+                    alert(result.Text);
+                });
+
+            };
+
+            self.ShowDialog = function (type) {
+                switch (type) {
+                    case "add":
+                        self.BeetlePicInfo(self.BeetlePicInit());
+                        break;
+                    case "edit":
+                        $.getJSON(self.Urls.GetPicInfo, { id: self.CurrID() }, function (result) {
+                            if (result.IsSuccess) {
+                                self.GetClassContentInfoList();
+                                self.BeetlePicInfo(self.BeetlePicBind(result.ResultData.BPInfo));
+                                setTimeout(function () {
+                                    $("#selectClass").val(self.CurrBCCSID());
+                                }, 500);
+
+                            } else {
+                                self.BeetlePicInfo(self.BeetlePicInit());
+                            }
+                        });
+                        break;
+                }
+            };
+
+            self.SearchClick = function (data, _event) {
+                if (_event.keyCode == 13) {
+                    self.RefreshList();
+                }
+            };
+            self.SelectClick = function (data, _event) {
+                self.CurrSelectBCCSid($(_event.target).val());
+            };
+
+            //分页
+            self.PagePrev = function () {
+                var vPrev = (self.pageIndex() - 1) <= 0 ? 1 : self.pageIndex() - 1;
+                self.pageIndex(vPrev);
+            };
+            self.PageNext = function () {
+                var vNext = (self.pageIndex() + 1) >= self.pageCount() ? self.pageCount() : (self.pageIndex() + 1);
+                self.pageIndex(vNext);
+            };
+            self.IndexClick = function (data) {
+                self.pageIndex(data);
+            };
+            self.PageEnter = function (data, _event) {
+                if (_event.keyCode == 13) {
+                    var vPage = $("#txtPage").val() <= 0 ? 1 : $("#txtPage").val() >= self.pageCount() ? self.pageCount() : $("#txtPage").val();
+                    $("#txtPage").val(vPage);
+                    self.pageIndex(vPage);
+                }
+            };
+
+        };
+        ko.applyBindings(new vPicList());
+
+    </script>
+}

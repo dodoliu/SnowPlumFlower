@@ -266,6 +266,7 @@
     <Content Include="Images\coordinate.png" />
     <Content Include="Images\earth.png" />
     <Content Include="Images\error.gif" />
+    <Content Include="Images\first.jpg" />
     <Content Include="Images\home.png" />
     <Content Include="Images\ico-next2.png" />
     <Content Include="Images\icons%402x.png" />
@@ -313,6 +314,7 @@
     <Content Include="Images\phone.png" />
     <Content Include="Images\ppage_133.jpg" />
     <Content Include="Images\public.png" />
+    <Content Include="Images\second.jpg" />
     <Content Include="Images\service.png" />
     <Content Include="Images\team.png" />
     <Content Include="Images\tel.png" />
@@ -345,6 +347,7 @@
     <Content Include="Scripts\klass.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\maivl.js" />
     <Content Include="Scripts\ManagerHelper.js" />
     <Content Include="Scripts\modal.js" />

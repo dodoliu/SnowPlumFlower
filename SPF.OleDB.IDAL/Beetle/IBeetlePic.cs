@@ -35,11 +35,11 @@ namespace SPF.OleDB.IDAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		bool Add(SPF.OleDB.Model.BeetlePic model);
+		bool Add(SPF.OleDB.Model.BeetlePicInfo model);
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		bool Update(SPF.OleDB.Model.BeetlePic model);
+        bool Update(SPF.OleDB.Model.BeetlePicInfo model);
 		/// <summary>
 		/// 删除一条数据
 		/// </summary>
@@ -48,8 +48,8 @@ namespace SPF.OleDB.IDAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		SPF.OleDB.Model.BeetlePic GetModel(int ID);
-		SPF.OleDB.Model.BeetlePic DataRowToModel(DataRow row);
+        SPF.OleDB.Model.BeetlePicInfo GetModel(int ID);
+        SPF.OleDB.Model.BeetlePicInfo DataRowToModel(DataRow row);
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>

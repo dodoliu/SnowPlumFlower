@@ -72,6 +72,26 @@ namespace SPF.Beetlea.Web.Controllers
             return View();
         }
 
+        public JsonResult GetPicList(string sid = "")
+        {
+            Helper.ReturnMessage rm = new Helper.ReturnMessage();
+
+            try
+            {
+                BeetlePic bp = new BeetlePic();
+                IList<BeetlePicInfo> bpiList = bp.GetModelList(string.Format("1=1 and BPStatus = 1 and BCCSid = '{0}'",Server.UrlEncode(sid)));
+                rm.ResultData["BPIList"] = bpiList;
+                rm.IsSuccess = true;
+            }
+            catch 
+            {
+                rm.IsSuccess = false;
+            }
+
+            return MyJson(rm);
+
+        }
+
 
         #endregion
 

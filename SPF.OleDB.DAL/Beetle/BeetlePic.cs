@@ -59,7 +59,7 @@ namespace SPF.OleDB.DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public bool Add(SPF.OleDB.Model.BeetlePic model)
+        public bool Add(SPF.OleDB.Model.BeetlePicInfo model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into BeetlePic(");
@@ -74,11 +74,11 @@ namespace SPF.OleDB.DAL
 					new OleDbParameter("@BPDemo", OleDbType.VarChar,255),
 					new OleDbParameter("@BCCCreateTime", OleDbType.Date),
 					new OleDbParameter("@BCCUpdateTime", OleDbType.Date)};
-			parameters[0].Value = model.BCCSid;
-			parameters[1].Value = model.BPName;
-			parameters[2].Value = model.BPUrl;
+            parameters[0].Value = model.BCCSid;
+		    parameters[1].Value = model.BPName == null ? "" : model.BPName;
+            parameters[2].Value = model.BPUrl == null ? "" : model.BPUrl;
 			parameters[3].Value = model.BPStatus;
-			parameters[4].Value = model.BPDemo;
+            parameters[4].Value = model.BPDemo == null ? "" : model.BPDemo;
 			parameters[5].Value = model.BCCCreateTime;
 			parameters[6].Value = model.BCCUpdateTime;
 
@@ -95,35 +95,35 @@ namespace SPF.OleDB.DAL
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(SPF.OleDB.Model.BeetlePic model)
+        public bool Update(SPF.OleDB.Model.BeetlePicInfo model)
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update BeetlePic set ");
-			strSql.Append("BCCSid=@BCCSid,");
+            //strSql.Append("BCCSid=@BCCSid,");
 			strSql.Append("BPName=@BPName,");
 			strSql.Append("BPUrl=@BPUrl,");
 			strSql.Append("BPStatus=@BPStatus,");
 			strSql.Append("BPDemo=@BPDemo,");
-			strSql.Append("BCCCreateTime=@BCCCreateTime,");
+            //strSql.Append("BCCCreateTime=@BCCCreateTime,");
 			strSql.Append("BCCUpdateTime=@BCCUpdateTime");
 			strSql.Append(" where ID=@ID");
 			OleDbParameter[] parameters = {
-					new OleDbParameter("@BCCSid", OleDbType.VarChar,50),
+                    //new OleDbParameter("@BCCSid", OleDbType.VarChar,50),
 					new OleDbParameter("@BPName", OleDbType.VarChar,255),
 					new OleDbParameter("@BPUrl", OleDbType.VarChar,255),
 					new OleDbParameter("@BPStatus", OleDbType.SmallInt),
 					new OleDbParameter("@BPDemo", OleDbType.VarChar,255),
-					new OleDbParameter("@BCCCreateTime", OleDbType.Date),
+                    //new OleDbParameter("@BCCCreateTime", OleDbType.Date),
 					new OleDbParameter("@BCCUpdateTime", OleDbType.Date),
 					new OleDbParameter("@ID", OleDbType.Integer,4)};
-			parameters[0].Value = model.BCCSid;
-			parameters[1].Value = model.BPName;
-			parameters[2].Value = model.BPUrl;
-			parameters[3].Value = model.BPStatus;
-			parameters[4].Value = model.BPDemo;
-			parameters[5].Value = model.BCCCreateTime;
-			parameters[6].Value = model.BCCUpdateTime;
-			parameters[7].Value = model.ID;
+            //parameters[0].Value = model.BCCSid;
+            parameters[0].Value = model.BPName == null ? "" : model.BPName;
+            parameters[1].Value = model.BPUrl == null ? "" : model.BPUrl;
+			parameters[2].Value = model.BPStatus;
+            parameters[3].Value = model.BPDemo == null ? "" : model.BPDemo;
+            //parameters[4].Value = model.BCCCreateTime;
+			parameters[4].Value = model.BCCUpdateTime;
+			parameters[5].Value = model.ID;
 
 			int rows=OleDBHelper.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -183,7 +183,7 @@ namespace SPF.OleDB.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public SPF.OleDB.Model.BeetlePic GetModel(int ID)
+        public SPF.OleDB.Model.BeetlePicInfo GetModel(int ID)
 		{
 			
 			StringBuilder strSql=new StringBuilder();
@@ -194,7 +194,7 @@ namespace SPF.OleDB.DAL
 			};
 			parameters[0].Value = ID;
 
-			SPF.OleDB.Model.BeetlePic model=new SPF.OleDB.Model.BeetlePic();
+            SPF.OleDB.Model.BeetlePicInfo model = new SPF.OleDB.Model.BeetlePicInfo();
 			DataSet ds=OleDBHelper.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
 			{
@@ -210,9 +210,9 @@ namespace SPF.OleDB.DAL
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public SPF.OleDB.Model.BeetlePic DataRowToModel(DataRow row)
+        public SPF.OleDB.Model.BeetlePicInfo DataRowToModel(DataRow row)
 		{
-			SPF.OleDB.Model.BeetlePic model=new SPF.OleDB.Model.BeetlePic();
+            SPF.OleDB.Model.BeetlePicInfo model = new SPF.OleDB.Model.BeetlePicInfo();
 			if (row != null)
 			{
 				if(row["ID"]!=null && row["ID"].ToString()!="")
@@ -230,8 +230,11 @@ namespace SPF.OleDB.DAL
 				if(row["BPUrl"]!=null)
 				{
 					model.BPUrl=row["BPUrl"].ToString();
-				}
-					//model.BPStatus=row["BPStatus"].ToString();
+                }
+                if (row["BPStatus"] != null && row["BPStatus"].ToString() != "")
+                {
+                    model.BPStatus = (short)row["BPStatus"];
+                }
 				if(row["BPDemo"]!=null)
 				{
 					model.BPDemo=row["BPDemo"].ToString();

@@ -104,7 +104,7 @@ namespace SPF.OleDB.DAL
             //strSql.Append("BCSid=@BCSid,");
 			strSql.Append("BCName=@BCName,");
 			strSql.Append("BCType=@BCType,");
-			strSql.Append("BCCreateTime=@BCCreateTime,");
+            //strSql.Append("BCCreateTime=@BCCreateTime,");
 			strSql.Append("BCUpdateTime=@BCUpdateTime,");
 			strSql.Append("BCStatus=@BCStatus,");
 			strSql.Append("BCDesc=@BCDesc,");
@@ -114,7 +114,7 @@ namespace SPF.OleDB.DAL
                     //new OleDbParameter("@BCSid", OleDbType.VarChar,50),
 					new OleDbParameter("@BCName", OleDbType.VarChar,50),
 					new OleDbParameter("@BCType", OleDbType.SmallInt),
-					new OleDbParameter("@BCCreateTime", OleDbType.Date),
+                    //new OleDbParameter("@BCCreateTime", OleDbType.Date),
 					new OleDbParameter("@BCUpdateTime", OleDbType.Date),
 					new OleDbParameter("@BCStatus", OleDbType.SmallInt),
 					new OleDbParameter("@BCDesc", OleDbType.VarChar,255),
@@ -123,12 +123,12 @@ namespace SPF.OleDB.DAL
             //parameters[0].Value = model.BCSid;
             parameters[0].Value = model.BCName == null ? "" : model.BCName;
 			parameters[1].Value = model.BCType;
-			parameters[2].Value = model.BCCreateTime;
-			parameters[3].Value = model.BCUpdateTime;
-			parameters[4].Value = model.BCStatus;
-            parameters[5].Value = model.BCDesc == null ? "" : model.BCDesc;
-            parameters[6].Value = model.BCUrl == null ? "" : model.BCUrl;
-			parameters[7].Value = model.ID;
+            //parameters[2].Value = model.BCCreateTime;
+			parameters[2].Value = model.BCUpdateTime;
+			parameters[3].Value = model.BCStatus;
+            parameters[4].Value = model.BCDesc == null ? "" : model.BCDesc;
+            parameters[5].Value = model.BCUrl == null ? "" : model.BCUrl;
+			parameters[6].Value = model.ID;
 
 			int rows=OleDBHelper.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)

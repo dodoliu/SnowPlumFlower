@@ -1,14 +1,14 @@
 ﻿@{
-    ViewBag.Title = "分类内容列表";
+    ViewBag.Title = "子分类列表";
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
 
 @section SubmenuElement{
-<a href="javascript.void(0);" class="button" data-reveal-id="myModal" data-animation="fade" data-bind="click:$root.addClick"><small class="icon clipboard"></small><span>新增分类内容</span></a>
+<a href="javascript.void(0);" class="button" data-reveal-id="myModal" data-animation="fade" data-bind="click:$root.addClick"><small class="icon clipboard"></small><span>新增子分类</span></a>
 }
 @section SubmenuRightElement{
     <select style="float: right; margin-right: 15px; width: 120px; margin-top: 10px; height: 28px;" id="selectclassq" data-bind="event:{change:$root.SelectClick}">
-        <option data-bind="text:'--请选择分类--',value:'0'"></option>
+        <option data-bind="text:'--请选择主分类--',value:'0'"></option>
         <!--ko foreach:$root.BeetleClassList-->
         <option data-bind="text:$data.BCName,value:$data.BCSid"></option>
         <!--/ko-->
@@ -26,13 +26,13 @@
         <div class="content">
             <table>
                 <tr>
-                    <th width="10%">所属分类</th>
-                    <th width="20%">内容标题</th>
-                    <th width="10%">内容示例图片</th>
+                    <th width="10%">所属主分类</th>
+                    <th width="20%">子分类标题</th>
+                    <th width="10%">子分类示例图片</th>
                     <th width="10%">创建时间</th>
-                    <th width="10%">内容简介</th>
-                    <th width="10%">内容类别</th>
-                    <th width="10%">内容连接</th>
+                    <th width="10%">子分类简介</th>
+                    <th width="10%">子分类类别</th>
+                    <th width="10%">子分类连接</th>
                     <th width="20%">操作</th>
                 </tr>               
                 <!--ko foreach:$root.BeetleClassContentList-->
@@ -51,7 +51,7 @@
                     <!--/ko-->
                     <td data-bind="text:BCCUrl"></td>
                     <td>
-                        <a href="javascript.void(0)" title="编辑分类" data-reveal-id="myModal" data-animation="fade" class="button" data-bind="click:$root.EditClick"><small class="icon pencil"></small><span>编辑</span></a>
+                        <a href="javascript.void(0)" title="编辑子分类" data-reveal-id="myModal" data-animation="fade" class="button" data-bind="click:$root.EditClick"><small class="icon pencil"></small><span>编辑</span></a>
                     </td>
                 </tr>
                 <!--/ko-->
@@ -80,7 +80,7 @@
         <div class="col w5" data-bind="with:$root.BeetleClassContentInfo">
             <div class="content form">
                 <p style="margin-top:20px;">
-                    <label for="simple_input">所属分类:</label>
+                    <label for="simple_input">所属主分类:</label>
                     <select name="select" id="selectClass" class="w_28">
                         <!--ko foreach:$root.BeetleClassList-->                        
                         <option data-bind="text:$data.BCName,value:$data.BCSid"></option>
@@ -88,15 +88,15 @@
                     </select>
                 </p>
                 <p style="margin-top:20px;">
-                    <label for="simple_input">内容标题:</label>
+                    <label for="simple_input">子分类标题:</label>
                     <input type="text" maxlength="50" class="text w_30" data-bind="value:$data.BCCName" />
                 </p>
                 <p>
-                    <label for="simple_input">内容示例图片:</label>
+                    <label for="simple_input">子分类示例图片:</label>
                     <input type="text" name="simple_input" maxlength="255" class="text w_30" data-bind="value:$data.BCCPic" />
                 </p>
                 <p>
-                    <label for="simple_input">内容链接:</label>
+                    <label for="simple_input">子分类链接:</label>
                     <input type="text" name="simple_input" maxlength="255" class="text w_30" data-bind="value:$data.BCCUrl" />
                 </p>
                 <p>
@@ -281,12 +281,17 @@
                     //获取分类信息
                     self.GetClassInfoList();
                 });
-                self.EditClick = function(data) {
+                
+                //判断是否编辑
+                self.isEdit = false;
+                self.EditClick = function (data) {
+                    self.isEdit = true;
                     self.CurrID(data.ID());
                     self.CurrBCSID(data.BCSid());
                     self.ShowDialog("edit");
                 };
-                self.AddClick = function() {
+                self.AddClick = function () {
+                    self.isEdit = false;
                     self.CurrID(0);
                     self.CurrBCSID(data.BCSid());
                     self.ShowDialog("add");
@@ -296,7 +301,7 @@
                 self.SubmitData = function(item, _event) {
                     var vBCInfo = function(data) {
                         var temp = {};
-                        temp.ID = self.CurrID();
+                        temp.ID = self.isEdit ? self.CurrID() : 0;
                         temp.BCSid = $("#selectClass option:selected").val(); //item.BCSid();
                         temp.BCCName = data.BCCName();
                         temp.BCCPic = data.BCCPic();
@@ -313,6 +318,7 @@
                         if (result.IsSuccess) {
                             self.RefreshList();
                             CloseDialog();
+                            self.isEdit = false;
                         }
                         alert(result.Text);
                     });

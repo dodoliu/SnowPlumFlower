@@ -42,6 +42,8 @@
     <Compile Include="Beetle\BeetleClassContentInfo.cs" />
     <Compile Include="Beetle\BeetleClassInfo.cs" />
     <Compile Include="Beetle\BeetlePicInfo.cs" />
+    <Compile Include="Beetle\BeetleRoleInfo.cs" />
+    <Compile Include="Beetle\BeetleUserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

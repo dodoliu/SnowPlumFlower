@@ -6,7 +6,7 @@
     <title>甲壳虫设计微站管理后台</title>
     <link href="@Url.Content("~/Css/style.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Css/reveal.css")" rel="stylesheet" />
-    <script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/global.js")" charset="utf-8" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/SPF.Helper.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.reveal.js")" type="text/javascript"></script>
@@ -30,13 +30,19 @@
                     <div id="right"></div>
                     <ul id="ulUrl">
                         <li>
-                            <a href="@Url.Action("ManagerClass", "BeetleManager")" urltip="ManagerClassList" class="selected"><span>主分类管理</span></a>
+                            <a href="@Url.Action("ManagerClass", "BeetleManager")" urltip="Class" class="selected"><span>主分类管理</span></a>
                         </li>
                         <li>
-                            <a href="@Url.Action("ManagerClassContent", "BeetleManager")" urltip="ManagerClassContentList"><span>子分类管理</span></a>
+                            <a href="@Url.Action("ManagerClassContent", "BeetleManager")" urltip="ClassContent"><span>子分类管理</span></a>
                         </li>
                         <li>
-                            <a href="@Url.Action("ManagerPicShow", "BeetleManager")" urltip="ManagerClassContentList"><span>图片展示管理</span></a>
+                            <a href="@Url.Action("ManagerPicShow", "BeetleManager")" urltip="Pic"><span>图片展示管理</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ManagerRole", "BeetleManager")" urltip="Role"><span>角色管理</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ManagerUser", "BeetleManager")" urltip="User"><span>用户管理</span></a>
                         </li>
                     </ul>
                     <div class="clear"></div>

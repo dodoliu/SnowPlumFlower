@@ -11,13 +11,9 @@ using SPF.OleDB.Model;
 
 namespace SPF.Beetlea.Web.Controllers
 {
+    [Authorize]
     public class BeetleManagerController:BaseController
-    {
-
-
-
-        #region 后台
-
+    { 
         #region 主分类
         /// <summary>
         /// 请求
@@ -152,7 +148,6 @@ namespace SPF.Beetlea.Web.Controllers
         #endregion
 
         #endregion
-
 
         #region 子分类
         /// <summary>
@@ -525,6 +520,29 @@ namespace SPF.Beetlea.Web.Controllers
 
 
         #endregion
+
+        #region 后台登陆
+        /// <summary>
+        /// 显示登陆界面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public JsonResult Login(string uname,string upwd)
+        {
+            Helper.ReturnMessage rm = new Helper.ReturnMessage();
+
+
+
+
+
+            return MyJson(rm);
+        }
 
         #endregion
     }

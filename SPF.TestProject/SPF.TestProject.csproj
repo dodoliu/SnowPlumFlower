@@ -56,8 +56,13 @@
     <Compile Include="Beetle\BeetleClassTest.cs" />
     <Compile Include="Beetle\ProjectTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendMailTest\SendMailTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SPF.Helper\SPF.Helper.csproj">
+      <Project>{8E712061-C743-4721-AD31-B2E5AB5C5A33}</Project>
+      <Name>SPF.Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPF.OleDB.BLL\SPF.OleDB.BLL.csproj">
       <Project>{0BB045E0-383A-413A-B5DE-5A133E3A1E6E}</Project>
       <Name>SPF.OleDB.BLL</Name>

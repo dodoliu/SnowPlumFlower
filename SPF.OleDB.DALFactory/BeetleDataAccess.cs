@@ -70,5 +70,19 @@ namespace SPF.OleDB.DALFactory
             object objType = CreateObject(AssemblyPath, ClassNamespace);
             return (SPF.OleDB.IDAL.IBeetlePic)objType;
         }
+        public static SPF.OleDB.IDAL.IBeetleRole CreateBeetleRole()
+        {
+
+            string ClassNamespace = AssemblyPath + ".BeetleRole";
+            object objType = CreateObject(AssemblyPath, ClassNamespace);
+            return (SPF.OleDB.IDAL.IBeetleRole)objType;
+        }
+        public static SPF.OleDB.IDAL.IBeetleUser CreateBeetleUser()
+        {
+
+            string ClassNamespace = AssemblyPath + ".BeetleUser";
+            object objType = CreateObject(AssemblyPath, ClassNamespace);
+            return (SPF.OleDB.IDAL.IBeetleUser)objType;
+        }
 	}
 }

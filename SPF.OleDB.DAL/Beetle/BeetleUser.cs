@@ -20,7 +20,7 @@ using System.Text;
 using System.Data.OleDb;
 using SPF.DBUtility;
 using SPF.OleDB.IDAL; 
-namespace SPF.OleDB.OleDbDAL
+namespace SPF.OleDB.DAL
 {
 	/// <summary>
 	/// 数据访问类:BeetleUser
@@ -198,7 +198,7 @@ namespace SPF.OleDB.OleDbDAL
 			
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select ID,BUSid,BRSid,BUName,BUPassword,BUDisplayName,BUStatus,BUCreateDate,BUUpdateDate,BUDesc from BeetleUser ");
-			strSql.Append(" where ID=@ID");
+            strSql.Append(" where ID=@ID");
 			OleDbParameter[] parameters = {
 					new OleDbParameter("@ID", OleDbType.Integer,4)
 			};
@@ -215,7 +215,33 @@ namespace SPF.OleDB.OleDbDAL
 				return null;
 			}
 		}
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public SPF.OleDB.Model.BeetleUserInfo GetModelByUserName(string userName, string userPwd)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ID,BUSid,BRSid,BUName,BUPassword,BUDisplayName,BUStatus,BUCreateDate,BUUpdateDate,BUDesc from BeetleUser ");
+            strSql.Append(" where BUName=@BUName");
+            strSql.Append(" and BUPassword=@BUPassword");
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@BUName", OleDbType.VarChar,50),
+					new OleDbParameter("@BUPassword", OleDbType.VarChar,50)
+			};
+            parameters[0].Value = userName;
+            parameters[1].Value = userPwd;
 
+            SPF.OleDB.Model.BeetleUserInfo model = new SPF.OleDB.Model.BeetleUserInfo();
+            DataSet ds = OleDBHelper.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
 
 		/// <summary>
 		/// 得到一个对象实体

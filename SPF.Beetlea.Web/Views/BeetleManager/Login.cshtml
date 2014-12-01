@@ -23,11 +23,11 @@
         <section class="loginBox row-fluid">
             <section class="span7 left">
                 <h2>登录</h2>
-                <p><input type="text" name="username" /></p>
-                <p><input type="password" name="password" /></p>
+                <p><input type="text" name="username" id="txtUserName"/></p>
+                <p><input type="password" name="password" id="txtUserPwd"/></p>
                 <section class="row-fluid">
                     <section class="span8 lh30"><label><input type="checkbox" name="rememberme" />下次自动登录</label></section>
-                    <section class="span1"><input type="button" value=" 登录 " class="btn btn-primary"></section>
+                    <section class="span1"><input type="button" value=" 登录 " class="btn btn-primary" data-bind="click:$root.Login"></section>
                 </section>
             </section>
             <section class="span5 right">
@@ -35,7 +35,7 @@
                 <section>
                     <p>甲壳虫装饰欢迎您!</p>
                     <br/>
-                    <br />
+                    <p>建议使用Chrome浏览器</p>
                     <br />
                     <br />
                     @*<p><input type="button" value=" 注册 " class="btn"></p>*@
@@ -43,5 +43,29 @@
             </section>
         </section><!-- /loginBox -->
     </div> <!-- /container -->
+
+    <script src="@Url.Content("~/Scripts/knockout-2.2.0.js")"></script>
+    <script type="text/javascript">
+        window.Urls = {
+            Loginend: "@Url.Action("Loginend", "BeetleManager")"
+        };
+
+        var vLoginModel = function() {
+            var self = this;
+            self.Urls = window.Urls;
+
+            self.Login = function() {
+                $.getJSON(self.Urls.Loginend, { uname: $("#txtUserName").val(), upwd: $("#txtUserPwd").val() }, function(result) {
+                    if (result.IsSuccess) {
+                        location.href = result.ReturnUrl;
+                    }
+                    alert(result.Text);
+                });
+            };
+
+        };
+        ko.applyBindings(new vLoginModel());
+    </script>
+
 </body>
 </html>

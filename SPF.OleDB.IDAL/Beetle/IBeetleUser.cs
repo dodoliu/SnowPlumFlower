@@ -49,6 +49,10 @@ namespace SPF.OleDB.IDAL
 		/// 得到一个对象实体
 		/// </summary>
         SPF.OleDB.Model.BeetleUserInfo GetModel(int ID);
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        SPF.OleDB.Model.BeetleUserInfo GetModelByUserName(string userName,string userPwd);
         SPF.OleDB.Model.BeetleUserInfo DataRowToModel(DataRow row);
 		/// <summary>
 		/// 获得数据列表

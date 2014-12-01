@@ -400,6 +400,8 @@
     <Content Include="Views\Shared\_IndexFoot.cshtml" />
     <Content Include="Views\BeetleManager\ManagerPicShow.cshtml" />
     <Content Include="Views\BeetleManager\Login.cshtml" />
+    <Content Include="Views\BeetleManager\ManagerRole.cshtml" />
+    <Content Include="Views\BeetleManager\ManagerUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -409,6 +411,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SPF.Auth\SPF.Auth.csproj">
+      <Project>{751695FE-3D19-4B78-BFA3-5F46EDBE1E12}</Project>
+      <Name>SPF.Auth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPF.DBUtility\SPF.DBUtility.csproj">
       <Project>{c8fb9076-3e5a-41b5-8483-5da6154b89b7}</Project>
       <Name>SPF.DBUtility</Name>

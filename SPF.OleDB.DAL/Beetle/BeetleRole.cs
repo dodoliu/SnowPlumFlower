@@ -20,7 +20,7 @@ using System.Text;
 using System.Data.OleDb;
 using SPF.DBUtility;
 using SPF.OleDB.IDAL; 
-namespace SPF.OleDB.OleDbDAL
+namespace SPF.OleDB.DAL
 {
 	/// <summary>
 	/// 数据访问类:BeetleRole

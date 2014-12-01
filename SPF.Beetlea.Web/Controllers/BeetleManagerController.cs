@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.Security;
+using SPF.Auth;
 using SPF.DBUtility;
 using SPF.OleDB.BLL;
 using SPF.OleDB.Model;
@@ -521,6 +523,19 @@ namespace SPF.Beetlea.Web.Controllers
 
         #endregion
 
+        #region 角色管理
+        public ActionResult ManagerRole()
+        {
+            return View();
+        }
+        #endregion
+        #region 用户管理
+        public ActionResult ManagerUser()
+        {
+            return View();
+        }
+        #endregion
+
         #region 后台登陆
         /// <summary>
         /// 显示登陆界面
@@ -533,13 +548,35 @@ namespace SPF.Beetlea.Web.Controllers
             return View();
         }
 
-        public JsonResult Login(string uname,string upwd)
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult Loginend(string uname,string upwd)
         {
-            Helper.ReturnMessage rm = new Helper.ReturnMessage();
+            Helper.ReturnMessage rm = new Helper.ReturnMessage(false);
 
+            try
+            {
+                BeetleUser bu = new BeetleUser();
+                BeetleUserInfo bui = bu.GetModelByUserName(uname.Trim().Replace(" ", ""), upwd.Trim().Replace(" ", ""));
+                if (bui != null)
+                {
+                    Authorize.SignIn(uname);
+                    rm.IsSuccess = true;
+                    rm.ReturnUrl = FormsAuthentication.GetRedirectUrl(uname, false);
+                    rm.Text = "登陆成功!";
+                }
+                else
+                {
+                    rm.Text = "用户名或密码错误!";
+                    rm.IsSuccess = false;
+                }
 
-
-
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
 
             return MyJson(rm);
         }

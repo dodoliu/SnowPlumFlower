@@ -13,10 +13,10 @@
       <publishTime>10/12/2014 20:47:17</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>11/29/2014 14:02:08</publishTime>
+      <publishTime>12/01/2014 22:57:50</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>11/29/2014 14:02:08</publishTime>
+      <publishTime>12/01/2014 22:57:50</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/12/2014 20:47:04</publishTime>
@@ -33,35 +33,38 @@
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>10/12/2014 20:47:14</publishTime>
     </File>
+    <File Include="bin/SPF.Auth.dll">
+      <publishTime>12/01/2014 22:57:42</publishTime>
+    </File>
     <File Include="bin/SPF.Beetlea.Controller.dll">
       <publishTime>11/16/2014 12:57:09</publishTime>
     </File>
     <File Include="bin/SPF.Beetlea.Web.dll">
-      <publishTime>11/29/2014 14:01:55</publishTime>
+      <publishTime>12/01/2014 22:57:44</publishTime>
     </File>
     <File Include="bin/SPF.Controller.dll">
       <publishTime>11/16/2014 00:07:26</publishTime>
     </File>
     <File Include="bin/SPF.DBUtility.dll">
-      <publishTime>11/23/2014 13:23:25</publishTime>
+      <publishTime>12/01/2014 22:57:43</publishTime>
     </File>
     <File Include="bin/SPF.Helper.dll">
-      <publishTime>11/23/2014 13:23:25</publishTime>
+      <publishTime>12/01/2014 22:57:42</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.BLL.dll">
-      <publishTime>11/26/2014 22:08:39</publishTime>
+      <publishTime>12/01/2014 22:57:44</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.DAL.dll">
-      <publishTime>11/26/2014 22:08:39</publishTime>
+      <publishTime>12/01/2014 22:57:43</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.DALFactory.dll">
-      <publishTime>11/26/2014 22:08:39</publishTime>
+      <publishTime>12/01/2014 22:57:43</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.IDAL.dll">
-      <publishTime>11/26/2014 22:08:38</publishTime>
+      <publishTime>12/01/2014 22:57:43</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.Model.dll">
-      <publishTime>11/26/2014 22:08:37</publishTime>
+      <publishTime>12/01/2014 22:57:42</publishTime>
     </File>
     <File Include="bin/System.ComponentModel.DataAnnotations.dll">
       <publishTime>03/18/2010 19:31:26</publishTime>
@@ -441,6 +444,9 @@
     <File Include="Css/style.css">
       <publishTime>11/18/2014 08:48:33</publishTime>
     </File>
+    <File Include="CustomError/Error404.html">
+      <publishTime>11/18/2014 20:31:08</publishTime>
+    </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
       <publishTime>11/29/2014 13:12:07</publishTime>
     </File>
@@ -667,13 +673,13 @@
       <publishTime>11/15/2014 23:43:53</publishTime>
     </File>
     <File Include="OleDB/Beetle/Beetle.mdb">
-      <publishTime>11/26/2014 23:06:27</publishTime>
+      <publishTime>12/01/2014 22:55:49</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>11/29/2014 13:12:07</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>11/29/2014 14:02:03</publishTime>
+      <publishTime>12/01/2014 22:57:47</publishTime>
     </File>
     <File Include="Scripts/audio.js">
       <publishTime>11/19/2014 22:26:27</publishTime>
@@ -805,7 +811,7 @@
       <publishTime>11/23/2014 18:53:18</publishTime>
     </File>
     <File Include="Views/BeetleManager/Login.cshtml">
-      <publishTime>11/29/2014 13:31:20</publishTime>
+      <publishTime>12/01/2014 22:57:20</publishTime>
     </File>
     <File Include="Views/BeetleManager/ManagerClass.cshtml">
       <publishTime>11/26/2014 22:05:00</publishTime>
@@ -815,6 +821,12 @@
     </File>
     <File Include="Views/BeetleManager/ManagerPicShow.cshtml">
       <publishTime>11/26/2014 22:02:44</publishTime>
+    </File>
+    <File Include="Views/BeetleManager/ManagerRole.cshtml">
+      <publishTime>12/01/2014 22:55:42</publishTime>
+    </File>
+    <File Include="Views/BeetleManager/ManagerUser.cshtml">
+      <publishTime>12/01/2014 22:53:52</publishTime>
     </File>
     <File Include="Views/CustomError/404.html">
       <publishTime>11/18/2014 20:31:08</publishTime>
@@ -838,7 +850,7 @@
       <publishTime>11/15/2014 23:42:12</publishTime>
     </File>
     <File Include="Views/Shared/_ManagerLayout.cshtml">
-      <publishTime>11/29/2014 13:16:37</publishTime>
+      <publishTime>11/29/2014 19:03:36</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>11/15/2014 23:42:12</publishTime>
@@ -847,7 +859,7 @@
       <publishTime>11/15/2014 23:42:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/29/2014 14:01:57</publishTime>
+      <publishTime>12/01/2014 22:57:46</publishTime>
     </File>
   </ItemGroup>
 </Project>

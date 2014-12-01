@@ -91,6 +91,15 @@ namespace SPF.OleDB.BLL
 			return dal.GetModel(ID);
 		}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public SPF.OleDB.Model.BeetleUserInfo GetModelByUserName(string userName, string userPwd)
+        {
+            return dal.GetModelByUserName(userName, userPwd);
+        }
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>

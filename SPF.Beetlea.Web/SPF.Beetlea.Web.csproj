@@ -343,6 +343,7 @@
     <Content Include="Scripts\iscroll.js" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
@@ -352,6 +353,7 @@
     <Content Include="Scripts\jquery.imagesloaded.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.lazyload.js" />
+    <Content Include="Scripts\jquery.md5.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.reveal.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -402,6 +404,7 @@
     <Content Include="Views\BeetleManager\Login.cshtml" />
     <Content Include="Views\BeetleManager\ManagerRole.cshtml" />
     <Content Include="Views\BeetleManager\ManagerUser.cshtml" />
+    <Content Include="Views\Beetle\BeetleComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

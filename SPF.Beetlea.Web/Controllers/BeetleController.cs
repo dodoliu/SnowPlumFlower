@@ -91,7 +91,14 @@ namespace SPF.Beetlea.Web.Controllers
             return MyJson(rm);
 
         }
-
+        /// <summary>
+        /// 留言板
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BeetleComment()
+        {
+            return View();
+        }
 
         #endregion
 

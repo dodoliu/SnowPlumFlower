@@ -23,17 +23,18 @@
         <section class="loginBox row-fluid">
             <section class="span7 left">
                 <h2>登录</h2>
-                <p><input type="text" name="username" id="txtUserName"/></p>
-                <p><input type="password" name="password" id="txtUserPwd"/></p>
+                <p><input type="text" maxlength="50" name="username" id="txtUserName"/></p>
+                <p><input type="password" maxlength="50" name="password" id="txtUserPwd" /></p>
                 <section class="row-fluid">
-                    <section class="span8 lh30"><label><input type="checkbox" name="rememberme" />下次自动登录</label></section>
+                    @*<section class="span8 lh30"><label><input type="checkbox" name="rememberme" />下次自动登录</label></section>*@
+                    <section class="span8 lh30"></section>
                     <section class="span1"><input type="button" value=" 登录 " class="btn btn-primary" data-bind="click:$root.Login"></section>
                 </section>
             </section>
             <section class="span5 right">
                 <h2>欢迎访问后台</h2>
                 <section>
-                    <p>甲壳虫装饰欢迎您!</p>
+                    <p>甲壳虫设计欢迎您!</p>
                     <br/>
                     <p>建议使用Chrome浏览器</p>
                     <br />
@@ -44,25 +45,49 @@
         </section><!-- /loginBox -->
     </div> <!-- /container -->
 
+    <script src="@Url.Content("~/Scripts/jquery.md5.js")"></script>
     <script src="@Url.Content("~/Scripts/knockout-2.2.0.js")"></script>
     <script type="text/javascript">
         window.Urls = {
             Loginend: "@Url.Action("Loginend", "BeetleManager")"
         };
 
+        $(document).ready(function() {
+            $("#txtUserName").focus();           
+        });
+
         var vLoginModel = function() {
             var self = this;
             self.Urls = window.Urls;
-
             self.Login = function() {
-                $.getJSON(self.Urls.Loginend, { uname: $("#txtUserName").val(), upwd: $("#txtUserPwd").val() }, function(result) {
-                    if (result.IsSuccess) {
-                        location.href = result.ReturnUrl;
+                    var vName = $.trim($("#txtUserName").val());
+                    var vPwd = $.trim($("#txtUserPwd").val());
+                    if (vName == "") {
+                        alert("用户名不能为空！");
+                        return false;
                     }
-                    alert(result.Text);
-                });
+                    if (vPwd == "") {
+                        alert("密码不能为空！");
+                        return false;
+                    }
+                    if (vName.length < 3) {
+                        alert("用户名字符不能少于3个字符");
+                        return false;
+                    }
+                    if (vPwd.length < 3) {
+                        alert("密码字符不能少于3个字符");
+                        return false;
+                    }
+                    var vLPwd = $.md5(vPwd);
+                    $.getJSON(self.Urls.Loginend, { uname: vName, upwd: vLPwd }, function(result) {
+                        if (result.IsSuccess) {
+                            location.href = result.ReturnUrl;
+                        } else {
+                            alert(result.Text);
+                        }
+                    });
+                return true;
             };
-
         };
         ko.applyBindings(new vLoginModel());
     </script>

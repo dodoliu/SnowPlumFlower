@@ -1,6 +1,371 @@
 ﻿@{
-    ViewBag.Title = "ManagerUser";
+    ViewBag.Title = "用户管理";
     Layout = "~/Views/Shared/_ManagerLayout.cshtml";
 }
+@section SubmenuElement{
+    <a href="javascript:void(0);" class="button" data-reveal-id="myModal" data-animation="fade" data-bind="click:$root.addClick"><small class="icon clipboard"></small><span>新增用户</span></a>
+}
+@section SubmenuRightElement{
+    <select style="float: right; margin-right: 15px; width: 120px; margin-top: 10px; height: 28px;" id="selectclassq" data-bind="event:{change:$root.SelectClick}">
+        <option data-bind="text:'--请选择角色--',value:'0'"></option>
+        <!--ko foreach:$root.BeetleRoleList-->
+        <option data-bind="text:$data.BRName,value:$data.BRSid"></option>
+        <!--/ko-->
+    </select>
 
-<h2>ManagerUser</h2>
+    <div class="module search">
+        <p>
+            <input type="text" style="margin-right: 5px;" placeholder="搜索..." name="user_search" id="txtSearch" data-bind="event:{keyup:$root.SearchClick}" />
+        </p>
+    </div>
+}
+
+<div id="table" class="help">
+    <div class="col w10 last">
+        <div class="content">
+            <table>
+                <tr>
+                    <th width="10%">所属角色</th>
+                    <th width="20%">用户名</th>
+                    <th width="10%">用户显示名</th>
+                    <th width="10%">创建时间</th>
+                    <th width="20%">备注</th>
+                    <th width="10%">状态</th>
+                    <th width="20%">操作</th>
+                </tr>
+                <!--ko foreach:$root.BeetleUserList-->
+                <tr>
+                    <td data-bind="text:BRName"></td>
+                    <td data-bind="text:BUName"></td> 
+                    <td data-bind="text:BUDisplayName"></td> 
+                    <td data-bind="text:BUCreateDate"></td>
+                    <td data-bind="text:BUDesc"></td>
+                    <!--ko foreach:$root.BeetleUserStatus-->
+                    <!--ko if:$data.key==$parent.BUStatus()-->
+                    <td data-bind="text:$data.value"></td>
+                    <!--/ko-->
+                    <!--/ko--> 
+                    <td>
+                        <a href="javascript:void(0)" title="编辑子分类" data-reveal-id="myModal" data-animation="fade" class="button" data-bind="click:$root.EditClick"><small class="icon pencil"></small><span>编辑</span></a>
+                    </td>
+                </tr>
+                <!--/ko-->
+            </table>
+        </div>
+        <div class="module pagination" style="float:right;margin-right:30px;width:300px;">
+            <span class="pagingstyle" data-bind="text:'共 '+$root.pageCount() +' 页 ' + +$root.pageSize()+ ' 条'"></span>
+            <a href="javascript:void(0)" class="page_left" data-bind="click:$root.PagePrev"><small class="icon arrow_left"></small></a>
+            <!--ko foreach:$root.currPageIndex-->
+            <!--ko if:$root.pageIndex()==$data-->
+            <a href="javascript:void(0)" class="current" data-bind="text:$data,click:$root.IndexClick"></a>
+            <!--/ko-->
+            <!--ko if:$root.pageIndex()!=$data-->
+            <a href="javascript:void(0)" data-bind="text:$data,click:$root.IndexClick"></a>
+            <!--/ko-->
+            <!--/ko-->
+            <a href="javascript:void(0)" class="page_right" data-bind="click:$root.PageNext"><small class="icon arrow_right"></small></a>
+            <input type="text" id="txtPage" class="page_right" style="width:20px;margin-top:4px;margin-left:5px;" data-bind="value:$root.pageIndex,event:{keyup:$root.PageEnter}" />
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="reveal-modal">
+    <a class="close-reveal-modal">&#215;</a>
+    <div id="form" class="help">
+        <div class="col w5" data-bind="with:$root.BeetleUserInfo">
+            <div class="content form">
+                <p style="margin-top:20px;">
+                    <label for="simple_input">所属角色:</label>
+                    <select name="select" id="selectClass" class="w_28">
+                        <!--ko foreach:$root.BeetleRoleList-->
+                        <option data-bind="text:$data.BRName,value:$data.BRSid"></option>
+                        <!--/ko-->
+                    </select>
+                </p>
+                <p style="margin-top:20px;">
+                    <label for="simple_input">用户名:</label>
+                    <input type="text" maxlength="50" class="text w_30" data-bind="value:$data.BUName" />
+                </p>
+                <p>
+                    <label for="simple_input">密码:</label>
+                    <input type="text" name="simple_input" maxlength="255" class="text w_30" data-bind="value:$data.BUPassword" />
+                </p>
+                <p>
+                    <label for="simple_input">用户显示名:</label>
+                    <input type="text" name="simple_input" maxlength="255" class="text w_30" data-bind="value:$data.BUDisplayName" />
+                </p>
+                <p>
+                    <label for="select">状态:</label>
+                    <select name="select" id="selectStatus" class="w_28">
+                        <!--ko foreach:$root.BeetleUserStatus-->
+                        <!--ko if:$data.key==$parent.BUStatus()-->
+                        <option selected="selected" data-bind="text:$data.value,value:$data.key"></option>
+                        <!--/ko-->
+                        <!--ko if:$data.key!=$parent.BUStatus()-->
+                        <option data-bind="text:$data.value,value:$data.key"></option>
+                        <!--/ko-->
+                        <!--/ko-->
+                    </select>
+                </p>
+                <p>
+                    <label for="select">备注:</label>
+                    <textarea rows="10" maxlength="255" cols="50" data-bind="value:$data.BUDesc"></textarea>
+                    <br />
+                </p>
+            </div>
+            <div style="margin-left:150px;margin-top:40px;width:100%">
+                <a href="javascript:void(0)" title="保存" class="button" data-bind="click:$root.SubmitData"><span>&nbsp;&nbsp;保存&nbsp;&nbsp;</span></a>
+                <a href="javascript:void(0)" title="取消" class="button" onclick="CloseDialog();"><span>&nbsp;&nbsp;取消&nbsp;&nbsp;</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section FootElement{
+
+    <script src="@Url.Content("~/Scripts/jquery.md5.js")"></script>
+    <script src="@Url.Content("~/Scripts/knockout-2.2.0.js")"></script>
+
+    <script type="text/javascript">
+        window.Urls = {
+            GetUserList: "@Url.Action("GetUserList", "BeetleManager")",
+            GetUserInfo: "@Url.Action("GetUserInfo", "BeetleManager")",
+            AddUser: "@Url.Action("AddUserInfo", "BeetleManager")",
+            GetRoleList: "@Url.Action("GetRoleList", "BeetleManager")"
+        };
+
+        var vClassContentList = function () {
+            var self = this;
+            self.Urls = window.Urls;
+
+            //分页
+            self.pageSize = ko.observable(20); //每页条数
+            self.pageIndex = ko.observable(1); //当前页
+            self.pageCount = ko.observable(0); //总页数
+            self.count = ko.observable(0); //总条数
+            self.currPageIndex = ko.observableArray();
+
+
+            //当前编辑变量ID
+            self.CurrID = ko.observable(0);
+            self.CurrBRSID = ko.observable("");
+            //状态数组
+            self.BeetleUserStatus = ko.observableArray([{ key: "1", value: "正常" }, { key: "0", value: "关闭" }]);
+
+            self.BeetleUserList = ko.observableArray();
+
+            self.BeetleUserBind = function (data) {
+                var temp = {};
+                temp.ID = ko.observable(data.ID);
+                temp.BRSid = ko.observable(data.BRSid);
+                temp.BRName = ko.observable(data.BRName);
+                temp.BUSid = ko.observable(data.BUSid);
+                temp.BUName = ko.observable(data.BUName);
+                temp.BUPassword = ko.observable(data.BUPassword);
+                temp.BUDisplayName = ko.observable(data.BUDisplayName);
+                temp.BUCreateDate = ko.observable(data.BUCreateDate);
+                temp.BUUpdateDate = ko.observable(data.BUUpdateDate);
+                temp.BUStatus = ko.observable(data.BUStatus); 
+                temp.BUDesc = ko.observable(data.BUDesc);
+                return temp;
+            };
+
+            //分类内容对象
+            self.BeetleUserInit = function () {
+                var temp = {};
+                temp.ID = ko.observable("");
+                temp.BRSid = ko.observable("");
+                temp.BRName = ko.observable("");
+                temp.BUSid = ko.observable("");
+                temp.BUName = ko.observable("");
+                temp.BUPassword = ko.observable("");
+                temp.BUDisplayName = ko.observable("");
+                temp.BUCreateDate = ko.observable("");
+                temp.BUUpdateDate = ko.observable("");
+                temp.BUStatus = ko.observable("");
+                temp.BUDesc = ko.observable("");
+                return temp;
+            };
+
+
+            //分类列表
+            self.BeetleRoleList = ko.observableArray();
+            //分类内容
+            self.BeetleUserInfo = ko.observable(self.BeetleUserInit());
+            //分类绑定
+            self.BeetleRoleBind = function (data) {
+                var temp = {};
+                temp.ID = ko.observable(data.ID);
+                temp.BRSid = ko.observable(data.BRSid);
+                temp.BRName = ko.observable(data.BRName);
+                temp.BRCreateDate = ko.observable(data.BRCreateDate);
+                temp.BRUpdateDate = ko.observable(data.BRUpdateDate);
+                temp.BRStatus = ko.observable(data.BRStatus);
+                temp.BRDesc = ko.observable(data.BRDesc);
+                return temp;
+            };
+            //搜索框上当前选择的分类sid
+            self.CurrSelectBRSid = ko.observable("");
+
+            self.RefreshList = function () {
+                self.BeetleUserList.removeAll();
+                $.getJSON(self.Urls.GetUserList, { buname: $("#txtSearch").val(), brsid: self.CurrSelectBRSid(), ipageindex: self.pageIndex(), ipagesize: self.pageSize() }, function (result) {
+                    if (result.IsSuccess) {
+                        $(result.ResultData.BUIList).each(function (index, item) {
+                            self.BeetleUserList.push(self.BeetleUserBind(item));
+
+                            //分页
+                            self.count(result.ResultData.iCount);
+                            self.pageCount(result.ResultData.iPageCount);
+                        });
+
+                        //分页
+                        self.currPageIndex.removeAll();
+                        if (self.pageIndex() >= 3 && self.pageCount() >= 3) {
+                            if (self.pageIndex() + 1 >= self.pageCount()) {
+                                for (var i = self.pageCount() - 2; i <= self.pageCount() ; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            } else {
+                                for (var i = self.pageIndex() - 1; i <= self.pageIndex() + 1; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            }
+                        } else {
+                            if (self.pageCount() <= 3) {
+                                for (var i = 1; i <= self.pageCount() ; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            } else {
+                                for (var i = 1; i <= 3; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            self.GetRoleInfoList = function () {
+                //获取分类信息
+                self.BeetleRoleList.removeAll();
+                $.getJSON(self.Urls.GetRoleList, {}, function (result) {
+                    if (result.IsSuccess) {
+                        $(result.ResultData.BRIList).each(function (index, item) {
+                            self.BeetleRoleList.push(self.BeetleRoleBind(item));
+                        });
+                    }
+                });
+            }
+            self.GetData = ko.computed(function () {
+                self.RefreshList();
+
+            });
+            self.GetClassData = ko.computed(function () {
+                //获取分类信息
+                self.GetRoleInfoList();
+            });
+
+            //判断是否编辑
+            self.isEdit = false;
+            self.EditClick = function (data) {
+                self.isEdit = true;
+                self.CurrID(data.ID());
+                self.CurrBRSID(data.BRSid());
+                self.ShowDialog("edit");
+            };
+            self.AddClick = function () {
+                self.isEdit = false;
+                self.CurrID(0);
+                self.CurrBRSID(data.BRSid());
+                self.ShowDialog("add");
+            };
+
+
+            self.SubmitData = function (item, _event) {
+                var vBCInfo = function (data) {
+                    var temp = {};
+                    temp.ID = self.isEdit ? self.CurrID() : 0;
+                    temp.BRSid = $("#selectClass option:selected").val(); //item.BRSid();
+                    temp.BUName = data.BUName();
+                    temp.BUPassword = data.BUPassword() ? $.md5(data.BUPassword()) : "";
+                    temp.BUDisplayName = data.BUDisplayName();
+                    temp.BUStatus = $("#selectStatus option:selected").val(); //data.BUStatus();//
+                    temp.BUDesc = data.BUDesc();
+
+                    return temp;
+                }
+                var vSubmitData = vBCInfo(item);
+
+                $.getJSON(self.Urls.AddUser, vSubmitData, function (result) {
+                    if (result.IsSuccess) {
+                        self.RefreshList();
+                        CloseDialog();
+                        self.isEdit = false;
+                    }
+                    alert(result.Text);
+                });
+
+            };
+
+            self.ShowDialog = function (type) {
+                switch (type) {
+                    case "add":
+                        self.BeetleUserInfo(self.BeetleUserInit());
+                        break;
+                    case "edit":
+                        $.getJSON(self.Urls.GetUserInfo, { id: self.CurrID() }, function (result) {
+                            if (result.IsSuccess) {
+                                self.GetRoleInfoList();
+                                self.BeetleUserInfo(self.BeetleUserBind(result.ResultData.BUInfo));
+                                setTimeout(function () {
+                                    $("#selectClass").val(self.CurrBUSID());
+                                }, 500);
+
+                            } else {
+                                self.BeetleUserInfo(self.BeetleUserInit());
+                            }
+                        });
+                        break;
+                }
+            };
+
+            self.SearchClick = function (data, _event) {
+                if (_event.keyCode == 13) {
+                    self.RefreshList();
+                }
+            };
+            self.SelectClick = function (data, _event) {
+                self.CurrSelectBRSid($(_event.target).val());
+            };
+
+            //分页
+            self.PagePrev = function () {
+                var vPrev = (self.pageIndex() - 1) <= 0 ? 1 : self.pageIndex() - 1;
+                self.pageIndex(vPrev);
+            };
+            self.PageNext = function () {
+                var vNext = (self.pageIndex() + 1) >= self.pageCount() ? self.pageCount() : (self.pageIndex() + 1);
+                self.pageIndex(vNext);
+            };
+            self.IndexClick = function (data) {
+                self.pageIndex(data);
+            };
+            self.PageEnter = function (data, _event) {
+                if (_event.keyCode == 13) {
+                    var vPage = $("#txtPage").val() <= 0 ? 1 : $("#txtPage").val() >= self.pageCount() ? self.pageCount() : $("#txtPage").val();
+                    $("#txtPage").val(vPage);
+                    self.pageIndex(vPage);
+                }
+            };
+
+        };
+        ko.applyBindings(new vClassContentList());
+
+    </script>
+}
+
+
+
+

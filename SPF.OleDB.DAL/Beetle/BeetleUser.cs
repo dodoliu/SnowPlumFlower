@@ -77,14 +77,14 @@ namespace SPF.OleDB.DAL
 					new OleDbParameter("@BUUpdateDate", OleDbType.Date),
 					new OleDbParameter("@BUDesc", OleDbType.VarChar,255)};
 			parameters[0].Value = model.BUSid;
-			parameters[1].Value = model.BRSid;
-			parameters[2].Value = model.BUName;
+            parameters[1].Value = model.BRSid; 
+            parameters[2].Value = model.BUName == null ? "" : model.BUName;
 			parameters[3].Value = model.BUPassword;
 			parameters[4].Value = model.BUDisplayName;
 			parameters[5].Value = model.BUStatus;
 			parameters[6].Value = model.BUCreateDate;
 			parameters[7].Value = model.BUUpdateDate;
-			parameters[8].Value = model.BUDesc;
+            parameters[8].Value = model.BUDesc == null ? "" : model.BUDesc;
 
 			int rows=OleDBHelper.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -103,37 +103,37 @@ namespace SPF.OleDB.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update BeetleUser set ");
-			strSql.Append("BUSid=@BUSid,");
+            //strSql.Append("BUSid=@BUSid,");
 			strSql.Append("BRSid=@BRSid,");
-			strSql.Append("BUName=@BUName,");
+            //strSql.Append("BUName=@BUName,");
 			strSql.Append("BUPassword=@BUPassword,");
 			strSql.Append("BUDisplayName=@BUDisplayName,");
 			strSql.Append("BUStatus=@BUStatus,");
-			strSql.Append("BUCreateDate=@BUCreateDate,");
+            //strSql.Append("BUCreateDate=@BUCreateDate,");
 			strSql.Append("BUUpdateDate=@BUUpdateDate,");
 			strSql.Append("BUDesc=@BUDesc");
 			strSql.Append(" where ID=@ID");
 			OleDbParameter[] parameters = {
-					new OleDbParameter("@BUSid", OleDbType.VarChar,50),
+                    //new OleDbParameter("@BUSid", OleDbType.VarChar,50),
 					new OleDbParameter("@BRSid", OleDbType.VarChar,50),
-					new OleDbParameter("@BUName", OleDbType.VarChar,50),
+                    //new OleDbParameter("@BUName", OleDbType.VarChar,50),
 					new OleDbParameter("@BUPassword", OleDbType.VarChar,50),
 					new OleDbParameter("@BUDisplayName", OleDbType.VarChar,50),
 					new OleDbParameter("@BUStatus", OleDbType.SmallInt),
-					new OleDbParameter("@BUCreateDate", OleDbType.Date),
+                    //new OleDbParameter("@BUCreateDate", OleDbType.Date),
 					new OleDbParameter("@BUUpdateDate", OleDbType.Date),
 					new OleDbParameter("@BUDesc", OleDbType.VarChar,255),
 					new OleDbParameter("@ID", OleDbType.Integer,4)};
-			parameters[0].Value = model.BUSid;
-			parameters[1].Value = model.BRSid;
-			parameters[2].Value = model.BUName;
-			parameters[3].Value = model.BUPassword;
-			parameters[4].Value = model.BUDisplayName;
-			parameters[5].Value = model.BUStatus;
-			parameters[6].Value = model.BUCreateDate;
-			parameters[7].Value = model.BUUpdateDate;
-			parameters[8].Value = model.BUDesc;
-			parameters[9].Value = model.ID;
+            //parameters[0].Value = model.BUSid;
+            parameters[0].Value = model.BRSid;
+            //parameters[2].Value = model.BUName;
+			parameters[1].Value = model.BUPassword;
+			parameters[2].Value = model.BUDisplayName;
+			parameters[3].Value = model.BUStatus;
+            //parameters[6].Value = model.BUCreateDate;
+			parameters[4].Value = model.BUUpdateDate;
+			parameters[5].Value = model.BUDesc;
+			parameters[6].Value = model.ID;
 
 			int rows=OleDBHelper.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -224,6 +224,7 @@ namespace SPF.OleDB.DAL
             strSql.Append("select ID,BUSid,BRSid,BUName,BUPassword,BUDisplayName,BUStatus,BUCreateDate,BUUpdateDate,BUDesc from BeetleUser ");
             strSql.Append(" where BUName=@BUName");
             strSql.Append(" and BUPassword=@BUPassword");
+            strSql.Append(" and BUStatus=1");
             OleDbParameter[] parameters = {
 					new OleDbParameter("@BUName", OleDbType.VarChar,50),
 					new OleDbParameter("@BUPassword", OleDbType.VarChar,50)
@@ -275,7 +276,10 @@ namespace SPF.OleDB.DAL
 				{
 					model.BUDisplayName=row["BUDisplayName"].ToString();
 				}
-					//model.BUStatus=row["BUStatus"].ToString();
+                if (row["BUStatus"] != null && row["BUStatus"].ToString() != "")
+                {
+                    model.BUStatus = (short)row["BUStatus"];
+                }
 				if(row["BUCreateDate"]!=null && row["BUCreateDate"].ToString()!="")
 				{
 					model.BUCreateDate=DateTime.Parse(row["BUCreateDate"].ToString());

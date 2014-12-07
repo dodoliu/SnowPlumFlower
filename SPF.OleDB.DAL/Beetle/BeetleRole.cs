@@ -74,11 +74,11 @@ namespace SPF.OleDB.DAL
 					new OleDbParameter("@BRUpdateDate", OleDbType.Date),
 					new OleDbParameter("@BRDesc", OleDbType.VarChar,255)};
 			parameters[0].Value = model.BRSid;
-			parameters[1].Value = model.BRName;
+            parameters[1].Value = model.BRName == null ? "" : model.BRName;
 			parameters[2].Value = model.BRStatus;
 			parameters[3].Value = model.BRCreateDate;
 			parameters[4].Value = model.BRUpdateDate;
-			parameters[5].Value = model.BRDesc;
+            parameters[5].Value = model.BRDesc == null ? "" : model.BRDesc;
 
 			int rows=OleDBHelper.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -97,28 +97,28 @@ namespace SPF.OleDB.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update BeetleRole set ");
-			strSql.Append("BRSid=@BRSid,");
+            //strSql.Append("BRSid=@BRSid,");
 			strSql.Append("BRName=@BRName,");
 			strSql.Append("BRStatus=@BRStatus,");
-			strSql.Append("BRCreateDate=@BRCreateDate,");
+            //strSql.Append("BRCreateDate=@BRCreateDate,");
 			strSql.Append("BRUpdateDate=@BRUpdateDate,");
 			strSql.Append("BRDesc=@BRDesc");
 			strSql.Append(" where ID=@ID");
 			OleDbParameter[] parameters = {
-					new OleDbParameter("@BRSid", OleDbType.VarChar,50),
+                    //new OleDbParameter("@BRSid", OleDbType.VarChar,50),
 					new OleDbParameter("@BRName", OleDbType.VarChar,50),
 					new OleDbParameter("@BRStatus", OleDbType.SmallInt),
-					new OleDbParameter("@BRCreateDate", OleDbType.Date),
+                    //new OleDbParameter("@BRCreateDate", OleDbType.Date),
 					new OleDbParameter("@BRUpdateDate", OleDbType.Date),
 					new OleDbParameter("@BRDesc", OleDbType.VarChar,255),
-					new OleDbParameter("@ID", OleDbType.Integer,4)};
-			parameters[0].Value = model.BRSid;
-			parameters[1].Value = model.BRName;
-			parameters[2].Value = model.BRStatus;
-			parameters[3].Value = model.BRCreateDate;
-			parameters[4].Value = model.BRUpdateDate;
-			parameters[5].Value = model.BRDesc;
-			parameters[6].Value = model.ID;
+                    new OleDbParameter("@ID", OleDbType.Integer,4)};
+            //parameters[0].Value = model.BRSid;
+            parameters[0].Value = model.BRName == null ? "" : model.BRName;
+			parameters[1].Value = model.BRStatus;
+            //parameters[3].Value = model.BRCreateDate;
+			parameters[2].Value = model.BRUpdateDate;
+            parameters[3].Value = model.BRDesc == null ? "" : model.BRDesc;
+            parameters[4].Value = model.ID;
 
 			int rows=OleDBHelper.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -221,8 +221,11 @@ namespace SPF.OleDB.DAL
 				if(row["BRName"]!=null)
 				{
 					model.BRName=row["BRName"].ToString();
-				}
-					//model.BRStatus=row["BRStatus"].ToString();
+                }
+                if (row["BRStatus"] != null && row["BRStatus"].ToString() != "")
+                {
+                    model.BRStatus = (short)row["BRStatus"];
+                }
 				if(row["BRCreateDate"]!=null && row["BRCreateDate"].ToString()!="")
 				{
 					model.BRCreateDate=DateTime.Parse(row["BRCreateDate"].ToString());

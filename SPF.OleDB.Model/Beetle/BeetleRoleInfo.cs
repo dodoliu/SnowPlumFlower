@@ -30,8 +30,8 @@ namespace SPF.OleDB.Model
 		private string _brsid="";
 		private string _brname="";
 		private short _brstatus;
-		private DateTime? _brcreatedate= DateTime.Now;
-		private DateTime? _brupdatedate= DateTime.Now;
+		private DateTime _brcreatedate= DateTime.Now;
+		private DateTime _brupdatedate= DateTime.Now;
 		private string _brdesc="";
 		/// <summary>
 		/// ID
@@ -68,7 +68,7 @@ namespace SPF.OleDB.Model
 		/// <summary>
 		/// 创建时间
 		/// </summary>
-		public DateTime? BRCreateDate
+		public DateTime BRCreateDate
 		{
 			set{ _brcreatedate=value;}
 			get{return _brcreatedate;}
@@ -76,7 +76,7 @@ namespace SPF.OleDB.Model
 		/// <summary>
 		/// 更新时间
 		/// </summary>
-		public DateTime? BRUpdateDate
+		public DateTime BRUpdateDate
 		{
 			set{ _brupdatedate=value;}
 			get{return _brupdatedate;}

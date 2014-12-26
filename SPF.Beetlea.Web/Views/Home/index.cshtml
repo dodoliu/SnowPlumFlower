@@ -42,7 +42,7 @@
             <li><a href="http://m.wsq.qq.com/263608224"><img src="~/Images/community.png" alt="业主社区" /></a></li>
         </ul>
         <ul>
-            <li><a href="@Url.Action("ClassContent", "beetle")?sid=1b3b118d-923a-4707-9d9a-a90697c8b98c"><img src="~/Images/news.png" alt="最新资讯" /></a></li>
+            <li><a href="@Url.Action("ClassContent", "beetle")?sid=8c387891-0246-4c7c-9113-e5ac1298c4c5"><img src="~/Images/news.png" alt="最新资讯" /></a></li>
             <li><a href="@Url.Action("BeetleService", "beetle")"><img src="~/Images/service.png" alt="服务流程" /></a></li>
             <li><a href="http://www.baidu.com"><img src="~/Images/charge.png" alt="收费标准" /></a></li>
         </ul>
@@ -90,7 +90,7 @@
                         <dd>
                             <a data-bind="attr:{href:'/Beetle/BeetlePicShow?sid='+$data.BCCSid()}">
                                 <figure>
-                                    <div><img data-bind="attr:{src:$data.BCCPic}" /></div>
+                                    <div><img data-bind="attr:{src:$data.BCCPic}"/></div>
                                     <figcaption>
                                         <label data-bind="text:$data.BCCName"></label>
                                     </figcaption>
@@ -104,7 +104,7 @@
                     <dl>
                         <!--ko foreach:$root.CCBList-->
                         <dd>
-                            <a data-bind="attr:{href:$data.BCCUrl}">
+                            <a data-bind="attr:{href:'/Beetle/BeetlePicShow?sid='+$data.BCCSid()}">
                                 <figure>
                                     <div><img data-bind="attr:{src:$data.BCCPic}" /></div>
                                     <figcaption>
@@ -119,8 +119,8 @@
                 <li style="width: 1903px; float: left; vertical-align: top;">
                     <dl>
                         <!--ko foreach:$root.CCCList-->
-                        <dd>
-                            <a data-bind="attr:{href:$data.BCCUrl}">
+                        <dd> 
+                            <a data-bind="attr:{href:'/Beetle/BeetlePicShow?sid='+$data.BCCSid()}">
                                 <figure>
                                     <div><img data-bind="attr:{src:$data.BCCPic}" /></div>
                                     <figcaption>

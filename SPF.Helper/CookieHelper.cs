@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Security;
 using System.Web;
 
-namespace Teein.Helper
+namespace SPF.Helper
 {
     /// <summary>
     /// CookieHelper

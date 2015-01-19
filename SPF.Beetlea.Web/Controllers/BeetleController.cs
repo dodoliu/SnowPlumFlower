@@ -99,7 +99,14 @@ namespace SPF.Beetlea.Web.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 微信预约
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BeetleSubscribe()
+        {
+            return View();
+        }
         #endregion
 
     }

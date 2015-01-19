@@ -49,7 +49,7 @@ namespace SPF.DBUtility
                 sb.AppendFormat(" order by [{0}]) as T) ", strIndexColumn);
                 if (!string.IsNullOrWhiteSpace(strWhere))
                 {
-                    sb.AppendFormat(" where 1=1 and {0} ", strWhere);
+                    sb.AppendFormat(" and 1=1 and {0} ", strWhere);
                 }
                 sb.AppendFormat(" order by [{0}] ", strIndexColumn);
             }

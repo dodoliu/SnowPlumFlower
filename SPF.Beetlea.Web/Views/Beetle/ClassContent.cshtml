@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "甲壳虫设计";
     Layout = "~/Views/Shared/_ClassLayout.cshtml";
+    string strCopyright = SPF.Helper.TextHelper.GetConfigItem("Copyright");
 }
 <div class="Listpage">
     <div class="top46"></div>
@@ -38,7 +39,7 @@
     }
 </script>
 
-<div class="copyright">© 2014-2015 甲壳虫装饰版权所有</div> <div style="display:none"></div>
+<div class="copyright">@strCopyright</div> <div style="display:none"></div>
 
 <script src="@Url.Content("~/Scripts/knockout-2.2.0.js")"></script>
 

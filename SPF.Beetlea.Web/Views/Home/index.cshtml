@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "甲壳虫设计";
     Layout = "~/Views/Shared/_IndexLayout.cshtml";
+    string strCopyright = SPF.Helper.TextHelper.GetConfigItem("Copyright");
 }
 <div id="cate100">
     <div class="banner">
@@ -44,7 +45,7 @@
         <ul>
             <li><a href="@Url.Action("ClassContent", "beetle")?sid=8c387891-0246-4c7c-9113-e5ac1298c4c5"><img src="~/Images/news.png" alt="最新资讯" /></a></li>
             <li><a href="@Url.Action("BeetleService", "beetle")"><img src="~/Images/service.png" alt="服务流程" /></a></li>
-            <li><a href="http://www.baidu.com"><img src="~/Images/charge.png" alt="收费标准" /></a></li>
+            <li><a href="http://mp.weixin.qq.com/s?__biz=MzAwMzExNDIzOA==&mid=201702578&idx=1&sn=f4b1be5884e7a2fd3c3ffd4971eb730f#rd"><img src="~/Images/charge.png" alt="收费标准" /></a></li>
         </ul>
     </div>
 
@@ -119,8 +120,8 @@
                 <li style="width: 1903px; float: left; vertical-align: top;">
                     <dl>
                         <!--ko foreach:$root.CCCList-->
-                        <dd> 
-                            <a data-bind="attr:{href:'/Beetle/BeetlePicShow?sid='+$data.BCCSid()}">
+                        <dd>
+                            <a data-bind="attr:{href:$data.BCCUrl}">
                                 <figure>
                                     <div><img data-bind="attr:{src:$data.BCCPic}" /></div>
                                     <figcaption>
@@ -153,60 +154,60 @@
     </script>
     <div id="insert2"></div>
 
-    <div class="copyright">© 2014-2015 甲壳虫设计版权所有</div>
+    <div class="copyright">@strCopyright</div>
 
     <script type="text/javascript" src="@Url.Content("~/Scripts/knockout-2.2.0.js")"></script>
     <script type="text/javascript">
-        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-            window.shareData = {
-                "imgUrl": "http://www.baidu.com",
-                "timeLineLink": "http://www.baidu.com",
-                "sendFriendLink": "http://www.baidu.com",
-                "weiboLink": "http://www.baidu.com",
-                "tTitle": "测试",
-                "tContent": "测试",
-                "fTitle": "测试",
-                "fContent": "测试",
-                "wContent": "测试"
-            };
-            // 发送给好友
-            WeixinJSBridge.on('menu:share:appmessage', function(argv) {
-                WeixinJSBridge.invoke('sendAppMessage', {
-                    "img_url": window.shareData.imgUrl,
-                    "img_width": "640",
-                    "img_height": "640",
-                    "link": window.shareData.sendFriendLink,
-                    "desc": window.shareData.fContent,
-                    "title": window.shareData.fTitle
-                }, function(res) {
-                    _report('send_msg', res.err_msg);
-                })
-            });
+        //document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        //    window.shareData = {
+        //        "imgUrl": "http://www.baidu.com",
+        //        "timeLineLink": "http://www.baidu.com",
+        //        "sendFriendLink": "http://www.baidu.com",
+        //        "weiboLink": "http://www.baidu.com",
+        //        "tTitle": "测试",
+        //        "tContent": "测试",
+        //        "fTitle": "测试",
+        //        "fContent": "测试",
+        //        "wContent": "测试"
+        //    };
+        //    // 发送给好友
+        //    WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+        //        WeixinJSBridge.invoke('sendAppMessage', {
+        //            "img_url": window.shareData.imgUrl,
+        //            "img_width": "640",
+        //            "img_height": "640",
+        //            "link": window.shareData.sendFriendLink,
+        //            "desc": window.shareData.fContent,
+        //            "title": window.shareData.fTitle
+        //        }, function(res) {
+        //            _report('send_msg', res.err_msg);
+        //        })
+        //    });
 
-            // 分享到朋友圈
-            WeixinJSBridge.on('menu:share:timeline', function(argv) {
-                WeixinJSBridge.invoke('shareTimeline', {
-                    "img_url": window.shareData.imgUrl,
-                    "img_width": "640",
-                    "img_height": "640",
-                    "link": window.shareData.timeLineLink,
-                    "desc": window.shareData.tContent,
-                    "title": window.shareData.tTitle
-                }, function(res) {
-                    _report('timeline', res.err_msg);
-                });
-            });
+        //    // 分享到朋友圈
+        //    WeixinJSBridge.on('menu:share:timeline', function(argv) {
+        //        WeixinJSBridge.invoke('shareTimeline', {
+        //            "img_url": window.shareData.imgUrl,
+        //            "img_width": "640",
+        //            "img_height": "640",
+        //            "link": window.shareData.timeLineLink,
+        //            "desc": window.shareData.tContent,
+        //            "title": window.shareData.tTitle
+        //        }, function(res) {
+        //            _report('timeline', res.err_msg);
+        //        });
+        //    });
 
-            // 分享到微博
-            WeixinJSBridge.on('menu:share:weibo', function(argv) {
-                WeixinJSBridge.invoke('shareWeibo', {
-                    "content": window.shareData.wContent,
-                    "url": window.shareData.weiboLink,
-                }, function(res) {
-                    _report('weibo', res.err_msg);
-                });
-            });
-        }, false);
+        //    // 分享到微博
+        //    WeixinJSBridge.on('menu:share:weibo', function(argv) {
+        //        WeixinJSBridge.invoke('shareWeibo', {
+        //            "content": window.shareData.wContent,
+        //            "url": window.shareData.weiboLink,
+        //        }, function(res) {
+        //            _report('weibo', res.err_msg);
+        //        });
+        //    });
+        //}, false);
 
         window.Urls = {
             getClassContentForIndex :"@Url.Action("ClassContentForIndex", "Home")"

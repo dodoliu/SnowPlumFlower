@@ -13,10 +13,10 @@
       <publishTime>10/12/2014 20:47:17</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>12/26/2014 23:31:48</publishTime>
+      <publishTime>01/19/2015 22:14:58</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>12/26/2014 23:31:48</publishTime>
+      <publishTime>01/19/2015 22:14:57</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/12/2014 20:47:04</publishTime>
@@ -40,25 +40,25 @@
       <publishTime>11/16/2014 12:57:09</publishTime>
     </File>
     <File Include="bin/SPF.Beetlea.Web.dll">
-      <publishTime>12/21/2014 19:55:03</publishTime>
+      <publishTime>01/10/2015 23:28:23</publishTime>
     </File>
     <File Include="bin/SPF.Controller.dll">
       <publishTime>11/16/2014 00:07:26</publishTime>
     </File>
     <File Include="bin/SPF.DBUtility.dll">
-      <publishTime>12/21/2014 19:55:01</publishTime>
+      <publishTime>01/10/2015 21:34:22</publishTime>
     </File>
     <File Include="bin/SPF.Helper.dll">
-      <publishTime>12/21/2014 19:55:01</publishTime>
+      <publishTime>01/10/2015 21:34:21</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.BLL.dll">
-      <publishTime>12/21/2014 19:55:02</publishTime>
+      <publishTime>01/10/2015 21:34:23</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.DAL.dll">
-      <publishTime>12/21/2014 19:55:02</publishTime>
+      <publishTime>01/10/2015 21:34:22</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.DALFactory.dll">
-      <publishTime>12/21/2014 19:55:02</publishTime>
+      <publishTime>01/10/2015 21:34:22</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.IDAL.dll">
       <publishTime>12/21/2014 19:55:01</publishTime>
@@ -396,6 +396,12 @@
     <File Include="Css/footStyle.css">
       <publishTime>11/15/2014 23:44:32</publishTime>
     </File>
+    <File Include="Css/form/base.css">
+      <publishTime>01/10/2015 23:19:06</publishTime>
+    </File>
+    <File Include="Css/form/common.css">
+      <publishTime>01/10/2015 23:43:24</publishTime>
+    </File>
     <File Include="Css/Index.css">
       <publishTime>11/15/2014 23:44:32</publishTime>
     </File>
@@ -485,6 +491,18 @@
     </File>
     <File Include="Images/first.jpg">
       <publishTime>11/24/2014 23:52:34</publishTime>
+    </File>
+    <File Include="Images/from/gou.png">
+      <publishTime>01/10/2015 23:10:55</publishTime>
+    </File>
+    <File Include="Images/from/icon1.png">
+      <publishTime>01/10/2015 23:10:55</publishTime>
+    </File>
+    <File Include="Images/from/icon2.png">
+      <publishTime>01/10/2015 23:10:55</publishTime>
+    </File>
+    <File Include="Images/from/icon3.png">
+      <publishTime>01/10/2015 23:10:55</publishTime>
     </File>
     <File Include="Images/home.png">
       <publishTime>11/24/2014 23:51:29</publishTime>
@@ -679,7 +697,7 @@
       <publishTime>11/29/2014 13:12:07</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>12/26/2014 23:31:46</publishTime>
+      <publishTime>01/19/2015 22:14:53</publishTime>
     </File>
     <File Include="Scripts/audio.js">
       <publishTime>11/19/2014 22:26:27</publishTime>
@@ -692,6 +710,9 @@
     </File>
     <File Include="Scripts/code.photoswipe-3.0.5.min.js">
       <publishTime>11/22/2014 20:17:48</publishTime>
+    </File>
+    <File Include="Scripts/form/common.js">
+      <publishTime>01/10/2015 23:25:46</publishTime>
     </File>
     <File Include="Scripts/global.js">
       <publishTime>12/06/2014 22:51:27</publishTime>
@@ -811,13 +832,16 @@
       <publishTime>12/07/2014 16:56:39</publishTime>
     </File>
     <File Include="Views/Beetle/BeetlePicShow.cshtml">
-      <publishTime>11/27/2014 21:13:44</publishTime>
+      <publishTime>01/10/2015 21:23:39</publishTime>
     </File>
     <File Include="Views/Beetle/BeetleService.cshtml">
-      <publishTime>11/23/2014 18:53:18</publishTime>
+      <publishTime>01/10/2015 21:29:25</publishTime>
+    </File>
+    <File Include="Views/Beetle/BeetleSubscribe.cshtml">
+      <publishTime>01/19/2015 22:22:02</publishTime>
     </File>
     <File Include="Views/Beetle/ClassContent.cshtml">
-      <publishTime>11/23/2014 18:53:18</publishTime>
+      <publishTime>01/10/2015 21:29:42</publishTime>
     </File>
     <File Include="Views/BeetleManager/Login.cshtml">
       <publishTime>12/07/2014 15:54:01</publishTime>
@@ -841,10 +865,10 @@
       <publishTime>11/18/2014 20:31:08</publishTime>
     </File>
     <File Include="Views/Home/index.cshtml">
-      <publishTime>12/26/2014 23:30:54</publishTime>
+      <publishTime>01/10/2015 21:30:34</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>11/15/2014 23:42:12</publishTime>
+      <publishTime>01/10/2015 21:31:45</publishTime>
     </File>
     <File Include="Views/Shared/_ClassLayout.cshtml">
       <publishTime>11/29/2014 13:16:37</publishTime>
@@ -859,16 +883,16 @@
       <publishTime>11/15/2014 23:42:12</publishTime>
     </File>
     <File Include="Views/Shared/_ManagerLayout.cshtml">
-      <publishTime>12/06/2014 22:54:42</publishTime>
+      <publishTime>01/10/2015 21:31:39</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>11/15/2014 23:42:12</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>11/15/2014 23:42:12</publishTime>
+      <publishTime>01/10/2015 21:31:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/01/2014 22:57:46</publishTime>
+      <publishTime>01/10/2015 21:34:26</publishTime>
     </File>
   </ItemGroup>
 </Project>

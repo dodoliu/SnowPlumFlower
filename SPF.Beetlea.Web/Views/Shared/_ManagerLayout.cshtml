@@ -85,7 +85,10 @@
         </div>
     </div>
     <div id="footer">
-        <p class="last">© 2014-2015 甲壳虫设计版权所有</p>
+        @{            
+            string strCopyright = SPF.Helper.TextHelper.GetConfigItem("Copyright");
+        }
+        <p class="last">@strCopyright</p>
     </div>
 
     @RenderSection("FootElement", false)

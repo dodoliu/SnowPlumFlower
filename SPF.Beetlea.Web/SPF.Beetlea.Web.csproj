@@ -242,6 +242,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Css\form\base.css" />
+    <Content Include="Css\form\common.css" />
     <Content Include="Css\indexcatez.css" />
     <Content Include="Css\indexcate.css" />
     <Content Include="Css\classlisthome.css" />
@@ -279,6 +281,10 @@
     <Content Include="Images\earth.png" />
     <Content Include="Images\error.gif" />
     <Content Include="Images\first.jpg" />
+    <Content Include="Images\from\gou.png" />
+    <Content Include="Images\from\icon1.png" />
+    <Content Include="Images\from\icon2.png" />
+    <Content Include="Images\from\icon3.png" />
     <Content Include="Images\home.png" />
     <Content Include="Images\ico-next2.png" />
     <Content Include="Images\icons%402x.png" />
@@ -339,6 +345,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\code.photoswipe-3.0.5.min.js" />
+    <Content Include="Scripts\form\common.js" />
     <Content Include="Scripts\global.js" />
     <Content Include="Scripts\iscroll.js" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
@@ -405,6 +412,7 @@
     <Content Include="Views\BeetleManager\ManagerRole.cshtml" />
     <Content Include="Views\BeetleManager\ManagerUser.cshtml" />
     <Content Include="Views\Beetle\BeetleComment.cshtml" />
+    <Content Include="Views\Beetle\BeetleSubscribe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

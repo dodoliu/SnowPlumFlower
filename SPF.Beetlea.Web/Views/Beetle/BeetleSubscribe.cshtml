@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/css/form/base.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/form/common.css")">
+    <title>微信预约</title>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.8.3.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/form/common.js")"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <form>
+            <div class="bgfff form ov">
+                <div class="fb">请填写预约资料：</div>
+                <ul class="cb">
+                    <li>
+                        <div class="fl la_bg tc"><label for="name" class="lable">联系人</label></div>
+                        <div class="fl l_r"><input type="text" required id="name" class="w_img95 i_bor"></div>
+                    </li>
+                    <li>
+                        <div class="fl la_bg tc"><label for="name" class="lable">联系方式</label></div>
+                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                    </li>
+                    <li>
+                        <div class="fl la_bg tc"><label for="name" class="lable">预定日期</label></div>
+                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                    </li>
+                    <li>
+                        <div class="fl la_bg tc"><label for="name" class="lable">户型</label></div>
+                        <div class="fl l_r">
+                            @*<input type="text" id="name" required class="w_img95 i_bor">*@
+                            
+                            <select class="w_img100 i_bor" style="height:100%">
+                                <option>一居室</option>
+                                <option>二居室</option>
+                                <option>三居室</option>
+                                <option>四居室</option>
+                                <option>更多</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="fl la_bg tc"><label for="name" class="lable">小区地址</label></div>
+                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                    </li>
+                    <li>
+                        <div class="fl la_bg tc"><label for="name" class="lable">建筑面积</label></div>
+                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                    </li>
+                    <li>
+                        <div class="fl la_bg tc"><label for="name" class="lable">期望风格</label></div>
+                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                    </li>
+                    <li>
+                        <div class="fl la_bgmemo tc lable">
+                            指定设计师或备注
+                        </div>
+                        <div class="fl l_rmemo">
+                            <textarea style="height:48px" class="w_img95 i_bor"></textarea>
+                        </div>
+                    </li>
+                </ul>
+                <div class="cb pt20"><input type="submit" id="tijiao" value="提交信息" disabled class="nobut"></div>
+            </div>
+    </div>
+</body>
+</html>
+

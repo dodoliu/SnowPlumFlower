@@ -43,6 +43,7 @@
     <Compile Include="Beetle\BeetleClassInfo.cs" />
     <Compile Include="Beetle\BeetlePicInfo.cs" />
     <Compile Include="Beetle\BeetleRoleInfo.cs" />
+    <Compile Include="Beetle\BeetleSubscribeInfo.cs" />
     <Compile Include="Beetle\BeetleUserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

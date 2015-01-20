@@ -13,10 +13,10 @@
       <publishTime>10/12/2014 20:47:17</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/19/2015 22:14:58</publishTime>
+      <publishTime>01/20/2015 22:32:27</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/19/2015 22:14:57</publishTime>
+      <publishTime>01/20/2015 22:32:27</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/12/2014 20:47:04</publishTime>
@@ -40,7 +40,7 @@
       <publishTime>11/16/2014 12:57:09</publishTime>
     </File>
     <File Include="bin/SPF.Beetlea.Web.dll">
-      <publishTime>01/10/2015 23:28:23</publishTime>
+      <publishTime>01/20/2015 22:32:19</publishTime>
     </File>
     <File Include="bin/SPF.Controller.dll">
       <publishTime>11/16/2014 00:07:26</publishTime>
@@ -52,19 +52,19 @@
       <publishTime>01/10/2015 21:34:21</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.BLL.dll">
-      <publishTime>01/10/2015 21:34:23</publishTime>
+      <publishTime>01/20/2015 22:32:19</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.DAL.dll">
-      <publishTime>01/10/2015 21:34:22</publishTime>
+      <publishTime>01/20/2015 22:32:18</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.DALFactory.dll">
-      <publishTime>01/10/2015 21:34:22</publishTime>
+      <publishTime>01/20/2015 22:32:18</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.IDAL.dll">
-      <publishTime>12/21/2014 19:55:01</publishTime>
+      <publishTime>01/20/2015 22:32:17</publishTime>
     </File>
     <File Include="bin/SPF.OleDB.Model.dll">
-      <publishTime>12/21/2014 19:55:01</publishTime>
+      <publishTime>01/20/2015 22:32:17</publishTime>
     </File>
     <File Include="bin/System.ComponentModel.DataAnnotations.dll">
       <publishTime>03/18/2010 19:31:26</publishTime>
@@ -414,11 +414,17 @@
     <File Include="Css/iscroll.css">
       <publishTime>11/15/2014 23:44:32</publishTime>
     </File>
+    <File Include="Css/jquery.mobile-1.3.0.min.css">
+      <publishTime>01/20/2015 22:13:49</publishTime>
+    </File>
     <File Include="Css/listhome10_.css">
       <publishTime>11/15/2014 23:44:32</publishTime>
     </File>
     <File Include="Css/login.css">
       <publishTime>11/29/2014 13:05:45</publishTime>
+    </File>
+    <File Include="Css/mobiscroll.custom-2.5.0.min.css">
+      <publishTime>01/20/2015 22:14:55</publishTime>
     </File>
     <File Include="Css/photo.css">
       <publishTime>11/23/2014 19:21:52</publishTime>
@@ -697,7 +703,7 @@
       <publishTime>11/29/2014 13:12:07</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/19/2015 22:14:53</publishTime>
+      <publishTime>01/20/2015 22:32:22</publishTime>
     </File>
     <File Include="Scripts/audio.js">
       <publishTime>11/19/2014 22:26:27</publishTime>
@@ -741,6 +747,9 @@
     <File Include="Scripts/jquery-1.9.0.min.map">
       <publishTime>11/29/2014 13:12:04</publishTime>
     </File>
+    <File Include="Scripts/jquery-1.9.1.min.js">
+      <publishTime>01/20/2015 22:28:57</publishTime>
+    </File>
     <File Include="Scripts/jquery-ui-1.8.24.js">
       <publishTime>11/15/2014 23:42:14</publishTime>
     </File>
@@ -761,6 +770,9 @@
     </File>
     <File Include="Scripts/jquery.min.js">
       <publishTime>11/16/2014 15:07:21</publishTime>
+    </File>
+    <File Include="Scripts/jquery.mobile-1.3.0.min.js">
+      <publishTime>01/20/2015 22:13:20</publishTime>
     </File>
     <File Include="Scripts/jquery.reveal.js">
       <publishTime>11/16/2014 15:07:21</publishTime>
@@ -807,6 +819,9 @@
     <File Include="Scripts/ManagerHelper.js">
       <publishTime>11/16/2014 15:07:21</publishTime>
     </File>
+    <File Include="Scripts/mobiscroll.custom-2.5.0.min.js">
+      <publishTime>01/20/2015 22:15:20</publishTime>
+    </File>
     <File Include="Scripts/modal.js">
       <publishTime>11/16/2014 15:07:21</publishTime>
     </File>
@@ -838,7 +853,7 @@
       <publishTime>01/10/2015 21:29:25</publishTime>
     </File>
     <File Include="Views/Beetle/BeetleSubscribe.cshtml">
-      <publishTime>01/19/2015 22:22:02</publishTime>
+      <publishTime>01/20/2015 23:02:03</publishTime>
     </File>
     <File Include="Views/Beetle/ClassContent.cshtml">
       <publishTime>01/10/2015 21:29:42</publishTime>
@@ -874,7 +889,7 @@
       <publishTime>11/29/2014 13:16:37</publishTime>
     </File>
     <File Include="Views/Shared/_IndexFoot.cshtml">
-      <publishTime>12/07/2014 16:44:59</publishTime>
+      <publishTime>01/20/2015 22:55:10</publishTime>
     </File>
     <File Include="Views/Shared/_IndexLayout.cshtml">
       <publishTime>11/29/2014 13:16:37</publishTime>

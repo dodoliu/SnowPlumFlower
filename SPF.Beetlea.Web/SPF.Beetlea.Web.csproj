@@ -247,7 +247,9 @@
     <Content Include="Css\indexcatez.css" />
     <Content Include="Css\indexcate.css" />
     <Content Include="Css\classlisthome.css" />
+    <Content Include="Css\jquery.mobile-1.3.0.min.css" />
     <Content Include="Css\login.css" />
+    <Content Include="Css\mobiscroll.custom-2.5.0.min.css" />
     <Content Include="Css\photo.css" />
     <Content Include="Css\photoswipe.css" />
     <Content Include="Css\serviceawesome.css" />
@@ -355,6 +357,7 @@
     <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.imagesloaded.js" />
@@ -362,6 +365,7 @@
     <Content Include="Scripts\jquery.lazyload.js" />
     <Content Include="Scripts\jquery.md5.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.mobile-1.3.0.min.js" />
     <Content Include="Scripts\jquery.reveal.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -377,6 +381,7 @@
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\maivl.js" />
     <Content Include="Scripts\ManagerHelper.js" />
+    <Content Include="Scripts\mobiscroll.custom-2.5.0.min.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />

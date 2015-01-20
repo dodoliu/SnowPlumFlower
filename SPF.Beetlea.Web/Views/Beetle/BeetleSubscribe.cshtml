@@ -6,73 +6,130 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    @*<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <link type="text/css" rel="stylesheet" href="@Url.Content("~/css/form/base.css")">
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/form/common.css")">
+
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.8.3.min.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/jquery.mobile-1.3.0.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/mobiscroll.custom-2.5.0.min.css")">
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.mobile-1.3.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/mobiscroll.custom-2.5.0.min.js")"></script>
+
+    @*<link type="text/css" rel="stylesheet" href="@Url.Content("~/css/form/base.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/form/common.css")">*@
     <title>微信预约</title>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.8.3.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/form/common.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/form/common.js")"></script>*@
+     
+
+
+
 </head>
 
 <body>
     <div class="wrap">
         <form>
             <div class="bgfff form ov">
-                <div class="fb">请填写预约资料：</div>
-                <ul class="cb">
+                <div class="fb" style="text-align:center;font-size:20px;">请填写预约资料</div>
+                <ul class="cb" style="margin-right:20px;"> 
                     <li>
                         <div class="fl la_bg tc"><label for="name" class="lable">联系人</label></div>
-                        <div class="fl l_r"><input type="text" required id="name" class="w_img95 i_bor"></div>
+                        <div class="fl l_r"><input type="text" placeholder="请输入联系人" required id="txtContact" class="w_img95 i_bor"></div>
                     </li>
                     <li>
                         <div class="fl la_bg tc"><label for="name" class="lable">联系方式</label></div>
-                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                        <div class="fl l_r"><input type="text" placeholder="请输入联系方式" id="txtInformation" required class="w_img95 i_bor"></div>
                     </li>
                     <li>
                         <div class="fl la_bg tc"><label for="name" class="lable">预定日期</label></div>
-                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                        <div class="fl l_r"><input type="text" placeholder="请选择预订日期" id="txtReserveDate" required class="w_img95 i_bor"></div>
                     </li>
                     <li>
                         <div class="fl la_bg tc"><label for="name" class="lable">户型</label></div>
                         <div class="fl l_r">
-                            @*<input type="text" id="name" required class="w_img95 i_bor">*@
-                            
-                            <select class="w_img100 i_bor" style="height:100%">
+                            <select id="slHouseType" class="w_img100 i_bor" style="height:100%">
+                                <option>请选择户型</option>
                                 <option>一居室</option>
                                 <option>二居室</option>
                                 <option>三居室</option>
                                 <option>四居室</option>
-                                <option>更多</option>
+                                <option>复式别墅</option>
+                                <option>办公室</option>
+                                <option>酒店</option>
+                                <option>餐厅</option>
+                                <option>店铺</option>
+                                <option>其它</option>
                             </select>
                         </div>
                     </li>
                     <li>
                         <div class="fl la_bg tc"><label for="name" class="lable">小区地址</label></div>
-                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                        <div class="fl l_r"><input type="text" placeholder="请输入小区地址" id="txtHouseAddress" required class="w_img95 i_bor"></div>
                     </li>
                     <li>
                         <div class="fl la_bg tc"><label for="name" class="lable">建筑面积</label></div>
-                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                        <div class="fl l_r"><input type="text" placeholder="请输入建筑面积(数字)" id="txtFloorArea" required class="w_img95 i_bor"></div>
                     </li>
                     <li>
                         <div class="fl la_bg tc"><label for="name" class="lable">期望风格</label></div>
-                        <div class="fl l_r"><input type="text" id="name" required class="w_img95 i_bor"></div>
+                        <div class="fl l_r">
+                            <select id="slStyle" class="w_img100 i_bor" style="height:100%">
+                                <option>请选择期望风格</option>
+                                <option>现代简约风格</option>
+                                <option>田园风格</option>
+                                <option>欧式风格</option>
+                                <option>美式风格</option>
+                                <option>中式风格</option>
+                                <option>新古典风情</option>
+                                <option>地中海风格</option>
+                                <option>北欧森系风格</option>
+                                <option>室内混搭风格</option>
+                                <option>其它</option>
+                            </select>
+                        </div>
                     </li>
                     <li>
                         <div class="fl la_bgmemo tc lable">
                             指定设计师或备注
                         </div>
                         <div class="fl l_rmemo">
-                            <textarea style="height:48px" class="w_img95 i_bor"></textarea>
+                            <textarea placeholder="指定设计师或备注" style="height:48px" id="txtMemo" class="w_img95 i_bor"></textarea>
                         </div>
                     </li>
                 </ul>
-                <div class="cb pt20"><input type="submit" id="tijiao" value="提交信息" disabled class="nobut"></div>
+                <div class="cb pt20"><input type="button" id="btnSubmit" value="提交信息" class="nobut" onclick="SubmitClick();"></div>
             </div>
     </div>
+
+    <script type="text/javascript">
+        $(function () {
+            var opt = {
+                preset: 'date', //日期
+                theme: 'sense-ui', //皮肤样式
+                display: 'modal', //显示方式 
+                mode: 'scroller', //日期选择模式
+                dateFormat: 'yy-mm-dd', // 日期格式
+                setText: '确定', //确认按钮名称
+                cancelText: '取消',//取消按钮名籍我
+                dateOrder: 'yymmdd', //面板中日期排列格式
+                dayText: '日', monthText: '月', yearText: '年', //面板中年月日文字
+                endYear: 2020 //结束年份            };
+            $("#txtReserveDate").mobiscroll(opt).date(opt);
+
+
+        });
+
+
+        function SubmitClick() {
+            alert('系统还在开发中...');
+        }
+    </script>
+
 </body>
 </html>
 

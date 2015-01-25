@@ -49,6 +49,7 @@ namespace SPF.OleDB.IDAL
 		/// 得到一个对象实体
 		/// </summary>
         SPF.OleDB.Model.BeetleSubscribeInfo GetModel(int ID);
+        SPF.OleDB.Model.BeetleSubscribeInfo GetModel(string strContact, string strInformation);
         SPF.OleDB.Model.BeetleSubscribeInfo DataRowToModel(DataRow row);
 		/// <summary>
 		/// 获得数据列表

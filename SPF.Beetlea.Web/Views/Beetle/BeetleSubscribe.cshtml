@@ -6,51 +6,87 @@
 <html>
 <head>
     <meta charset="utf-8">
-    @*<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">*@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-
-    @*<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.8.3.min.js")"></script>*@
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
-
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/jquery.mobile-1.3.0.min.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/mobiscroll.custom-2.5.0.min.css")">
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.mobile-1.3.0.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/mobiscroll.custom-2.5.0.min.js")"></script>
-
-    @*<link type="text/css" rel="stylesheet" href="@Url.Content("~/css/form/base.css")">
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/form/common.css")">*@
     <title>微信预约</title>
-    @*<script type="text/javascript" src="@Url.Content("~/Scripts/form/common.js")"></script>*@
-     
+    <style type="text/css">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            margin: 0;
+        }
 
+        #main {
+            height: 100%;
+            padding-top: 90px;
+            text-align: center;
+        }
 
+        #fullbg {
+            background-color: Gray;
+            left: 0px;
+            height:100%;
+            opacity: 0.5;
+            position: absolute;
+            top: 0px;
+            z-index: 3;
+            filter: alpha(opacity=50); /* IE6 */
+            -moz-opacity: 0.5; /* Mozilla */
+            -khtml-opacity: 0.5; /* Safari */
+        }
 
+        #dialog {
+            /*background-color: #FFF;*/
+            /*border: 1px solid #888;*/
+            display: none;
+            color:gray;
+            /*height: 200px;*/
+            left: 50%;
+            margin: -100px 0 0 -100px;
+            padding: 12px;
+            position: fixed !important; /* 浮动对话框 */
+            position: absolute;
+            top: 50%;
+            width: 200px;
+            z-index: 5;
+        }
+
+            #dialog p {
+                margin: 0 0 12px;
+            }
+
+                #dialog p.close {
+                    text-align: right;
+                }
+    </style>
 </head>
-
 <body>
     <div class="wrap">
-        <form>
+        <form id="formSubscribe">
             <div class="bgfff form ov">
                 <div class="fb" style="text-align:center;font-size:20px;">请填写预约资料</div>
-                <ul class="cb" style="margin-right:20px;"> 
+                <ul class="cb" style="margin-right:20px;">
                     <li>
-                        <div class="fl la_bg tc"><label for="name" class="lable">联系人</label></div>
-                        <div class="fl l_r"><input type="text" placeholder="请输入联系人" required id="txtContact" class="w_img95 i_bor"></div>
+                        <div class="fl la_bg tc"><label for="name" class="lable">联系人</label><label id="lblContact" style="float:right;margin-right:5px;color:red;display:none;">必填</label></div>
+                        <div class="fl l_r"><input type="text" placeholder="请输入联系人" maxlength="5" required id="txtContact" class="w_img95 i_bor"></div>
                     </li>
                     <li>
-                        <div class="fl la_bg tc"><label for="name" class="lable">联系方式</label></div>
-                        <div class="fl l_r"><input type="text" placeholder="请输入联系方式" id="txtInformation" required class="w_img95 i_bor"></div>
+                        <div class="fl la_bg tc"><label for="name" class="lable">联系方式</label><label id="lblInformation" style="float:right;margin-right:5px;color:red;display:none;">必填</label></div>
+                        <div class="fl l_r"><input type="text" placeholder="请输入联系方式" maxlength="50" id="txtInformation" required class="w_img95 i_bor"></div>
                     </li>
                     <li>
-                        <div class="fl la_bg tc"><label for="name" class="lable">预定日期</label></div>
-                        <div class="fl l_r"><input type="text" placeholder="请选择预订日期" id="txtReserveDate" required class="w_img95 i_bor"></div>
+                        <div class="fl la_bg tc"><label for="name" class="lable">预定日期</label><label id="lblReserveDate" style="float:right;margin-right:5px;color:red;display:none;">必填</label></div>
+                        <div class="fl l_r"><input type="text" placeholder="请选择预订日期" maxlength="10" id="txtReserveDate" required class="w_img95 i_bor"></div>
                     </li>
                     <li>
-                        <div class="fl la_bg tc"><label for="name" class="lable">户型</label></div>
+                        <div class="fl la_bg tc"><label for="name" class="lable">户型</label><label id="lblHouseType" style="float:right;margin-right:5px;color:red;display:none;">必填</label></div>
                         <div class="fl l_r">
                             <select id="slHouseType" class="w_img100 i_bor" style="height:100%">
                                 <option>请选择户型</option>
@@ -68,15 +104,15 @@
                         </div>
                     </li>
                     <li>
-                        <div class="fl la_bg tc"><label for="name" class="lable">小区地址</label></div>
-                        <div class="fl l_r"><input type="text" placeholder="请输入小区地址" id="txtHouseAddress" required class="w_img95 i_bor"></div>
+                        <div class="fl la_bg tc"><label for="name" class="lable">小区地址</label><label id="lblHouseAddress" style="float:right;margin-right:5px;color:red;display:none;">必填</label></div>
+                        <div class="fl l_r"><input type="text" placeholder="请输入小区地址" maxlength="255" id="txtHouseAddress" required class="w_img95 i_bor"></div>
                     </li>
                     <li>
-                        <div class="fl la_bg tc"><label for="name" class="lable">建筑面积</label></div>
-                        <div class="fl l_r"><input type="text" placeholder="请输入建筑面积(数字)" id="txtFloorArea" required class="w_img95 i_bor"></div>
+                        <div class="fl la_bg tc"><label for="name" class="lable">建筑面积</label><label id="lblFloorArea" style="float:right;margin-right:5px;color:red;display:none;">必填</label></div>
+                        <div class="fl l_r"><input type="text" placeholder="请输入建筑面积(数字)" maxlength="10" id="txtFloorArea" required class="w_img95 i_bor"></div>
                     </li>
                     <li>
-                        <div class="fl la_bg tc"><label for="name" class="lable">期望风格</label></div>
+                        <div class="fl la_bg tc"><label for="name" class="lable">期望风格</label><label id="lblStyle" style="float:right;margin-right:5px;color:red;display:none;">必填</label></div>
                         <div class="fl l_r">
                             <select id="slStyle" class="w_img100 i_bor" style="height:100%">
                                 <option>请选择期望风格</option>
@@ -98,38 +134,157 @@
                             指定设计师或备注
                         </div>
                         <div class="fl l_rmemo">
-                            <textarea placeholder="指定设计师或备注" style="height:48px" id="txtMemo" class="w_img95 i_bor"></textarea>
+                            <textarea placeholder="指定设计师或备注" maxlength="255" style="height:48px" id="txtMemo" class="w_img95 i_bor"></textarea>
                         </div>
                     </li>
                 </ul>
                 <div class="cb pt20"><input type="button" id="btnSubmit" value="提交信息" class="nobut" onclick="SubmitClick();"></div>
             </div>
+        </form>
+    </div>
+
+    <!-- jQuery 遮罩层 -->
+    <div id="fullbg"></div>
+    <!-- end jQuery 遮罩层 -->
+    <!-- 对话框 -->
+    <div id="dialog" >
+        @*<p class="close"><a href="#" onclick="closeBg();">关闭</a></p>*@
+        <p style="text-align:center;">
+            <img width="50" src="~/Images/gifloading.gif" />
+        </p>
     </div>
 
     <script type="text/javascript">
+        //显示灰色 jQuery 遮罩层
+        function showBg() {
+            var bh = $("#formSubscribe").height();
+            var bw = $("#formSubscribe").width(); 
+            $("#fullbg").css({
+                height: bh,
+                width: bw,
+                display: "block"
+            });
+            $("#dialog").show();
+        }
+        //关闭灰色 jQuery 遮罩
+        function closeBg() {
+            $("#fullbg,#dialog").hide();
+        }
+    </script>
+    <!--[if lte IE 6]>
+    <script type="text/javascript">
+    // 浮动对话框
+    $(document).ready(function() {
+        var domThis = $('#dialog')[0];
+        var wh = $(window).height() / 2;
+        $("body").css({
+            "background-image": "url(about:blank)",
+            "background-attachment": "fixed"
+        });
+        domThis.style.setExpression('top', 'eval((document.documentElement).scrollTop + ' + wh + ') + "px"');
+    });
+    </script>
+    <![endif]-->
+
+
+    <script type="text/javascript">
+        window.Urls = {
+            SubScribeSubmit: "@Url.Action("SubScribeSubmit", "Beetle")"
+        };
+
         $(function () {
             var opt = {
                 preset: 'date', //日期
                 theme: 'sense-ui', //皮肤样式
-                display: 'modal', //显示方式 
+                display: 'modal', //显示方式
                 mode: 'scroller', //日期选择模式
                 dateFormat: 'yy-mm-dd', // 日期格式
                 setText: '确定', //确认按钮名称
                 cancelText: '取消',//取消按钮名籍我
                 dateOrder: 'yymmdd', //面板中日期排列格式
                 dayText: '日', monthText: '月', yearText: '年', //面板中年月日文字
-                endYear: 2020 //结束年份            };
+                endYear: 2020 //结束年份
+            };
             $("#txtReserveDate").mobiscroll(opt).date(opt);
-
-
         });
 
+        //验证必填
+        function ValidateRequired(value, id) {
+            if (id == "lblHouseType" || id == "lblStyle") {
+                if (value.indexOf("请选择") > -1) {
+                    $("#" + id).text("必选");
+                    $("#" + id).css("display", "block");
+                }
+                else {
+                    $("#" + id).css("display", "none");
+                    return true;
+                }
+            }
+            else {
+                if (value) {
+                    $("#" + id).css("display", "none");
+                    return true;
+                }
+                else {
+                    $("#" + id).text("必填");
+                    $("#" + id).css("display", "block");
+                    return false;
+                }
+            }
+        }
 
         function SubmitClick() {
-            alert('系统还在开发中...');
+
+            showBg();
+
+            var vContact = $("#txtContact").val();
+            var vInformation = $("#txtInformation").val();
+            var vReserveDate = $("#txtReserveDate").val();
+            var vHouseType = $("#slHouseType").val();
+            var vHouseAddress = $("#txtHouseAddress").val();
+            var vFloorArea = $("#txtFloorArea").val();
+            var vStyle = $("#slStyle").val();
+            var vMemo = $("#txtMemo").val();
+
+            var _bool = true;
+            ValidateRequired(vContact, "lblContact") ? "" : _bool = false;
+            ValidateRequired(vInformation, "lblInformation") ? "" : _bool = false;
+            ValidateRequired(vReserveDate, "lblReserveDate") ? "" : _bool = false;
+            ValidateRequired(vHouseType, "lblHouseType") ? "" : _bool = false;
+            ValidateRequired(vHouseAddress, "lblHouseAddress") ? "" : _bool = false;
+            ValidateRequired(vFloorArea, "lblFloorArea") ? "" : _bool = false;
+            ValidateRequired(vStyle, "lblStyle") ? "" : _bool = false;
+
+            if (!_bool)
+            {
+                closeBg();
+                alert("请完善信息!");
+            }
+
+            if (_bool) {
+                $.getJSON(window.Urls.SubScribeSubmit,
+                    {
+                        con: vContact,
+                        inf: vInformation,
+                        res: vReserveDate,
+                        typ: vHouseType,
+                        add: vHouseAddress,
+                        flo: vFloorArea,
+                        sty: vStyle,
+                        mem: vMemo
+                    },
+                    function (result) {
+                        if (result.IsSuccess) {
+                            alert("感谢您的预约,工作人员会在24小时内联系您!");
+                        }
+                        else {
+                            alert("预约失败!遇到未知问题,您也可以拨打电话 15551189377 直接联系.");
+                        }
+                        closeBg();
+                    });
+            }
         }
     </script>
 
 </body>
 </html>
-

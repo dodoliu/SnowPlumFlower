@@ -79,14 +79,14 @@ namespace SPF.OleDB.DAL
 					new OleDbParameter("@SubsStatus", OleDbType.SmallInt),
 					new OleDbParameter("@SubsCreateDate", OleDbType.Date)};
 			parameters[0].Value = model.SubsSid;
-			parameters[1].Value = model.SubsContact;
-			parameters[2].Value = model.SubsInformation;
-			parameters[3].Value = model.SubsReserveDate;
-			parameters[4].Value = model.SubsHouseType;
-			parameters[5].Value = model.SubsHouseAddress;
-			parameters[6].Value = model.SubsFloorArea;
-			parameters[7].Value = model.SubsStyle;
-			parameters[8].Value = model.SubsMemo;
+            parameters[1].Value = model.SubsContact == null ? "" : model.SubsContact;
+            parameters[2].Value = model.SubsInformation == null ? "" : model.SubsInformation;
+            parameters[3].Value = model.SubsReserveDate == null ? DateTime.Now : model.SubsReserveDate;
+            parameters[4].Value = model.SubsHouseType == null ? "" : model.SubsHouseType;
+            parameters[5].Value = model.SubsHouseAddress == null ? "" : model.SubsHouseAddress;
+            parameters[6].Value = model.SubsFloorArea == null ? "" : model.SubsFloorArea;
+            parameters[7].Value = model.SubsStyle == null ? "" : model.SubsStyle;
+            parameters[8].Value = model.SubsMemo == null ? "" : model.SubsMemo;
 			parameters[9].Value = model.SubsStatus;
 			parameters[10].Value = model.SubsCreateDate;
 
@@ -107,22 +107,22 @@ namespace SPF.OleDB.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update BeetleSubscribe set ");
-			strSql.Append("SubsSid=@SubsSid,");
-			strSql.Append("SubsContact=@SubsContact,");
-			strSql.Append("SubsInformation=@SubsInformation,");
+            //strSql.Append("SubsSid=@SubsSid,");
+            //strSql.Append("SubsContact=@SubsContact,");
+            //strSql.Append("SubsInformation=@SubsInformation,");
 			strSql.Append("SubsReserveDate=@SubsReserveDate,");
 			strSql.Append("SubsHouseType=@SubsHouseType,");
 			strSql.Append("SubsHouseAddress=@SubsHouseAddress,");
 			strSql.Append("SubsFloorArea=@SubsFloorArea,");
 			strSql.Append("SubsStyle=@SubsStyle,");
 			strSql.Append("SubsMemo=@SubsMemo,");
-			strSql.Append("SubsStatus=@SubsStatus,");
-			strSql.Append("SubsCreateDate=@SubsCreateDate");
+			strSql.Append("SubsStatus=@SubsStatus");
+            //strSql.Append("SubsCreateDate=@SubsCreateDate");
 			strSql.Append(" where ID=@ID");
 			OleDbParameter[] parameters = {
-					new OleDbParameter("@SubsSid", OleDbType.VarChar,50),
-					new OleDbParameter("@SubsContact", OleDbType.VarChar,0),
-					new OleDbParameter("@SubsInformation", OleDbType.VarChar,255),
+                    //new OleDbParameter("@SubsSid", OleDbType.VarChar,50),
+                    //new OleDbParameter("@SubsContact", OleDbType.VarChar,50),
+                    //new OleDbParameter("@SubsInformation", OleDbType.VarChar,255),
 					new OleDbParameter("@SubsReserveDate", OleDbType.Date),
 					new OleDbParameter("@SubsHouseType", OleDbType.VarChar,50),
 					new OleDbParameter("@SubsHouseAddress", OleDbType.VarChar,255),
@@ -130,20 +130,20 @@ namespace SPF.OleDB.DAL
 					new OleDbParameter("@SubsStyle", OleDbType.VarChar,50),
 					new OleDbParameter("@SubsMemo", OleDbType.VarChar,255),
 					new OleDbParameter("@SubsStatus", OleDbType.SmallInt),
-					new OleDbParameter("@SubsCreateDate", OleDbType.Date),
+                    //new OleDbParameter("@SubsCreateDate", OleDbType.Date),
 					new OleDbParameter("@ID", OleDbType.Integer,4)};
-			parameters[0].Value = model.SubsSid;
-			parameters[1].Value = model.SubsContact;
-			parameters[2].Value = model.SubsInformation;
-			parameters[3].Value = model.SubsReserveDate;
-			parameters[4].Value = model.SubsHouseType;
-			parameters[5].Value = model.SubsHouseAddress;
-			parameters[6].Value = model.SubsFloorArea;
-			parameters[7].Value = model.SubsStyle;
-			parameters[8].Value = model.SubsMemo;
-			parameters[9].Value = model.SubsStatus;
-			parameters[10].Value = model.SubsCreateDate;
-			parameters[11].Value = model.ID;
+            //parameters[0].Value = model.SubsSid;
+            //parameters[1].Value = model.SubsContact;
+            //parameters[2].Value = model.SubsInformation;
+            parameters[0].Value = model.SubsReserveDate == null ? DateTime.Now : model.SubsReserveDate;
+            parameters[1].Value = model.SubsHouseType == null ? "" : model.SubsHouseType;
+            parameters[2].Value = model.SubsHouseAddress == null ? "" : model.SubsHouseAddress;
+            parameters[3].Value = model.SubsFloorArea == null ? "" : model.SubsFloorArea;
+            parameters[4].Value = model.SubsStyle == null ? "" : model.SubsStyle;
+            parameters[5].Value = model.SubsMemo == null ? "" : model.SubsMemo;
+			parameters[6].Value = model.SubsStatus;
+            //parameters[10].Value = model.SubsCreateDate;
+			parameters[7].Value = model.ID;
 
 			int rows=OleDBHelper.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -225,6 +225,33 @@ namespace SPF.OleDB.DAL
 				return null;
 			}
 		}
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public SPF.OleDB.Model.BeetleSubscribeInfo GetModel(string strContact, string strInformation)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ID,SubsSid,SubsContact,SubsInformation,SubsReserveDate,SubsHouseType,SubsHouseAddress,SubsFloorArea,SubsStyle,SubsMemo,SubsStatus,SubsCreateDate from BeetleSubscribe ");
+            strSql.Append(" where SubsContact=@SubsContact");
+            strSql.Append(" and SubsInformation=@SubsInformation");
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@SubsContact", OleDbType.VarChar,50),
+					new OleDbParameter("@SubsInformation", OleDbType.VarChar,50)
+			};
+            parameters[0].Value = strContact;
+            parameters[1].Value = strInformation;
+
+            SPF.OleDB.Model.BeetleSubscribeInfo model = new SPF.OleDB.Model.BeetleSubscribeInfo();
+            DataSet ds = OleDBHelper.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
 
 
 		/// <summary>

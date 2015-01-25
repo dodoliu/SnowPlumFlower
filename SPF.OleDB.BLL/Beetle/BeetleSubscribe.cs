@@ -90,6 +90,10 @@ namespace SPF.OleDB.BLL
 			
 			return dal.GetModel(ID);
 		}
+        public SPF.OleDB.Model.BeetleSubscribeInfo GetModel(string strContact, string strInformation)
+        {
+            return dal.GetModel(strContact, strInformation);
+        }
 
 		/// <summary>
 		/// 得到一个对象实体，从缓存中

@@ -4,7 +4,7 @@
     <nav>
         <ul id="top_menu" class="top_menu">
             <li>
-                <a onclick="javascript:displayit(0)"><img src="@Url.Content("~/Images/earth.png")"><label>首页</label></a>
+                <a href="@Url.Content("~/Home/Index")"><img src="@Url.Content("~/Images/earth.png")"><label>首页</label></a>
                 <ul id="menu_list0" class="menu_font" style=" display:none"></ul>
             </li>
             <li>
@@ -24,29 +24,29 @@
 </div>
 <div id="plug-wrap" onclick="closeall()" style="display: none;"></div>
 <script type="text/javascript">
-            function displayit(n) {
-                var count = document.getElementById("top_menu").getElementsByTagName("ul").length;
-                for (var i = 0; i < count; i++) {
-                    if (i == n) {
-                        if (document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display == 'none') {
-                            document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display = '';
-                            document.getElementById("plug-wrap").style.display = '';
-                        } else {
-                            document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display = 'none';
-                            document.getElementById("plug-wrap").style.display = 'none';
-                        }
-                    } else {
-                        document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display = 'none';
-                    }
-                }
-            }
-            function closeall() {
-                var count = document.getElementById("top_menu").getElementsByTagName("ul").length;
-                for (i = 0; i < count; i++) {
-                    document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display = 'none';
-                }
-                document.getElementById("plug-wrap").style.display = 'none';
-            }
+            //function displayit(n) {
+            //    var count = document.getElementById("top_menu").getElementsByTagName("ul").length;
+            //    for (var i = 0; i < count; i++) {
+            //        if (i == n) {
+            //            if (document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display == 'none') {
+            //                document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display = '';
+            //                document.getElementById("plug-wrap").style.display = '';
+            //            } else {
+            //                document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display = 'none';
+            //                document.getElementById("plug-wrap").style.display = 'none';
+            //            }
+            //        } else {
+            //            document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display = 'none';
+            //        }
+            //    }
+            //}
+            //function closeall() {
+            //    var count = document.getElementById("top_menu").getElementsByTagName("ul").length;
+            //    for (i = 0; i < count; i++) {
+            //        document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display = 'none';
+            //    }
+            //    document.getElementById("plug-wrap").style.display = 'none';
+            //}
 
 
             document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {

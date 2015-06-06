@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "预约管理";
+    Layout = "~/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div id="table" class="help">
+    <div class="col w10 last">
+        <div class="content">
+            <table>
+                <tr>
+                    <th width="10%">联系人</th>
+                    <th width="10%">联系方式</th>
+                    <th width="10%">预定日期</th>
+                    <th width="10%">户型</th>
+                    <th width="20%">小区地址</th>
+                    <th width="10%">建筑面积</th>
+                    <th width="10%">期望风格</th>
+                    <th width="10%">指定设计师或备注</th>
+                    <th width="10%">创建日期</th>
+                </tr>
+                <!--ko foreach:$root.BeetleSubsList-->
+                <tr>
+                    <td data-bind="text:SubsContact"></td>
+                    <td data-bind="text:SubsInformation"></td>
+                    <td data-bind="text:SubsReserveDate"></td> 
+                    <td data-bind="text:SubsHouseType"></td> 
+                    <td data-bind="text:SubsHouseAddress"></td> 
+                    <td data-bind="text:SubsFloorArea"></td> 
+                    <td data-bind="text:SubsStyle"></td> 
+                    <td data-bind="text:SubsMemo"></td> 
+                    <td data-bind="text:SubsCreateDate"></td> 
+                </tr>
+                <!--/ko-->
+            </table>
+        </div>
+        <div class="module pagination" style="float:right;margin-right:30px;width:300px;">
+            <span class="pagingstyle" data-bind="text:'共 '+$root.pageCount() +' 页 ' + +$root.pageSize()+ ' 条'"></span>
+            <a href="javascript:void(0)" class="page_left" data-bind="click:$root.PagePrev"><small class="icon arrow_left"></small></a>
+            <!--ko foreach:$root.currPageIndex-->
+            <!--ko if:$root.pageIndex()==$data-->
+            <a href="javascript:void(0)" class="current" data-bind="text:$data,click:$root.IndexClick"></a>
+            <!--/ko-->
+            <!--ko if:$root.pageIndex()!=$data-->
+            <a href="javascript:void(0)" data-bind="text:$data,click:$root.IndexClick"></a>
+            <!--/ko-->
+            <!--/ko-->
+            <a href="javascript:void(0)" class="page_right" data-bind="click:$root.PageNext"><small class="icon arrow_right"></small></a>
+            <input type="text" id="txtPage" class="page_right" style="width:20px;margin-top:4px;margin-left:5px;" data-bind="value:$root.pageIndex,event:{keyup:$root.PageEnter}" />
+        </div>
+    </div>
+</div> 
+@section FootElement{
+
+    <script src="@Url.Content("~/Scripts/knockout-2.2.0.js")"></script>
+
+    <script type="text/javascript">
+        window.Urls = {
+            GetSubscribeList: "@Url.Action("GetSubscribeList", "BeetleManager")"
+        };
+
+        var vClassList = function() {
+            var self = this;
+            self.Urls = window.Urls;
+            //当前编辑变量ID
+            self.CurrID = ko.observable(0);
+
+            //分页
+            self.pageSize = ko.observable(20); //每页条数
+            self.pageIndex = ko.observable(1); //当前页
+            self.pageCount = ko.observable(0); //总页数
+            self.count = ko.observable(0); //总条数
+            self.currPageIndex = ko.observableArray();
+
+ 
+
+            self.BeetleSubsList = ko.observableArray();
+
+            self.BeetleSubsBind = function (data) {
+                var temp = {};
+                temp.ID = ko.observable(data.ID);
+                temp.SubsSid = ko.observable(data.SubsSid);
+                temp.SubsContact = ko.observable(data.SubsContact);
+                temp.SubsInformation = ko.observable(data.SubsInformation);
+                temp.SubsReserveDate = ko.observable(data.SubsReserveDate);
+                temp.SubsHouseType = ko.observable(data.SubsHouseType);
+                temp.SubsHouseAddress = ko.observable(data.SubsHouseAddress);
+                temp.SubsFloorArea = ko.observable(data.SubsFloorArea);
+                temp.SubsStyle = ko.observable(data.SubsStyle);
+                temp.SubsMemo = ko.observable(data.SubsMemo);
+                temp.SubsStatus = ko.observable(data.SubsStatus);
+                temp.SubsCreateDate = ko.observable(data.SubsCreateDate);
+                return temp;
+            };
+
+            self.RefreshList = function() {
+                self.BeetleSubsList.removeAll();
+                $.getJSON(self.Urls.GetSubscribeList, { ipageindex: self.pageIndex(), ipagesize: self.pageSize() }, function (result) {
+                    if (result.IsSuccess) {
+                        $(result.ResultData.SubsList).each(function (index, item) {
+                            self.BeetleSubsList.push(self.BeetleSubsBind(item));
+                            self.count(result.ResultData.iCount);
+                            self.pageCount(result.ResultData.iPageCount);
+                        });
+
+                        //分页
+                        self.currPageIndex.removeAll();
+                        if (self.pageIndex() >= 3 && self.pageCount() >= 3) {
+                            if (self.pageIndex() + 1 >= self.pageCount()) {
+                                for (var i = self.pageCount() - 2; i <= self.pageCount(); i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            } else {
+                                for (var i = self.pageIndex() - 1; i <= self.pageIndex() + 1; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            }
+                        } else {
+                            if (self.pageCount() <= 3) {
+                                for (var i = 1; i <= self.pageCount(); i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            } else {
+                                for (var i = 1; i <= 3; i++) {
+                                    self.currPageIndex.push(i);
+                                }
+                            }
+                        }
+
+                    }
+                });
+            };
+
+            //判断几次回发
+            self.GetData = ko.computed(function() {
+                self.RefreshList();
+            }, this);
+            
+            //分页
+            self.PagePrev = function() {
+                var vPrev = (self.pageIndex() - 1) <= 0 ? 1 : self.pageIndex() - 1;
+                self.pageIndex(vPrev);
+            };
+            self.PageNext = function() {
+                var vNext = (self.pageIndex() + 1) >= self.pageCount() ? self.pageCount() : (self.pageIndex() + 1);
+                self.pageIndex(vNext);
+            };
+            self.IndexClick = function(data) {
+                self.pageIndex(data);
+            };
+            self.PageEnter = function(data, _event) {
+                if (_event.keyCode == 13) {
+                    var vPage = $("#txtPage").val() <= 0 ? 1 : $("#txtPage").val() >= self.pageCount() ? self.pageCount() : $("#txtPage").val();
+                    $("#txtPage").val(vPage);
+                    self.pageIndex(vPage);
+                }
+            };
+        };
+        ko.applyBindings(new vClassList());
+    </script>
+}
+
+

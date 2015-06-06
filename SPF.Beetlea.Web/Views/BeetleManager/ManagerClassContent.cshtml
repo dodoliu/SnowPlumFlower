@@ -265,7 +265,7 @@
                 self.GetClassInfoList = function() {
                     //获取分类信息
                     self.BeetleClassList.removeAll();
-                    $.getJSON(self.Urls.GetClassList, {}, function(result) {
+                    $.getJSON(self.Urls.GetClassList, {ipageindex:1,ipagesize:100}, function(result) {
                         if (result.IsSuccess) {
                             $(result.ResultData.BCIList).each(function(index, item) {
                                 self.BeetleClassList.push(self.BeetleClassBind(item));

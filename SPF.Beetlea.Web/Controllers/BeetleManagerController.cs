@@ -890,6 +890,59 @@ namespace SPF.Beetlea.Web.Controllers
         }
 
         #endregion
+
+        #region 预约管理
+        public ActionResult ManagerSubscribe()
+        {
+            return View();
+        }
+        public JsonResult GetSubscribeList(int ipageindex = 0, int ipagesize = 10)
+        {
+            Helper.ReturnMessage rm = new ReturnMessage(false);
+            try
+            {
+
+                ////获取分类信息
+                BeetleSubscribe bs = new BeetleSubscribe();
+                //StringBuilder bssb = new StringBuilder();
+                //bssb.Append("1=1");
+                //bssb.Append(" and SubsStatus >0 ");
+                //IList<BeetleSubscribeInfo> briList = bs.GetModelList(bssb.ToString());
+
+
+                //BeetleRole br = new BeetleRole();
+                //分页
+                DataHelpler dataHelper = new DataHelpler();
+                //总记录条数
+                int iCount = dataHelper.FindCount("BeetleSubscribe", "ID");
+                //每页记录数
+                int iPageSize = ipagesize;
+                //总页数
+                int iPageCount = iCount % iPageSize == 0 ? iCount / iPageSize : iCount / iPageSize + 1;
+                //当前页
+                int iPageIndex = ipageindex <= 0 ? 1 : ipageindex;
+
+                DataTable dt = dataHelper.FindDataByPage(iPageSize, iPageIndex, "BeetleSubscribe", "ID", "SubsStatus >0");
+                IList<BeetleSubscribeInfo> bsiList = bs.DataTableToList(dt);
+
+                rm.ResultData["SubsList"] = bsiList;
+                rm.ResultData["iPageSize"] = iPageSize;
+                rm.ResultData["iPageCount"] = iPageCount;
+                rm.ResultData["iPageIndex"] = iPageIndex;
+                rm.ResultData["iCount"] = iCount;
+
+                rm.IsSuccess = true;
+            }
+            catch
+            {
+                rm.IsSuccess = false;
+            }
+
+            return MyJson(rm);
+
+        }
+
+        #endregion
     }
 
 

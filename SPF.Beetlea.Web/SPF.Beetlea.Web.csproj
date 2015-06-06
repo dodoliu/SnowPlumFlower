@@ -419,6 +419,7 @@
     <Content Include="Views\BeetleManager\ManagerUser.cshtml" />
     <Content Include="Views\Beetle\BeetleComment.cshtml" />
     <Content Include="Views\Beetle\BeetleSubscribe.cshtml" />
+    <Content Include="Views\BeetleManager\ManagerSubscribe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
